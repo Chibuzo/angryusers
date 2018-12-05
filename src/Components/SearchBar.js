@@ -5,7 +5,6 @@ import logo from "../images/logo.jpg";
 import avatar from "../images/avatar.jpg";
 
 class SearchBar extends Component {
-
     render() {
         return(
             <div className="headernav">
