@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import UserInfo from "./UserInfoThumb";
 
 class ComplaintIntro extends Component {
-    render() {
+    render() {        
         return(
             <div className="post">
                 <div className="wrap-ut pull-left">
