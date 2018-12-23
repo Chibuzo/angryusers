@@ -50,6 +50,8 @@ class ComplaintForm extends Component {
             IssueDate: new Date().toISOString(),
             CompanyId: companyId,
             CompanyName: e.target.elements.company_name.value,
+            FacebookShare: e.target.elements.fb_share ? true : false,
+            TwitterShare: e.target.elements.tq_share ? true : false,
             UserId: 1
         };
 
@@ -64,13 +66,12 @@ class ComplaintForm extends Component {
             if (res.ok === true) {
                 this.props.toggleForm();
 
-                // update page with the post
-                //this.props.newPostData(complaint);
+                // Send new complaint to home page for live update
+                this.props.sendNewComplaint(complaint);
             }
         }).catch(err => {
             console.log(err);
         });
-        //this.props.newPostData(complaint);
     }
 
     onChange = (event, { newValue }) => {
@@ -141,14 +142,14 @@ class ComplaintForm extends Component {
                                         <div className="col-lg-3 col-md-4">
                                             <div className="checkbox">
                                                 <label>
-                                                    <input type="checkbox" id="fb"/> <i className="fa fa-facebook-square"></i>
+                                                    <input type="checkbox" name="fb_share" id="fb"/> <i className="fa fa-facebook-square"></i>
                                                 </label>
                                             </div>
                                         </div>
                                         <div className="col-lg-3 col-md-4">
                                             <div className="checkbox">
                                                 <label>
-                                                    <input type="checkbox" id="tw" /> <i className="fa fa-twitter"></i>
+                                                    <input type="checkbox" name="tw_share" id="tw" /> <i className="fa fa-twitter"></i>
                                                 </label>
                                             </div>
                                         </div>
@@ -178,7 +179,7 @@ class ComplaintForm extends Component {
 
                         <div className="pull-right postreply">
                             <div className="pull-left smile"><a href=""><i className="fa fa-smile-o"></i></a></div>
-                            <div className="pull-left"><button type="submit" className="btn btn-primary">Post</button></div>
+                            <div className="pull-left"><button type="submit" className="btn btn-primary">Post Complaint</button></div>
                             <div className="clearfix"></div>
                         </div>
 

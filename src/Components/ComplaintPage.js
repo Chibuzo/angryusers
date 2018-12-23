@@ -8,7 +8,7 @@ import CommentBox from "./CommentForm";
 import SideBarWidget from "./SideBarWidget";
 import Footer from "./Footer";
 
-const post_utilities = require('../utilities/PostUtilities');
+const post_utilities = require('../Helpers/PostUtilities');
 
 class ComplaintPage extends Component {
     state = { show_complain_form: false, complaint: '', comments: '' };
@@ -27,7 +27,7 @@ class ComplaintPage extends Component {
             return response.json();
         }).then(rant => {
             let complaint = <Complaint id={rant.Id} title={rant.Title} complaint={rant.Issue} postdate={post_utilities.formatDate(rant.IssueDate)} key={rant.IssueDate} />
-            let comments = rant.Comments.map(comment => {
+            let comments = rant.Comments && rant.Comments.map(comment => {
                 return (<Complaint id={comment.Id} complaint={comment.Body} postdate={post_utilities.formatDate(comment.DatePosted)} key={comment.DatePosted} />);
             });
             this.setState({ complaint: complaint, comments: comments });
