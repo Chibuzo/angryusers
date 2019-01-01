@@ -38,7 +38,7 @@ let companyId = 0;
 class ComplaintForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', suggestions: [] };
+        this.state = { value: '', suggestions: [], uploadFiles: null };
     }
 
     submitComplaint = (e) => {
@@ -63,11 +63,39 @@ class ComplaintForm extends Component {
             },
             body: JSON.stringify(complaint)
         }).then(res => {
-            if (res.ok === true) {
+            return res.json();
+        }).then(data => {
+            if (data.Success === true) {
                 this.props.toggleForm();
 
                 // Send new complaint to home page for live update
+                complaint.Id = data.Id;
                 this.props.sendNewComplaint(complaint);
+            }
+            this.uploadFiles(data.Id)
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    getSelectedFiles = (e) => {
+        this.setState({ uploadFiles: e.target.files });
+    }
+
+    uploadFiles = (ComplaintId) => {
+        let formData = new FormData();
+        formData.append("ComplaintId", ComplaintId);
+        let n = 1;    
+        for (const file of this.state.uploadFiles) {  
+            formData.append("files" + n, file);
+            n++;
+        }
+        fetch(process.env.REACT_APP_API_URL + 'ComplaintFiles/uploadFiles', {
+            method: 'POST',
+            body: formData
+        }).then(res => {
+            if (res.ok === true) {
+               console.log('Done')
             }
         }).catch(err => {
             console.log(err);
@@ -132,6 +160,12 @@ class ComplaintForm extends Component {
                             <div><input type="text" name="title" placeholder="Brief caption for your displeasure..." className="form-control" /></div>
                     
                             <div><textarea name="complaint" id="desc" placeholder="Full description of what happened"  className="form-control" ></textarea></div>
+
+                            <div>
+                                <label>Include Evidence (Screenshots, receipts etc)</label>
+                                <input type="file" name="files" onChange={this.getSelectedFiles} accept="image/*|audio/*|video/*" multiple />
+                            </div>
+                            <br></br>
                             <input type="hidden" name="companyId" value="1" />
                             <div className="row newtopcheckbox">
                                 <div className="col-lg-6 col-md-6">
