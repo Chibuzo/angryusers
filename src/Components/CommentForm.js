@@ -15,7 +15,6 @@ class CommentForm extends Component {
         };
         fetch(process.env.REACT_APP_API_URL + 'comments', {
             method: 'POST',
-            //mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             },

@@ -38,6 +38,7 @@ class Home extends Component {
                     />
                 );
             });
+            document.title = 'Angry Users - We will not keep quiet';
             this.setState({ complaints: complaints });
         }).catch(err => {
             console.log(err);
