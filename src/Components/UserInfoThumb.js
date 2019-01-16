@@ -9,7 +9,7 @@ const UserInfoThumb = () => {
         <div className="userinfo pull-left">
             <div className="avatar">
                 <img src={avatar} alt="" />
-                <div className="status green">&nbsp;</div>
+                <div className="">Chibuzo</div>
             </div>
 
             <div className="icons">

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 
 import logo from "../images/logo.jpg";
-import avatar from "../images/avatar.jpg";
+import avatar from "../images/angry.jpg";
 
 class SearchBar extends Component {
     render() {

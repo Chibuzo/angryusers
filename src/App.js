@@ -13,6 +13,7 @@ import ContactPage from "./Components/ContactPage";
 import PostPage from './Components/Blog/PostPage';
 
 class App extends Component {
+
     render() {
         return (
             <Router>

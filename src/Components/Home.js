@@ -6,13 +6,16 @@ import ComplaintForm from "./ComplaintForm";
 import ComplaintIntro from "./ComplaintIntro";
 import SideBarWidget from "./SideBarWidget";
 import Footer from "./Footer";
+import LoginModal from "./LoginModal";
+
+//import User from "../Helpers/User";
 
 const post_utilities = require('../Helpers/PostUtilities');
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false };
+        this.state = { show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: false, User: null, show_login_modal: false };
     }
 
     toggleComplaintForm = () => {
@@ -38,7 +41,7 @@ class Home extends Component {
                     />
                 );
             });
-            document.title = 'Angry Users - We will not keep quiet';
+            document.title = "Angry Users - Public compilation of angry users' stories";
             this.setState({ complaints: complaints });
         }).catch(err => {
             console.log(err);
@@ -58,17 +61,21 @@ class Home extends Component {
         });
     }
 
+    showLoginModal = () => {
+        this.setState({ modal_toggle: true });
+    }
+
     render() {
         return(
             <div className="container-fluid">
                 <Banner />
-                <SearchBar showComplaintForm={this.toggleComplaintForm} />
+                <SearchBar showComplaintForm={this.toggleComplaintForm} userInfo={this.state.User} />
 
                 <section className="content">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-md-8">
-                                { this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} /> }
+                                {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} showLoginOpts={this.showLoginModal} /> }
                                
                                 {this.state.new_complaint && <ComplaintIntro
                                     id={this.state.newComplaint.Id}
@@ -90,7 +97,13 @@ class Home extends Component {
                     </div>
                 </section>
 
+                <button onClick={this.openModal} className="btn btn-danger">
+                    Right Sidebar
+                </button>
+
                 <Footer />
+
+                { this.state.modal_toggle && <LoginModal /> }
             </div>
         );
     }

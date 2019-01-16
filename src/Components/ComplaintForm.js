@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Autosuggest from 'react-autosuggest';
 
+import User from "../Helpers/User";
 import UserInfo from "./UserInfoThumb";
 
 import '../css/autosuggest.css';
@@ -44,6 +45,12 @@ class ComplaintForm extends Component {
     submitComplaint = (e) => {
         e.preventDefault();
 
+        if (User.status !== "Active") {
+            // authenticate
+            this.props.showLoginOpts();
+            return false;
+        }
+
         const complaint = {
             Title: e.target.elements.title.value,
             Issue: e.target.elements.complaint.value,
@@ -51,8 +58,8 @@ class ComplaintForm extends Component {
             CompanyId: companyId,
             CompanyName: e.target.elements.company_name.value,
             FacebookShare: e.target.elements.fb_share ? true : false,
-            TwitterShare: e.target.elements.tq_share ? true : false,
-            UserId: 1
+            TwitterShare: e.target.elements.tw_share ? true : false,
+            UserId: User.id
         };
 
         fetch(process.env.REACT_APP_API_URL + 'complaints/save', {
@@ -72,7 +79,7 @@ class ComplaintForm extends Component {
                 complaint.Id = data.Id;
                 this.props.sendNewComplaint(complaint);
             }
-            this.uploadFiles(data.Id)
+            this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
         }).catch(err => {
             console.log(err);
         });
