@@ -31,7 +31,7 @@ class FullComplaint extends Component {
         return(
             <div className="post">
                 <div className="topwrap">
-                    <UserInfo />
+                    <UserInfo user={this.props.user} />
 
                     <div className="posttext pull-left">
                         <h2>{this.props.title}</h2>
@@ -45,9 +45,9 @@ class FullComplaint extends Component {
             
                     <div className="next pull-right">
                         {this.state.postImage > 0 && <button type="button" className="btn btn-default" onClick={() => this.setState({ isOpen: true })}><i className="fa fa-image"></i> View Files</button> }
-                        &nbsp; &nbsp;<a href=""><i className="fa fa-share"></i></a>
+                        &nbsp; &nbsp;<a href="" title="Share this content"><i className="fa fa-share"></i></a>
                 
-                        <a href=""><i className="fa fa-flag"></i></a>
+                        <a href="" title="Flag this content"><i className="fa fa-flag"></i></a>
                     </div>
             
                     <div className="clearfix"></div>

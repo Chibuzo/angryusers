@@ -36,19 +36,23 @@ const renderSuggestion = suggestion => (
 );
 
 let companyId = 0;
+
 class ComplaintForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', suggestions: [], uploadFiles: null };
+        this.state = { value: '', suggestions: [], uploadFiles: [] };
     }
 
     submitComplaint = (e) => {
         e.preventDefault();
 
-        if (User.status !== "Active") {
-            // authenticate
+        // fetch user details
+        let user;
+        if (Object.keys(User.getUserData()).length > 0) {
+            user = User.getUserData();
+        } else {
             this.props.showLoginOpts();
-            return false;
+            return;
         }
 
         const complaint = {
@@ -59,7 +63,7 @@ class ComplaintForm extends Component {
             CompanyName: e.target.elements.company_name.value,
             FacebookShare: e.target.elements.fb_share ? true : false,
             TwitterShare: e.target.elements.tw_share ? true : false,
-            UserId: User.id
+            UserId: user.Id
         };
 
         fetch(process.env.REACT_APP_API_URL + 'complaints/save', {
@@ -151,7 +155,7 @@ class ComplaintForm extends Component {
             <div className='post make-post'>
                 <form className="form newtopic" method="post" onSubmit={this.submitComplaint}>
                     <div className="topwrap">
-                        <UserInfo />
+                        <UserInfo user={User} />
 
                         <div className="posttext pull-left">
                             <Autosuggest
@@ -166,7 +170,7 @@ class ComplaintForm extends Component {
                     
                             <div><input type="text" name="title" placeholder="Brief caption for your displeasure..." className="form-control" /></div>
                     
-                            <div><textarea name="complaint" id="desc" placeholder="Full description of what happened"  className="form-control" ></textarea></div>
+                            <div><textarea name="complaint" id="desc" placeholder="Full description of what happened"  className="editor"></textarea></div>
 
                             <div>
                                 <label>Include Evidence (Screenshots, receipts etc)</label>

@@ -8,14 +8,14 @@ import SideBarWidget from "./SideBarWidget";
 import Footer from "./Footer";
 import LoginModal from "./LoginModal";
 
-//import User from "../Helpers/User";
+import User from "../Helpers/User";
 
 const post_utilities = require('../Helpers/PostUtilities');
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: false, User: null, show_login_modal: false };
+        this.state = { show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: false, show_login_modal: false };
     }
 
     toggleComplaintForm = () => {
@@ -34,10 +34,13 @@ class Home extends Component {
                 return (
                     <ComplaintIntro 
                         id={rant.Id} 
+                        company={rant.Company}
                         title={rant.Title} 
                         complaint={post_utilities.postIntro(rant.Issue)} 
                         postdate={post_utilities.formatDateSince(rant.CreatedAt)} 
                         comments={rant.Comments.length} key={rant.IssueDate} 
+                        views={rant.ViewCount}
+                        user={rant.User}
                     />
                 );
             });
@@ -69,7 +72,7 @@ class Home extends Component {
         return(
             <div className="container-fluid">
                 <Banner />
-                <SearchBar showComplaintForm={this.toggleComplaintForm} userInfo={this.state.User} />
+                <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} />
 
                 <section className="content">
                     <div className="container">
@@ -83,7 +86,9 @@ class Home extends Component {
                                     complaint={post_utilities.postIntro(this.state.newComplaint.Issue)}
                                     postdate={post_utilities.formatDateSince(this.state.newComplaint.CreatedAt)}
                                     comments='0' 
+                                    views='0'
                                     key={this.state.newComplaint.CreatedAt}
+                                    user={User.getUserData()}
                                 /> }
 
                                 { this.state.complaints }
@@ -96,10 +101,6 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
-
-                <button onClick={this.openModal} className="btn btn-danger">
-                    Right Sidebar
-                </button>
 
                 <Footer />
 

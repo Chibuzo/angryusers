@@ -161,14 +161,14 @@ ul.socialicons li a:hover {
     font-family: 'Open Sans Bold', sans-serif;
     padding-left: 30px;
     padding-right: 30px;
-    background-color: #1abc9c;
+    background-color: #37474F;
 }
 
 .avt .btn-primary:hover, 
 .avt .btn-primary:focus, 
 .avt .btn-primary:active, 
 .avt .btn-primary.active{
-    background-color: #1abc9c;
+    background-color: #37474F;
 
 
     border: none;
@@ -442,8 +442,8 @@ td.chbox {
     padding-right: 30px;
     padding-top: 20px;
     padding-bottom: 15px;
-
-    color: #989c9e;
+    white-space: pre-wrap;
+    color: #414445;
     font-size: 14px;
     font-family: 'Open Sans Light', sans-serif;   
     line-height: 25px;
@@ -468,12 +468,25 @@ td.chbox {
     padding-top: 7px;
 }
 
+.post p {
+    font-family: 'Open Sans';
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.post h1 {
+    color: #363838;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif; 
+    margin-top: -4px;
+}
+
 .post h2 {
     color: #363838;
-    font-size: 18px;
+    font-size: 19px;
     font-family: 'Open Sans', sans-serif;   
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 21px;
 }
 
 .post .comments {
@@ -484,7 +497,7 @@ td.chbox {
 
 
 .post .comments .commentbg {
-    background-color: #bdc3c7;
+    background-color: #FF6D00;
     border-radius: 2px;
     display: inline-block;
     padding: 12px 17px;
@@ -497,7 +510,7 @@ td.chbox {
 .post .comments .commentbg .mark {
     width: 11px;
     height: 11px;
-    background-color: #bdc3c7;
+    background-color: #FF6D00;
     position: absolute;
     bottom: 0;
     left: 43%;
@@ -612,7 +625,7 @@ td.chbox {
 }
 
 .up {
-    color: #1abc9c;
+    color: #37474F;
     font-size: 12px;
 }
 
@@ -707,7 +720,7 @@ a.down:hover {
 
 
 .btn-primary {
-    background-color: #1abc9c;
+    background-color: #37474F;
     box-shadow: none;
     border-radius: 2px;
     padding: 10px 15px;

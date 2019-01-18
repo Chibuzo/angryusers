@@ -8,9 +8,10 @@ class ComplaintIntro extends Component {
         return(
             <div className="post">
                 <div className="wrap-ut pull-left">
-                    <UserInfo />
+                    <UserInfo user={this.props.user} />
 
                     <div className="posttext pull-left">
+                        <h1>{this.props.company.CompanyName}</h1>
                         <h2><Link to={`/complaint/${this.props.id}`}>{this.props.title}</Link></h2>
                         <p>{this.props.complaint}</p>
                     </div>
@@ -24,7 +25,7 @@ class ComplaintIntro extends Component {
                         </div>
             
                     </div>
-                    <div className="views"><i className="fa fa-eye"></i> 1,568</div>
+                    <div className="views"><i className="fa fa-eye"></i> &nbsp;{this.props.views}</div>
                     <div className="time"><i className="fa fa-clock-o"></i> {this.props.postdate} ago</div>
                 </div>
                 <div className="clearfix"></div>

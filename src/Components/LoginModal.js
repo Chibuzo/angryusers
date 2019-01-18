@@ -10,11 +10,12 @@ class LoginModal extends Component {
         this.state = { modal_toggle: true, User: null };
     }
 
+    // login user7
     responseFacebook = (res) => {
         let user = {
             Fullname: res.name,
             Email: res.email,
-            Photo_url: res.picture.data.url
+            Photo_url: res.picture.data.is_silhouette ? '' : res.picture.data.url
         };
         fetch(process.env.REACT_APP_API_URL + 'Users/FindOrCreate', {
             method: 'POST',
@@ -23,11 +24,13 @@ class LoginModal extends Component {
             },
             body: JSON.stringify(user)
         }).then(res => {
-            res.json();
+            return res.json();
         }).then(valid_user => {
             if (valid_user.Success === true) {
-                user.id = valid_user.Id;
-                User.saveUser(user);
+                user.Id = valid_user.Id;
+                let newUser = new User(user);
+                newUser.saveUser(user)
+                this.closeModal();
             }
         }).catch(err => {
             console.log(err);

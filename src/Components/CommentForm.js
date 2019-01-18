@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 
+import User from "../Helpers/User";
 import UserInfo from "./UserInfoThumb";
 
 class CommentForm extends Component {
@@ -7,11 +8,20 @@ class CommentForm extends Component {
     postComment = (e) => {
         e.preventDefault();
 
+        // fetch user details
+        let user;
+        if (Object.keys(User.getUserData()).length > 0) {
+            user = User.getUserData();
+        } else {
+            this.props.showLoginOpts();
+            return;
+        }
+
         let comment = {
             ComplaintId: e.target.elements.complaint_id.value,
             Body: e.target.elements.comment.value,
             DatePosted: new Date().toISOString(),
-            userId: 1
+            userId: user.Id
         };
         fetch(process.env.REACT_APP_API_URL + 'comments', {
             method: 'POST',
@@ -21,6 +31,7 @@ class CommentForm extends Component {
             body: JSON.stringify(comment)
         }).then(res => {
             if (res.ok === true) {
+                this.props.sendNewComment(comment);
             }
         }).catch(err => {
             console.log(err);
@@ -33,7 +44,7 @@ class CommentForm extends Component {
             <div className="post">
                 <form className="form" method="post" onSubmit={this.postComment}>
                     <div className="topwrap">
-                        <UserInfo />
+                        <UserInfo user={this.props.user} />
 
                         <div className="posttext pull-left">
                             <div className="textwraper">
@@ -54,7 +65,6 @@ class CommentForm extends Component {
                         </div>
                 
                         <div className="pull-right postreply">
-                            <div className="pull-left smile"><a href=""><i className="fa fa-smile-o"></i></a></div>
                             <div className="pull-left"><button type="submit" className="btn btn-primary">Post Comment</button></div>
                             <div className="clearfix"></div>
                         </div>
