@@ -29,7 +29,7 @@ class ComplaintPage extends Component {
         fetch(process.env.REACT_APP_API_URL + 'complaints/' + this.props.match.params.id).then(function(response) {
             return response.json();
         }).then(rant => {
-            let complaint = <Complaint id={rant.Id} title={rant.Title} complaint={rant.Issue} postdate={post_utilities.formatDate(rant.IssueDate)} files={rant.ComplaintFiles} key={rant.CreatedAt} user={rant.User} />
+            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} complaint={rant.Issue} postdate={post_utilities.formatDate(rant.IssueDate)} files={rant.ComplaintFiles} key={rant.CreatedAt} user={rant.User} />
             let comments = rant.Comments && rant.Comments.map(comment => {
                 return (<Complaint id={comment.Id} complaint={comment.Body} user={comment.User} postdate={post_utilities.formatDate(comment.DatePosted)} key={comment.DatePosted} />);
             });

@@ -1,3 +1,14 @@
+.au-post {
+    box-shadow: 0 1px 2px #c9cccd;
+    background-color: #fff;
+    padding: 50px 60px;
+    margin-bottom: 50px;
+    color: #414445;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;   
+    line-height: 25px;
+}
+
 /*------------------------------------------------------------------
 [Table of contents]
 
@@ -478,7 +489,7 @@ td.chbox {
     color: #363838;
     font-size: 24px;
     font-family: 'Open Sans', sans-serif; 
-    margin-top: -4px;
+    margin-top: 0px;
 }
 
 .post h2 {
@@ -992,6 +1003,10 @@ a.down:hover {
 /*--- Extra small devices (less 767px) ---*/
 
 @media (max-width: 767px) {
+
+    .au-post {
+        padding: 30px;
+    }
     .headernav .search {
         margin-top: 71px;
     }
@@ -1011,7 +1026,7 @@ a.down:hover {
         padding-right: 15px;
         padding-top: 15px;
         padding-bottom: 15px;
-        padding-left: 15px;
+        padding-left: 22px;
     }
 
     .post .comments .commentbg {
@@ -1135,6 +1150,10 @@ a.down:hover {
 /*--- Small devices (768 - 991px) ---*/
 
 @media (min-width: 768px) and (max-width: 991px) {
+
+    .au-post {
+        padding: 30px 40px;
+    }
 
     .headernav .search {
         margin-top: 71px;

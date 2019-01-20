@@ -157,7 +157,7 @@ class ComplaintForm extends Component {
                     <div className="topwrap">
                         <UserInfo user={User} />
 
-                        <div className="posttext pull-left">
+                        <div className="posttext col-md-10">
                             <Autosuggest
                                 suggestions={suggestions}
                                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

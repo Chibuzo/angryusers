@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 col-md-12">
-                            <article className="post">
+                            <article className="au-post">
                                 <h1>Privacy Policy</h1>
                                 <p>Last updated: January 2019</p>
 
@@ -19,7 +19,7 @@ The AngryUsers community (also refered herein as “AngryUsers”) operates http
 
 We use your Personal Information only for providing and improving the Site. By using the Site, you agree to the collection and use of information in accordance with this policy.
 
-<h3>nformation Collection And Use</h3>
+<h3>Information Collection And Use</h3>
 
 While using our Site, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to your name ("Personal Information").
 

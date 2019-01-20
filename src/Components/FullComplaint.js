@@ -34,6 +34,7 @@ class FullComplaint extends Component {
                     <UserInfo user={this.props.user} />
 
                     <div className="posttext col-md-10">
+                        <h1>{this.props.company.CompanyName}</h1>
                         <h2>{this.props.title}</h2>
                         <p>{this.props.complaint}</p>
                     </div>
@@ -41,7 +42,7 @@ class FullComplaint extends Component {
                 </div>
                 <div className="postinfobot">
             
-                    <div className="posted pull-left"><i className="fa fa-clock-o"></i> Posted on : {this.props.postdate}</div>
+                    <div className="posted pull-left"><i className="fa fa-clock"></i> Posted on : {this.props.postdate}</div>
             
                     <div className="next pull-right">
                         {this.state.postImage > 0 && <button type="button" className="btn btn-default" onClick={() => this.setState({ isOpen: true })}><i className="fa fa-image"></i> View Files</button> }
