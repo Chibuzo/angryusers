@@ -10,7 +10,7 @@ class ComplaintIntro extends Component {
                 <div className="wrap-ut pull-left">
                     <UserInfo user={this.props.user} />
 
-                    <div className="posttext pull-left">
+                    <div className="posttext col-md-10">
                         <h1>{this.props.company.CompanyName}</h1>
                         <h2><Link to={`/complaint/${this.props.id}`}>{this.props.title}</Link></h2>
                         <p>{this.props.complaint}</p>

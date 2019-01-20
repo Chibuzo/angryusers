@@ -170,7 +170,7 @@ class ComplaintForm extends Component {
                     
                             <div><input type="text" name="title" placeholder="Brief caption for your displeasure..." className="form-control" /></div>
                     
-                            <div><textarea name="complaint" id="desc" placeholder="Full description of what happened"  className="editor"></textarea></div>
+                            <div><textarea name="complaint" id="desc" placeholder="Full description of what happened"  className="form-control"></textarea></div>
 
                             <div>
                                 <label>Include Evidence (Screenshots, receipts etc)</label>

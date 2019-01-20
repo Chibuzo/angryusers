@@ -438,7 +438,7 @@ td.chbox {
 }
 
 .post .posttext {
-    width: 85%;
+    /* width: 85%; */
     padding-right: 30px;
     padding-top: 20px;
     padding-bottom: 15px;
@@ -573,7 +573,7 @@ td.chbox {
 }
 
 .topic .posttext {
-    width: 88%;
+    /* width: 88%; */
 }
 
 .postinfobot {
@@ -670,6 +670,7 @@ a.down:hover {
     color: #bdc3c7;
     display: block;
     font-family: 'Open Sans Regular', sans-serif; 
+    padding-right:13px;
 }
 
 .textwraper textarea {
@@ -735,7 +736,7 @@ a.down:hover {
 .btn-primary:active,
 .btn-primary:focus {
     border: none;
-    background-color: #20e1bb;
+    background-color: #37474F;
     box-shadow: none;
 }
 
@@ -991,6 +992,9 @@ a.down:hover {
 /*--- Extra small devices (less 767px) ---*/
 
 @media (max-width: 767px) {
+    .headernav .search {
+        margin-top: 71px;
+    }
     
     /*--- index.html ---*/
     .container-fluid {
@@ -1003,10 +1007,11 @@ a.down:hover {
     }
 
     .post .posttext {
-        width: 70%;
+        /* width: 70%; */
         padding-right: 15px;
         padding-top: 15px;
         padding-bottom: 15px;
+        padding-left: 15px;
     }
 
     .post .comments .commentbg {
@@ -1072,6 +1077,7 @@ a.down:hover {
 
     .postinfobot {
         padding: 10px;
+        padding-right: 2px;
     }
 
     .postinfobot .likeblock {
@@ -1084,7 +1090,7 @@ a.down:hover {
     }
 
     .postinfobot .next {
-        width: 76px;
+        /* width: 76px; */
         margin: 0;
     }
 
@@ -1130,6 +1136,10 @@ a.down:hover {
 
 @media (min-width: 768px) and (max-width: 991px) {
 
+    .headernav .search {
+        margin-top: 71px;
+    }
+
     .container-fluid {
         padding: 0;
     }
@@ -1140,7 +1150,7 @@ a.down:hover {
     }
 
     .post .posttext {
-        width: 85%;
+        /* width: 85%; */
         padding-right: 15px;
         padding-top: 15px;
         padding-bottom: 15px;

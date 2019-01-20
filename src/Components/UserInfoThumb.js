@@ -2,7 +2,7 @@ import React from "react";
 
 const UserInfoThumb = (props) => {
     return(
-        <div className="userinfo pull-left">
+        <div className="userinfo col-md-2 hidden-sm hidden-xs">
             <div className="avatar">
                 <img src={props.user.Photo_url} alt={props.user.fullname} title={props.user.Fullname} />
                 <div className=""></div>

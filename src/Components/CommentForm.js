@@ -46,7 +46,7 @@ class CommentForm extends Component {
                     <div className="topwrap">
                         <UserInfo user={this.props.user} />
 
-                        <div className="posttext pull-left">
+                        <div className="posttext col-md-10 col-sm-12 col-xs-12">
                             <div className="textwraper">
                                 <div className="postreply">Post a Comment</div>
                                 <textarea name="comment" placeholder="Type your comment here"></textarea>

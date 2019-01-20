@@ -6,6 +6,8 @@ import ComplaintPage from "./Components/ComplaintPage";
 
 import About from "./Components/About";
 import HowItWorks from "./Components/HowItWorks";
+import PrivacyPolicy from "./Components/Pages/PrivacyPolicy";
+import TermsOfUse from "./Components/Pages/TermsOfUse";
 import Blog from "./Components/Blog/Home";
 import BlogEntry from "./Components/Blog/BlogEntry";
 import ManageEntries from "./Components/Blog/ManageEntries";
@@ -25,6 +27,9 @@ class App extends Component {
                     <Route path="/about" component={About} />
                     <Route path="/how-it-works" component={HowItWorks} />
                     <Route path="/contact" component={ContactPage} />
+
+                    <Route path="/privacypolicy" component={PrivacyPolicy} />
+                    <Route path="/termsofuse" component={TermsOfUse} />
 
                     <Route path="/blog" component={Blog} />
                     <Route path="/blog/newentry" component={BlogEntry} />

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import Banner from "./Banner";
+//import Banner from "./Banner";
 import SearchBar from "./SearchBar";
 import ComplaintForm from "./ComplaintForm";
 import Complaint from "./FullComplaint";
@@ -63,8 +63,8 @@ class ComplaintPage extends Component {
     render() {
         return(
             <div className="container-fluid">
-                <Banner />
-                <SearchBar showComplaintForm={this.toggleComplaintForm} />
+                {/* <Banner /> */}
+                <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} />
 
                 <section className="content">
                     <div className="container">

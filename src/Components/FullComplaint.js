@@ -33,7 +33,7 @@ class FullComplaint extends Component {
                 <div className="topwrap">
                     <UserInfo user={this.props.user} />
 
-                    <div className="posttext pull-left">
+                    <div className="posttext col-md-10">
                         <h2>{this.props.title}</h2>
                         <p>{this.props.complaint}</p>
                     </div>
