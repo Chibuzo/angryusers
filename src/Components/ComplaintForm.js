@@ -40,7 +40,7 @@ let companyId = 0;
 class ComplaintForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', suggestions: [], uploadFiles: [] };
+        this.state = { value: '', suggestions: [], uploadFiles: [], post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' } };
     }
 
     submitComplaint = (e) => {
@@ -54,6 +54,9 @@ class ComplaintForm extends Component {
             this.props.showLoginOpts();
             return;
         }
+
+        // change post button state
+        this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
 
         const complaint = {
             Title: e.target.elements.title.value,
@@ -82,6 +85,7 @@ class ComplaintForm extends Component {
                 // Send new complaint to home page for live update
                 complaint.Id = data.Id;
                 this.props.sendNewComplaint(complaint);
+                this.setState({ post_btn: { text: 'Post Complaint', icon: 'fa-upload' }});
             }
             this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
         }).catch(err => {
@@ -155,7 +159,7 @@ class ComplaintForm extends Component {
             <div className='post make-post'>
                 <form className="form newtopic" method="post" onSubmit={this.submitComplaint}>
                     <div className="topwrap">
-                        <UserInfo user={User} />
+                        <UserInfo user={User.getUserData()} />
 
                         <div className="posttext col-md-10">
                             <Autosuggest
@@ -184,24 +188,17 @@ class ComplaintForm extends Component {
                                         <p>Share on Social Networks</p>
                                     </div>
                                     <div className="row">
-                                        <div className="col-lg-3 col-md-4">
+                                        <div className="col-lg-4 col-md-6">
                                             <div className="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="fb_share" id="fb"/> <i className="fa fa-facebook-square"></i>
+                                                    <input type="checkbox" name="fb_share" id="fb"/> <i className="fab fa-facebook-square"></i>
                                                 </label>
                                             </div>
                                         </div>
-                                        <div className="col-lg-3 col-md-4">
+                                        <div className="col-lg-4 col-md-6">
                                             <div className="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="tw_share" id="tw" /> <i className="fa fa-twitter"></i>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3 col-md-4">
-                                            <div className="checkbox">
-                                                <label>
-                                                    <input type="checkbox" id="gp" /> <i className="fa fa-google-plus-square"></i>
+                                                    <input type="checkbox" name="tw_share" id="tw" /> <i className="fab fa-twitter"></i>
                                                 </label>
                                             </div>
                                         </div>
@@ -224,7 +221,7 @@ class ComplaintForm extends Component {
 
                         <div className="pull-right postreply">
                             <div className="pull-left smile"><a href=""><i className="fa fa-smile-o"></i></a></div>
-                            <div className="pull-left"><button type="submit" className="btn btn-primary">Post Complaint</button></div>
+                            <div className="pull-left"><button type="submit" className="btn btn-primary" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>
                             <div className="clearfix"></div>
                         </div>
 

@@ -6,6 +6,8 @@ import ComplaintForm from "./ComplaintForm";
 import ComplaintIntro from "./ComplaintIntro";
 import SideBarWidget from "./SideBarWidget";
 import Footer from "./Footer";
+
+import Notification, { notify } from 'react-notify-toast';
 import LoginModal from "./LoginModal";
 
 import User from "../Helpers/User";
@@ -27,6 +29,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        notify.show('Loading recent complaints, in a moment...');
         fetch(process.env.REACT_APP_API_URL + 'complaints').then(function(response) {
             return response.json();
         }).then(res => {
@@ -46,6 +49,7 @@ class Home extends Component {
             });
             document.title = "Angry Users - Public compilation of angry users' stories";
             this.setState({ complaints: complaints });
+            notify.hide();
         }).catch(err => {
             console.log(err);
         });
@@ -56,6 +60,7 @@ class Home extends Component {
         this.setState({ 
             newComplaint: {
                 Id: new_complaint.Id,
+                Company: { CompanyName: new_complaint.CompanyName },
                 Title: new_complaint.Title,
                 Issue: new_complaint.Issue,
                 CreatedAt: new Date().toISOString(),
@@ -73,6 +78,7 @@ class Home extends Component {
             <div className="container-fluid">
                 <Banner />
                 <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} />
+                <Notification options={{ timeout: -1 }} />
 
                 <section className="content">
                     <div className="container">
@@ -82,6 +88,7 @@ class Home extends Component {
                                
                                 {this.state.new_complaint && <ComplaintIntro
                                     id={this.state.newComplaint.Id}
+                                    company={this.state.newComplaint.Company}
                                     title={this.state.newComplaint.Title}
                                     complaint={post_utilities.postIntro(this.state.newComplaint.Issue)}
                                     postdate={post_utilities.formatDateSince(this.state.newComplaint.CreatedAt)}

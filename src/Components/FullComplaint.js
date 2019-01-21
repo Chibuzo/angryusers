@@ -34,7 +34,7 @@ class FullComplaint extends Component {
                     <UserInfo user={this.props.user} />
 
                     <div className="posttext col-md-10">
-                        <h1>{this.props.company.CompanyName}</h1>
+                        { this.props.company && <h1>{this.props.company.CompanyName}</h1> }
                         <h2>{this.props.title}</h2>
                         <p>{this.props.complaint}</p>
                     </div>

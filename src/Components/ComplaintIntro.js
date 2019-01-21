@@ -26,7 +26,7 @@ class ComplaintIntro extends Component {
             
                     </div>
                     <div className="views"><i className="fa fa-eye"></i> &nbsp;{this.props.views}</div>
-                    <div className="time"><i className="fa fa-clock-o"></i> {this.props.postdate} ago</div>
+                    <div className="time">{this.props.postdate} ago</div>
                 </div>
                 <div className="clearfix"></div>
             </div>
