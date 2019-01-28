@@ -9,7 +9,7 @@ import HowItWorks from "./Components/HowItWorks";
 import PrivacyPolicy from "./Components/Pages/PrivacyPolicy";
 import TermsOfUse from "./Components/Pages/TermsOfUse";
 import Blog from "./Components/Blog/Home";
-import BlogEntry from "./Components/Blog/BlogEntry";
+import NewPost from "./Components/Blog/NewPost";
 import ManageEntries from "./Components/Blog/ManageEntries";
 import ContactPage from "./Components/ContactPage";
 import PostPage from './Components/Blog/PostPage';
@@ -31,10 +31,11 @@ class App extends Component {
                     <Route path="/privacypolicy" component={PrivacyPolicy} />
                     <Route path="/termsofuse" component={TermsOfUse} />
 
-                    <Route path="/blog" component={Blog} />
-                    <Route path="/blog/newentry" component={BlogEntry} />
+                    <Route exact path="/blog" component={Blog} />
+                    <Route path="/blog/newentry" component={NewPost} />
                     <Route path="/blog/manage" component={ManageEntries} />
-                    <Route path="/blog/edit/:id" component={BlogEntry} />
+                    <Route path="/blog/edit/:id" component={NewPost} />
+                    <Route path="/blog/category/:category" component={Blog} />
                     <Route path="/blog/:id/:title" component={PostPage} />
                 </Switch>
             </Router>

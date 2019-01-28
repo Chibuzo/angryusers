@@ -1,9 +1,9 @@
 import React from "react";
 
-const SideBarWidget = () => {
+const SideBarWidget = (props) => {
     return(
         <div className="sidebarblock">
-            <h3>Categories</h3>
+            <h3>{props.title}</h3>
             <div className="divline"></div>
             <div className="blocktxt">
                 <ul className="cats">

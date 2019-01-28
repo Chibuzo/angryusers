@@ -85,9 +85,12 @@ class ComplaintForm extends Component {
                 // Send new complaint to home page for live update
                 complaint.Id = data.Id;
                 this.props.sendNewComplaint(complaint);
-                this.setState({ post_btn: { text: 'Post Complaint', icon: 'fa-upload' }});
+
+                // upload files if any
+                this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
+                
+                this.setState({ post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' }});
             }
-            this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
         }).catch(err => {
             console.log(err);
         });
