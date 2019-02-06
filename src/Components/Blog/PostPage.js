@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import SearchBar from "../SearchBar";
-import RecentPostWidget from "./RecentPostsWidget";
+import RecentPosts from "./RecentPosts";
+import Categories from "./BlogCategories";
 import Footer from "../Footer";
-
-const blogfns = require('../../Helpers/BlogSideBar');
 
 
 class PostPage extends Component {
@@ -25,18 +24,6 @@ class PostPage extends Component {
                     photo: post.Photos.length > 0 ? post.Photos[0].PhotoName : null
                 }
             });
-        });
-
-        blogfns.getRecentPosts().then(recents => {
-            this.setState({ recent_posts: recents });
-        }).catch(err => {
-
-        });
-
-        blogfns.getCatgories().then(categories => {
-            this.setState({ categories: categories });
-        }).catch(err => {
-
         });
     }
 
@@ -60,8 +47,8 @@ class PostPage extends Component {
                             </div>
 
                             <div className="col-lg-4 col-md-4">
-                                <RecentPostWidget title="Recent Posts" list={this.state.recent_posts} />
-                                <RecentPostWidget title="Categories" list={this.state.categories} />
+                                <RecentPosts />
+                                <Categories />
                             </div>
                         </div>
                     </div>

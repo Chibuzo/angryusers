@@ -9,12 +9,18 @@ import SideBarWidget from "./SideBarWidget";
 import Footer from "./Footer";
 import LoginModal from "./LoginModal";
 
+import Notification, { notify } from 'react-notify-toast';
+
 import User from "../Helpers/User";
 
 const post_utilities = require('../Helpers/PostUtilities');
 
 class ComplaintPage extends Component {
-    state = { show_complain_form: false, complaint: '', comments: '', modal_toggle: false, new_comment: {}, show_new_comment: false };
+    constructor(props) {
+        super(props);
+
+        this.state = { show_complain_form: false, complaint: '', comments: '', modal_toggle: false, new_comment: {}, show_new_comment: false };
+    }
 
     toggleComplaintForm = () => {
         if (this.state.show_complain_form === true) {
@@ -25,6 +31,7 @@ class ComplaintPage extends Component {
     }
 
     componentDidMount() {
+        notify.show('Fetching selected angry bout, in a moment...');
         // fetch complaints
         fetch(process.env.REACT_APP_API_URL + 'complaints/' + this.props.match.params.id).then(function(response) {
             return response.json();
@@ -38,13 +45,10 @@ class ComplaintPage extends Component {
             document.title = rant.Title;
 
             this.setState({ complaint: complaint, comments: comments });
+            notify.hide();
         });
     }
 
-    // Update complaint list with new complaint
-    newPostNotification() {
-        
-    }
 
     updateComment = (comment) => {
         this.setState({
@@ -65,6 +69,7 @@ class ComplaintPage extends Component {
             <div className="container-fluid">
                 {/* <Banner /> */}
                 <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} />
+                <Notification options={{ timeout: -1 }} />
 
                 <section className="content">
                     <div className="container">
@@ -79,7 +84,7 @@ class ComplaintPage extends Component {
                                     user={User.getUserData()}
                                     key={this.state.new_comment.date} 
                                 />}
-                                {this.state.complaint.length !== '' && <CommentBox complaintId={this.props.match.params.id} user={User.getUserData()} sendNewComment={this.updateComment} showLoginOpts={this.showLoginModal} /> }
+                                {this.state.complaint.length > 10 && <CommentBox complaintId={this.props.match.params.id} user={User.getUserData()} sendNewComment={this.updateComment} showLoginOpts={this.showLoginModal} /> }
                             </div>
 
                             <div className="col-lg-4 col-md-4">

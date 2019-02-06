@@ -343,7 +343,7 @@ ul.cats {
 ul.cats li a {
     font-size: 14px;
     color: #363838;
-    font-family: 'Open Sans Light', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     line-height: 30px;
 }
 
@@ -360,7 +360,7 @@ ul.cats .badge {
 
     font-size: 14px;
     color: #363838;
-    font-family: 'Open Sans Light', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 
 }
 
@@ -462,7 +462,7 @@ td.chbox {
     white-space: pre-wrap;
     color: #414445;
     font-size: 14px;
-    font-family: 'Open Sans Light', sans-serif;   
+    font-family: 'Open Sans', sans-serif;   
     line-height: 25px;
 }
 
@@ -486,10 +486,9 @@ td.chbox {
 }
 
 .post p {
-    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     line-height: 21px;
-    font-weight: 400 !important;
+    color: #414445
 }
 
 .post h1 {
@@ -501,8 +500,8 @@ td.chbox {
 
 .post h2 {
     color: #363838;
-    font-size: 18px;
-    font-family: 'Montserrat', 'Open Sans', sans-serif;   
+    font-size: 21px;
+    font-family: 'Open Sans', sans-serif;   
     margin-top: 10px;
     font-weight: 500;
     margin-bottom: 21px;
@@ -757,6 +756,13 @@ a.down:hover {
     border: none;
     background-color: #37474F;
     box-shadow: none;
+}
+
+.au-input-button {
+    height: 18px;
+    width: 18px;
+    top: 3px;
+    position: relative;
 }
 
 

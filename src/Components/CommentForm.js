@@ -4,6 +4,7 @@ import User from "../Helpers/User";
 import UserInfo from "./UserInfoThumb";
 
 class CommentForm extends Component {
+    state = { comment_btn: { text: 'Post Comment', icon: 'fa-upload', disabled: '' }};
 
     postComment = (e) => {
         e.preventDefault();
@@ -16,6 +17,8 @@ class CommentForm extends Component {
             this.props.showLoginOpts();
             return;
         }
+
+        this.setState({ comment_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
 
         let comment = {
             ComplaintId: e.target.elements.complaint_id.value,
@@ -37,6 +40,7 @@ class CommentForm extends Component {
             console.log(err);
         });
         e.target.reset();
+        this.setState({ comment_btn: { text: 'Post Comment', icon: 'fa-upload', disabled: '' } });
     }
 
     render() {
@@ -65,7 +69,7 @@ class CommentForm extends Component {
                         </div>
                 
                         <div className="pull-right postreply">
-                            <div className="pull-left"><button type="submit" className="btn btn-primary">Post Comment</button></div>
+                            <div className="pull-left"><button type="submit" className="btn btn-primary" {...this.state.comment_btn.disabled}><i className={"fa " + this.state.comment_btn.icon}></i>&nbsp;&nbsp;{this.state.comment_btn.text}</button></div>
                             <div className="clearfix"></div>
                         </div>
 

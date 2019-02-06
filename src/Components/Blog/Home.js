@@ -2,10 +2,9 @@ import React, { Component } from "react";
 
 import SearchBar from "../SearchBar";
 import PostIntro from "./PostIntro";
-import RecentPostWidget from "./RecentPostsWidget"
+import RecentPosts from "./RecentPosts";
+import Categories from "./BlogCategories";
 import Footer from "../Footer";
-
-const blogfns = require('../../Helpers/BlogSideBar');
 
 class Blog extends Component {
     constructor(props) {
@@ -36,19 +35,6 @@ class Blog extends Component {
             });
             this.setState({ posts: posts });
         });
-
-        // load sidebar link
-        blogfns.getRecentPosts().then(recents => {
-            this.setState({ recent_posts: recents });
-        }).catch(err => {
-
-        });
-
-        blogfns.getCatgories().then(categories => {
-            this.setState({ categories: categories });
-        }).catch(err => {
-
-        });
     }
 
     render() {
@@ -66,8 +52,8 @@ class Blog extends Component {
                             </div>
 
                             <div className="col-lg-4 col-md-4">
-                                <RecentPostWidget title="Recent Posts" list={this.state.recent_posts} />
-                                <RecentPostWidget title="Categories" list={this.state.categories} />
+                                <RecentPosts />
+                                <Categories />
                             </div>
                         </div>
                     </div>

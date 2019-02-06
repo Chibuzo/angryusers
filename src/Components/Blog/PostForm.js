@@ -6,7 +6,7 @@ class BlogEntry extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { article: '', categories: '', postPhotos: [], post_btn: { text: 'Publish Post', icon: 'fa-upload', disabled: '' } };
+        this.state = { post: { article: '' }, category: '', categories: '', postPhotos: [], post_btn: { text: 'Publish Post', icon: 'fa-upload', disabled: '' }, edit: { title: '', createdAt: '', id: 0 }};
     }
 
 
@@ -15,16 +15,34 @@ class BlogEntry extends Component {
             return res.json();
         }).then(res => {
             let categories = res || [];
-            let category_opts = '<option value="">Choose Category</option>';
-            categories.forEach(function(c) { 
-                category_opts += `<option value='${c.Id}'>${c.CategoryTitle}</option>`;
+            let category_opts = [];
+            category_opts = categories.map(cat => {
+                return(
+                    <option value={cat.Id} key={cat.Id}>{cat.CategoryTitle}</option>
+                )
             });
             this.setState({ categories: category_opts });
         });
+
+        if (this.props.param.id) {
+            fetch(process.env.REACT_APP_API_URL + 'BlogPosts/' + this.props.param.id).then(function (response) {
+                return response.json();
+            }).then(post => {
+                this.setState({
+                    edit: {
+                        title: post.Title,
+                        createdAt: post.CreatedAt,
+                        id: this.props.param.id
+                    },
+                    post: { article: post.Article },
+                    category: post.Category.Id
+                });
+            });
+        }
     }
 
     updateEditor = (text) => {
-        this.setState({ article: text });
+        this.setState({ post: { article: text }});
     }
 
     savePost = (e) => {
@@ -37,11 +55,20 @@ class BlogEntry extends Component {
         
         const post = {
             Title: e.target.elements.title.value,
-            Article: this.state.article,
+            Article: this.state.post.article,
             CategoryId: e.target.elements.category.value
         };
-        fetch(process.env.REACT_APP_API_URL + 'BlogPosts', {
-            method: 'POST',
+        let uri = '';
+        let method = 'POST';
+        if (e.target.elements.id.value > 0) {
+            post.Id = e.target.elements.id.value;
+            post.CreatedAt = this.state.edit.createdAt;
+            uri = '/' + e.target.elements.id.value;
+            method = 'PUT';
+        }
+        fetch(process.env.REACT_APP_API_URL + 'BlogPosts' + uri, {
+            method: method,
+            mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(post)
         }).then(res => {
@@ -53,9 +80,9 @@ class BlogEntry extends Component {
                 // redirect to new post
                 this.props.history.push('/blog/' + res.Id + '/' + res.Title.split(' ').join('-'));
             }
-            //this.setState({ post_btn: { text: 'Publish Post', icon: 'fa-upload', disabled: '' } });
-        });
-        // restore button state
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     getSelectedFiles = (e) => {
@@ -83,6 +110,14 @@ class BlogEntry extends Component {
         });
     }
 
+    updateTitle = (e) => {
+        this.setState({ edit: {title: e.target.title.value }});
+    }
+
+    updateCategory = (e) => {
+        this.setState({ category: e.target.value });
+    }
+
 
     render() {
         return(
@@ -91,11 +126,16 @@ class BlogEntry extends Component {
                     <div className="topwrap">
                         <div className="posttext" style={{ paddingLeft: '30px' }}>
                             <h2 style={{ fontWeight: 'bold' }}>New Blog Post</h2>
-                            <div><select name="category" className="form-control" required dangerouslySetInnerHTML={{__html: this.state.categories}}></select></div>
+                            <div>
+                                <select name="category" className="form-control" value={this.state.category} onChange={this.updateCategory} required>
+                                    <option value="">Choose Category</option>
+                                    {this.state.categories}
+                                </select>
+                            </div>    
 
-                            <div><input type="text" name="title" placeholder="Title for the post..." className="form-control" required /></div>
+                            <div><input type="text" name="title" placeholder="Title for the post..." className="form-control" value={this.state.edit.title} onChange={this.updateTitle} required /></div>
 
-                            <div><Editor value={this.state.article} onChange={this.updateEditor} /></div>
+                            <div><Editor value={this.state.post.article} onChange={this.updateEditor} /></div>
                             <div className="clearfix"></div>
                             <div>
                                 <label>Attach Photos</label>
@@ -109,6 +149,7 @@ class BlogEntry extends Component {
                                         <input type="checkbox" name="notify" className="form-control" />
                                     </label>
                                 </div>
+                                <input type="hidden" name="id" value={this.state.edit.id} />
 
                                 <div className="pull-right postreply">
                                     <div className="pull-left"><button type="submit" className="btn btn-primary" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Autosuggest from 'react-autosuggest';
+import Modal from 'react-awesome-modal';
 
 import User from "../Helpers/User";
 import UserInfo from "./UserInfoThumb";
@@ -40,20 +41,32 @@ let companyId = 0;
 class ComplaintForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', suggestions: [], uploadFiles: [], post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' } };
+        this.state = { value: '', suggestions: [], uploadFiles: [], post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' }, modal_visibility: false };
+    }
+
+    componentDidMount() {
+        fetchCompanies();
     }
 
     submitComplaint = (e) => {
         e.preventDefault();
 
         // fetch user details
-        let user;
-        if (Object.keys(User.getUserData()).length > 0) {
-            user = User.getUserData();
-        } else {
-            this.props.showLoginOpts();
-            return;
-        }
+        //let user;
+        // if (Object.keys(User.getUserData()).length > 0) {
+        //     user = User.getUserData();
+        // } else {
+        //     this.props.showLoginOpts();
+        //     return;
+        // }
+        let user = {
+            Id: 1,
+            fullname: 'Chibuzo',
+            email: 'uzo.systems@gmail.com',
+        };
+        var u = new User(user);
+        u.saveUser(user);
+        //let user = User.getUserData();
 
         // change post button state
         this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
@@ -64,10 +77,15 @@ class ComplaintForm extends Component {
             IssueDate: new Date().toISOString(),
             CompanyId: companyId,
             CompanyName: e.target.elements.company_name.value,
-            FacebookShare: e.target.elements.fb_share ? true : false,
-            TwitterShare: e.target.elements.tw_share ? true : false,
+            FacebookShare: e.target.elements.fb_share.checked ? true : false,
+            TwitterShare: e.target.elements.tw_share.checked ? true : false,
             UserId: user.Id
         };
+
+        const review = {
+            Legit: e.target.elements.legit.value === "1" ? true : false,
+            GoodCustomerService: e.target.elements.customer_care.value === "1" ? true : false
+        }
 
         fetch(process.env.REACT_APP_API_URL + 'complaints/save', {
             method: 'POST',
@@ -88,6 +106,11 @@ class ComplaintForm extends Component {
 
                 // upload files if any
                 this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
+
+                // send review
+                review.ComplaintId = data.Id;
+                review.CompanyId = companyId;
+                this.postReview(review);
                 
                 this.setState({ post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' }});
             }
@@ -120,6 +143,21 @@ class ComplaintForm extends Component {
         });
     }
 
+    postReview = (review) => {
+        console.log(review);
+        fetch(process.env.REACT_APP_API_URL + 'CompanyReviews', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        }).then(res => {
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     onChange = (event, { newValue }) => {
         this.setState({
           value: newValue
@@ -144,8 +182,13 @@ class ComplaintForm extends Component {
         });
     };
 
+    closeModal() {
+        this.setState({
+            modal_visibility: false
+        });
+    }
+
     render() {
-        fetchCompanies();
         const { value, suggestions } = this.state;
 
         // Autosuggest will pass through all these props to the input.
@@ -183,27 +226,37 @@ class ComplaintForm extends Component {
                                 <label>Include Evidence (Screenshots, receipts etc)</label>
                                 <input type="file" name="files" onChange={this.getSelectedFiles} accept="image/*|audio/*|video/*" multiple />
                             </div>
-                            <br></br>
+                            
+                            <div className="row">
+                                <div className="col-md-12"><label>Do you think this organisation is legit?</label></div>
+                                <div className="col-md-4 col-xs-4"><input type="radio" name="legit" className="au-input-button" value="1" /> &nbsp;Yes</div>
+                                <div className="col-md-4 col-xs-6"><input type="radio" name="legit" className="au-input-button" value="0" /> &nbsp;No</div>    
+                            </div>
+
+                            <div className="row">
+                                <div className="col-md-12"><label>How would rate the customer service of this organisation?</label></div>
+                                <div className="col-md-4 col-xs-4"><input type="radio" name="customer_care" className="au-input-button" value="1" /> &nbsp;Good</div>
+                                <div className="col-md-4 col-xs-6"><input type="radio" name="customer_care" className="au-input-button" value="0" /> &nbsp;Bad</div>
+                            </div>
+
                             <input type="hidden" name="companyId" value="1" />
                             <div className="row newtopcheckbox">
-                                <div className="col-lg-6 col-md-6">
+                                <div className="col-lg-12 col-md-12">
                                     <div>
-                                        <p>Share on Social Networks</p>
+                                        Share on AngryUsers' Social Networks
                                     </div>
-                                    <div className="row">
-                                        <div className="col-lg-4 col-md-6">
-                                            <div className="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="fb_share" id="fb"/> <i className="fab fa-facebook-square"></i>
-                                                </label>
-                                            </div>
+                                </div>
+                                <div className="">                                    
+                                    <div className="col-lg-4 col-md-5 col-xs-4">
+                                        <div className="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="fb_share" id="fb"/> <i className="fab fa-facebook-square"></i>
+                                            </label>
                                         </div>
-                                        <div className="col-lg-4 col-md-6">
-                                            <div className="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="tw_share" id="tw" /> <i className="fab fa-twitter"></i>
-                                                </label>
-                                            </div>
+                                    </div>
+                                    <div className="col-lg-4 col-md-6 col-xs-6">
+                                        <div className="checkbox">
+                                            <label><input type="checkbox" name="tw_share" id="tw" /> <i className="fab fa-twitter"></i></label>
                                         </div>
                                     </div>
                                 </div>
@@ -231,6 +284,12 @@ class ComplaintForm extends Component {
                         <div className="clearfix"></div>
                     </div>
                 </form>
+
+                <Modal toggleModal={this.toggleModal} visible={this.state.modal_visibility} width="400" height="350" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                    <div className="Modal">
+                        <h4>Please Rate this Company</h4>
+                    </div>    
+                </Modal>
             </div>
         );
     }

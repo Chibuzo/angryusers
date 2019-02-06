@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "../SearchBar";
 import PostForm from "./PostForm";
-import RecentPostWidget from "./RecentPostsWidget";
+import RecentPosts from "./RecentPosts";
 import Footer from "../Footer";
 
 class NewPost extends Component {
@@ -18,11 +18,11 @@ class NewPost extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-md-8">
-                                <PostForm history={this.props.history} />
+                                <PostForm history={this.props.history} param={this.props.match.params} />
                             </div>
 
                             <div className="col-lg-4 col-md-4">
-                                <RecentPostWidget />
+                                <RecentPosts />
                             </div>
                         </div>
                     </div> 

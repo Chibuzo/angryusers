@@ -5,6 +5,8 @@ import SearchBar from "./SearchBar";
 import ComplaintForm from "./ComplaintForm";
 import ComplaintIntro from "./ComplaintIntro";
 import SideBarWidget from "./SideBarWidget";
+import RecentPosts from "./Blog/RecentPosts";
+import BlogCategories from "./Blog/BlogCategories";
 import Footer from "./Footer";
 
 import Notification, { notify } from 'react-notify-toast';
@@ -103,7 +105,8 @@ class Home extends Component {
 
                             <div className="col-lg-4 col-md-4">
                                 <SideBarWidget />
-                                <SideBarWidget />
+                                <RecentPosts />
+                                <BlogCategories />
                             </div>
                         </div>
                     </div>
