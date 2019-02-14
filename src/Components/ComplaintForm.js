@@ -52,20 +52,20 @@ class ComplaintForm extends Component {
         e.preventDefault();
 
         // fetch user details
-        //let user;
-        // if (Object.keys(User.getUserData()).length > 0) {
-        //     user = User.getUserData();
-        // } else {
-        //     this.props.showLoginOpts();
-        //     return;
-        // }
-        let user = {
-            Id: 1,
-            fullname: 'Chibuzo',
-            email: 'uzo.systems@gmail.com',
-        };
-        var u = new User(user);
-        u.saveUser(user);
+        let user;
+        if (Object.keys(User.getUserData()).length > 0) {
+            user = User.getUserData();
+        } else {
+            this.props.showLoginOpts();
+            return;
+        }
+        // let user = {
+        //     Id: 1,
+        //     fullname: 'Chibuzo',
+        //     email: 'uzo.systems@gmail.com',
+        // };
+        // var u = new User(user);
+        // u.saveUser(user);
         //let user = User.getUserData();
 
         // change post button state
@@ -144,7 +144,6 @@ class ComplaintForm extends Component {
     }
 
     postReview = (review) => {
-        console.log(review);
         fetch(process.env.REACT_APP_API_URL + 'CompanyReviews', {
             method: 'POST',
             headers: {

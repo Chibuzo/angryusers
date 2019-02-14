@@ -1,19 +1,11 @@
 import React from "react";
-import SearchBar from "../SearchBar";
-import Footer from "../Footer";
+import Page from "../Pages/Page";
 
 const PrivacyPolicy = () => {
     return(
-        <div className="container-fluid">
-            <SearchBar />
-
-            <section className="content">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12 col-md-12">
-                            <article className="au-post">
-                                <h1>Privacy Policy</h1>
-                                <p>Last updated: January 2019</p>
+        <Page>
+            <h1>Privacy Policy</h1>
+            <p>Last updated: January 2019</p>
 
 The AngryUsers community (also refered herein as “AngryUsers”) operates https://angryusers.com. This page informs you of our policies regarding the collection, use and disclosure of Personal Information we receive from users of the Site.
 
@@ -59,14 +51,7 @@ If we make any material changes to this Privacy Policy, we will notify you eithe
 
 If you have any questions about this Privacy Policy, please contact us.
 
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </section>     
-
-            <Footer />       
-        </div>
+        </Page>
     );
 }
 

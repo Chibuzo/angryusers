@@ -5,7 +5,8 @@ import SearchBar from "./SearchBar";
 import ComplaintForm from "./ComplaintForm";
 import Complaint from "./FullComplaint";
 import CommentBox from "./CommentForm";
-import SideBarWidget from "./SideBarWidget";
+import RecentPosts from "./Blog/RecentPosts";
+import Categories from "./Blog/BlogCategories";
 import Footer from "./Footer";
 import LoginModal from "./LoginModal";
 
@@ -32,6 +33,7 @@ class ComplaintPage extends Component {
 
     componentDidMount() {
         notify.show('Fetching selected angry bout, in a moment...');
+       
         // fetch complaints
         fetch(process.env.REACT_APP_API_URL + 'complaints/' + this.props.match.params.id).then(function(response) {
             return response.json();
@@ -75,7 +77,7 @@ class ComplaintPage extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-md-8">
-                                {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} showNotification={this.newPostNotification} showLoginOpts={this.showLoginModal} /> }    
+                                { this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} showNotification={this.newPostNotification} showLoginOpts={this.showLoginModal} /> }    
                                 { this.state.complaint }
                                 { this.state.comments }
                                 { this.state.show_new_comment && <Complaint 
@@ -84,12 +86,12 @@ class ComplaintPage extends Component {
                                     user={User.getUserData()}
                                     key={this.state.new_comment.date} 
                                 />}
-                                {this.state.complaint.length > 10 && <CommentBox complaintId={this.props.match.params.id} user={User.getUserData()} sendNewComment={this.updateComment} showLoginOpts={this.showLoginModal} /> }
+                                { typeof this.state.complaint === 'object' && <CommentBox complaintId={this.props.match.params.id} user={User.getUserData()} sendNewComment={this.updateComment} showLoginOpts={this.showLoginModal} /> }
                             </div>
 
                             <div className="col-lg-4 col-md-4">
-                                <SideBarWidget />
-                                <SideBarWidget />
+                                <RecentPosts />
+                                <Categories />
                             </div>
                         </div>
                     </div>

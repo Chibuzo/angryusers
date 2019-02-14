@@ -4,7 +4,7 @@ import Banner from "./Banner";
 import SearchBar from "./SearchBar";
 import ComplaintForm from "./ComplaintForm";
 import ComplaintIntro from "./ComplaintIntro";
-import SideBarWidget from "./SideBarWidget";
+// import StatWidget from "./StatWidget";
 import RecentPosts from "./Blog/RecentPosts";
 import BlogCategories from "./Blog/BlogCategories";
 import Footer from "./Footer";
@@ -32,6 +32,7 @@ class Home extends Component {
 
     componentDidMount() {
         notify.show('Loading recent complaints, in a moment...');
+
         fetch(process.env.REACT_APP_API_URL + 'complaints').then(function(response) {
             return response.json();
         }).then(res => {
@@ -49,7 +50,7 @@ class Home extends Component {
                     />
                 );
             });
-            document.title = "Angry Users - Public compilation of angry users' stories";
+            document.title = "AngryUsers - Public compilation of angry users' stories";
             this.setState({ complaints: complaints });
             notify.hide();
         }).catch(err => {
@@ -104,7 +105,7 @@ class Home extends Component {
                             </div>
 
                             <div className="col-lg-4 col-md-4">
-                                <SideBarWidget />
+                                {/* <StatWidget /> */}
                                 <RecentPosts />
                                 <BlogCategories />
                             </div>
