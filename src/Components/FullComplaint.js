@@ -20,7 +20,7 @@ class FullComplaint extends Component {
 
     componentDidMount() {
         if (this.props.files && this.props.files.length > 0) {
-            images = this.props.files.map(file => '//localhost:52704/ComplaintFiles/cp_' + file.Filename);
+            images = this.props.files.map(file => file.Filename);
             this.setState({ postImage: this.props.files.length });
         }
     }

@@ -37,7 +37,6 @@ class SearchBar extends Component {
 
             menu = <div className="avatar pull-right dropdown">
                 <b className="caret"></b> <a data-toggle="dropdown" href=""><img src={user.Photo_url} alt="" /></a>
-                <div className="status green">&nbsp;</div>
                 <ul className="dropdown-menu" role="menu">
                     <li role="presentation"><a role="menuitem" tabIndex="-1" href="">My Complaints</a></li>
                     <li role="presentation"><a role="menuitem" tabIndex="-3" href="" onClick={this.logOut}>Log Out</a></li>
@@ -46,7 +45,6 @@ class SearchBar extends Component {
         } else {
             menu = <div className="avatar pull-right dropdown">
                 <b className="caret"></b> <a data-toggle="dropdown" href=""><img src={avatar} alt="" /></a>
-                <div className="status green">&nbsp;</div>
                 <ul className="dropdown-menu" role="menu">
                     <li role="presentation"><a role="menuitem" tabIndex="-1" onClick={this.showLoginModal}>Login</a></li>
                 </ul>

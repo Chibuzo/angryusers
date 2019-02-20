@@ -5,13 +5,15 @@ import Home from "./Components/Home";
 import ComplaintPage from "./Components/ComplaintPage";
 
 import About from "./Components/Pages/About";
-import HowItWorks from "./Components/HowItWorks";
+import WhyAngryusers from "./Components/Pages/WhyAngryusers";
+import ContactPage from "./Components/Pages/ContactPage";
 import PrivacyPolicy from "./Components/Pages/PrivacyPolicy";
 import TermsOfUse from "./Components/Pages/TermsOfUse";
+import Disclaimer from "./Components/Pages/Disclaimer";
+
 import Blog from "./Components/Blog/Home";
 import NewPost from "./Components/Blog/NewPost";
 import ManageEntries from "./Components/Blog/ManageEntries";
-import ContactPage from "./Components/ContactPage";
 import PostPage from './Components/Blog/PostPage';
 
 class App extends Component {
@@ -25,11 +27,12 @@ class App extends Component {
                     <Route path="/complaint/:id" component={ComplaintPage} />
 
                     <Route path="/about" component={About} />
-                    <Route path="/how-it-works" component={HowItWorks} />
+                    <Route path="/whyangryusers" component={WhyAngryusers} />
                     <Route path="/contact" component={ContactPage} />
 
                     <Route path="/privacypolicy" component={PrivacyPolicy} />
                     <Route path="/termsofuse" component={TermsOfUse} />
+                    <Route path="/disclaimer" component={Disclaimer} />
 
                     <Route exact path="/blog" component={Blog} />
                     <Route path="/blog/newentry" component={NewPost} />

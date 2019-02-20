@@ -12,7 +12,7 @@ class RecentPosts extends Component {
             let posts = res.recentPosts || [];
             let recent = posts.map(p => {
                 return (
-                    <li><Link to={"/blog/" + p.id + "/" + p.title.split(' ').join('-')}>{p.title}</Link></li>
+                    <li key={p.id}><Link to={"/blog/" + p.id + "/" + p.title.split(' ').join('-')}>{p.title}</Link></li>
                 );
             });
 

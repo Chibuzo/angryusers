@@ -1,12 +1,12 @@
 import React from "react";
 import Page from "./Page"
 
-const TermsOfUse = () => {
+const Disclaimer = () => {
     return (
         <Page>
             <div className="row">
                 <div className="col-md-12">
-                    <h2>Terms of Use</h2>
+                    <h2>Disclaimer</h2>
 
                 </div>
             </div>
@@ -14,4 +14,4 @@ const TermsOfUse = () => {
     );
 }
 
-export default TermsOfUse;    
+export default Disclaimer;    

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Autosuggest from 'react-autosuggest';
-import Modal from 'react-awesome-modal';
+import S3FileUpload from 'react-s3';
 
 import User from "../Helpers/User";
 import UserInfo from "./UserInfoThumb";
@@ -46,27 +46,28 @@ class ComplaintForm extends Component {
 
     componentDidMount() {
         fetchCompanies();
+        document.title = 'AngryUsers - Vent your spleen here';
     }
 
     submitComplaint = (e) => {
         e.preventDefault();
 
         // fetch user details
-        let user;
-        if (Object.keys(User.getUserData()).length > 0) {
-            user = User.getUserData();
-        } else {
-            this.props.showLoginOpts();
-            return;
-        }
-        // let user = {
-        //     Id: 1,
-        //     fullname: 'Chibuzo',
-        //     email: 'uzo.systems@gmail.com',
-        // };
-        // var u = new User(user);
-        // u.saveUser(user);
-        //let user = User.getUserData();
+        // let user;
+        // if (Object.keys(User.getUserData()).length > 0) {
+        //     user = User.getUserData();
+        // } else {
+        //     this.props.showLoginOpts();
+        //     return;
+        // }
+        let usr = {
+            Id: 1,
+            fullname: 'Chibuzo',
+            email: 'uzo.systems@gmail.com',
+        };
+        var u = new User(usr);
+        u.saveUser(usr);
+        let user = User.getUserData();
 
         // change post button state
         this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
@@ -123,17 +124,42 @@ class ComplaintForm extends Component {
         this.setState({ uploadFiles: e.target.files });
     }
 
-    uploadFiles = (ComplaintId) => {
-        let formData = new FormData();
-        formData.append("ComplaintId", ComplaintId);
-        let n = 1;    
-        for (const file of this.state.uploadFiles) {  
-            formData.append("files" + n, file);
-            n++;
+
+    uploadFiles = async (complaint_id) => {
+        const config = {
+            bucketName: 'angryusers-complaint-files',
+            dirName: 'complaints',
+            region: 'us-east-2',
+            accessKeyId: process.env.REACT_APP_AWS_IAM_ACCESS_KEY,
+            secretAccessKey: process.env.REACT_APP_AWS_IAM_SECRET,
         }
-        fetch(process.env.REACT_APP_API_URL + 'ComplaintFiles/uploadFiles', {
+
+        let files = [];
+
+        for (const file of this.state.uploadFiles) {
+            const ext = file.name.split('.').pop();
+            Object.defineProperty(file, 'name', {
+                writable: true,
+                value: 'cp_' + new Date().getTime() + '.' + ext
+            });
+            try {
+                const res = await S3FileUpload.uploadFile(file, config);
+                files.push({
+                    Filename: res.location,
+                    ComplaintId: complaint_id
+                });
+            } catch(err) {
+                console.log(err)
+            }
+        }
+
+        // save the location of uploaded files
+        fetch(process.env.REACT_APP_API_URL + 'ComplaintFiles/SaveUploadedFiles', {
             method: 'POST',
-            body: formData
+            body: JSON.stringify(files),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then(res => {
             if (res.ok === true) {
                console.log('Done')
@@ -233,7 +259,7 @@ class ComplaintForm extends Component {
                             </div>
 
                             <div className="row">
-                                <div className="col-md-12"><label>How would rate the customer service of this organisation?</label></div>
+                                <div className="col-md-12"><label>How would rate the customer service?</label></div>
                                 <div className="col-md-4 col-xs-4"><input type="radio" name="customer_care" className="au-input-button" value="1" /> &nbsp;Good</div>
                                 <div className="col-md-4 col-xs-6"><input type="radio" name="customer_care" className="au-input-button" value="0" /> &nbsp;Bad</div>
                             </div>
@@ -283,12 +309,6 @@ class ComplaintForm extends Component {
                         <div className="clearfix"></div>
                     </div>
                 </form>
-
-                <Modal toggleModal={this.toggleModal} visible={this.state.modal_visibility} width="400" height="350" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                    <div className="Modal">
-                        <h4>Please Rate this Company</h4>
-                    </div>    
-                </Modal>
             </div>
         );
     }

@@ -12,7 +12,7 @@ class Categories extends Component {
             let cats = res || [];
             let categories = cats.map(cat => {
                 return(
-                    <li><Link to={"/blog/category/" + cat.category}>{cat.category} <span className="badge pull-right">{cat.count}</span></Link></li>
+                    <li key={cat.id}><Link to={"/blog/category/" + cat.category}>{cat.category} <span className="badge pull-right">{cat.count}</span></Link></li>
                 );
             });
 

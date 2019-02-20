@@ -14,6 +14,7 @@ class Blog extends Component {
     }
 
     componentDidMount() {
+        document.title = 'AngryUsers - Recent Blog Entries';
         let url = this.props.match.params.category ? 'BlogCategories/getPosts/' : 'BlogPosts';
         const category = this.props.match.params.category || '';
         url += category;
