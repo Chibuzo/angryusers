@@ -53,21 +53,21 @@ class ComplaintForm extends Component {
         e.preventDefault();
 
         // fetch user details
-        // let user;
-        // if (Object.keys(User.getUserData()).length > 0) {
-        //     user = User.getUserData();
-        // } else {
-        //     this.props.showLoginOpts();
-        //     return;
-        // }
-        let usr = {
-            Id: 1,
-            fullname: 'Chibuzo',
-            email: 'uzo.systems@gmail.com',
-        };
-        var u = new User(usr);
-        u.saveUser(usr);
-        let user = User.getUserData();
+        let user;
+        if (Object.keys(User.getUserData()).length > 0) {
+            user = User.getUserData();
+        } else {
+            this.props.showLoginOpts('post-complaint');
+            return;
+        }
+        // let usr = {
+        //     Id: 1,
+        //     fullname: 'Chibuzo',
+        //     email: 'uzo.systems@gmail.com',
+        // };
+        // var u = new User(usr);
+        // u.saveUser(usr);
+        // let user = User.getUserData();
 
         // change post button state
         this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
@@ -80,6 +80,7 @@ class ComplaintForm extends Component {
             CompanyName: e.target.elements.company_name.value,
             FacebookShare: e.target.elements.fb_share.checked ? true : false,
             TwitterShare: e.target.elements.tw_share.checked ? true : false,
+            Anonymous: e.target.elements.anonymous.checked ? true : false,
             UserId: user.Id
         };
 
@@ -268,7 +269,7 @@ class ComplaintForm extends Component {
                             <div className="row newtopcheckbox">
                                 <div className="col-lg-12 col-md-12">
                                     <div>
-                                        Share on AngryUsers' Social Networks
+                                        <label>Share on AngryUsers' Social Networks</label>
                                     </div>
                                 </div>
                                 <div className="">                                    
@@ -287,11 +288,12 @@ class ComplaintForm extends Component {
                                 </div>
                             </div>
 
+                            <div className="pull-right">Post as anonymous &nbsp; <input type="checkbox" name="anonymous" className="au-input-button" /></div>
                         </div>
                         <div className="clearfix"></div>
                     </div>
                     <div className="postinfobot">
-                
+
                         <div className="notechbox pull-left">
                             <input type="checkbox" name="notify" className="form-control" />
                         </div>
@@ -301,7 +303,6 @@ class ComplaintForm extends Component {
                         </div>
 
                         <div className="pull-right postreply">
-                            <div className="pull-left smile"><a href=""><i className="fa fa-smile-o"></i></a></div>
                             <div className="pull-left"><button type="submit" className="btn btn-primary" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>
                             <div className="clearfix"></div>
                         </div>

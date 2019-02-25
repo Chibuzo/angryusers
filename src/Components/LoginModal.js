@@ -45,7 +45,6 @@ class LoginModal extends Component {
     }
 
     responseGoogle = (res) => {
-        console.log(res);
         let result = res.profileObj;
         if (result) {
             let user = {
@@ -90,7 +89,7 @@ class LoginModal extends Component {
                         callback={this.responseFacebook} />
                     <br /><br />
                     <GoogleLogin
-                        clientId="860814159781-odgcd519ddtnc5qei30rk72hba1cpfk5.apps.googleusercontent.com"
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                         buttonText="Login With Google"
                         icon="true"
                         className='google-login-btn'
