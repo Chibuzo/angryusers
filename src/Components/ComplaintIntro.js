@@ -12,7 +12,7 @@ class ComplaintIntro extends Component {
 
                     <div className="posttext col-md-10">
                         <h1>{this.props.company.CompanyName}</h1>
-                        <h2><Link to={`/complaint/${this.props.id}`}>{this.props.title}</Link></h2>
+                        <h2><Link to={`/complaint/${this.props.id}/${this.props.title.split(' ').join('-')}`}>{this.props.title}</Link></h2>
                         <p>{this.props.complaint}</p>
                     </div>
                     <div className="clearfix"></div>

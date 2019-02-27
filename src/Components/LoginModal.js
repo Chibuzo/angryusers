@@ -27,7 +27,7 @@ const loginUser = (user, $this) => {
         console.log(err);
     });
 }
-
+    
 class LoginModal extends Component {
     constructor(props) {
         super(props);

@@ -38,7 +38,8 @@ class ComplaintPage extends Component {
         fetch(process.env.REACT_APP_API_URL + 'complaints/' + this.props.match.params.id).then(function(response) {
             return response.json();
         }).then(rant => {
-            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} complaint={rant.Issue} postdate={post_utilities.formatDate(rant.IssueDate)} files={rant.ComplaintFiles} key={rant.CreatedAt} user={rant.User} />
+            const url = process.env.REACT_APP_BASEURL + 'complaint/' + rant.Id + '/' + rant.Title.split(' ').join('-');
+            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} complaint={rant.Issue} postdate={post_utilities.formatDate(rant.IssueDate)} files={rant.ComplaintFiles} url={url} user={rant.User} />
             let comments = rant.Comments && rant.Comments.map(comment => {
                 return (<Complaint id={comment.Id} complaint={comment.Body} user={comment.User} postdate={post_utilities.formatDate(comment.DatePosted)} key={comment.DatePosted} />);
             });
@@ -84,7 +85,6 @@ class ComplaintPage extends Component {
                                     complaint={this.state.new_comment.comment} 
                                     postdate={post_utilities.formatDate(this.state.new_comment.date)} 
                                     user={User.getUserData()}
-                                    key={this.state.new_comment.date} 
                                 />}
                                 { typeof this.state.complaint === 'object' && <CommentBox complaintId={this.props.match.params.id} user={User.getUserData()} sendNewComment={this.updateComment} showLoginOpts={this.showLoginModal} /> }
                             </div>

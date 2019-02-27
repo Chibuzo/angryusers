@@ -91,8 +91,8 @@ footer {
     color: #f8f8f8;
 }
 
-footer .logo {
-    line-height: normal;
+.footer-logo {
+    
 }
 
 
@@ -119,6 +119,10 @@ ul.socialicons li a:hover {
 .headernav {
     height: 70px;
     border-bottom: 1px solid #c9cccd;
+}
+
+.logo {
+    margin-top: 7px;
 }
 
 
