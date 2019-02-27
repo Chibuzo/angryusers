@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
 
-import logo from "../images/logo.jpg";
+import logo from "../images/logo.png";
 import avatar from "../images/angry.jpg";
 
 import User from "../Helpers/User";
@@ -54,15 +54,12 @@ class SearchBar extends Component {
         return(
             <section>
                 <div className="headernav">
+                    <div style={{ padding: '1px', backgroundColor: '#CF4137' }}></div>
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo"><img src={logo} alt=""  /></div>
-                            <div className="col-lg-3 col-xs-9 col-sm-10 col-md-3 selecttopic">
-                                <div className="dropdown">
-                                    <Link to="/" >Angry Users</Link>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 search col-sm-12 col-md-4">
+                            <div className="col-xs-3 col-sm-2 col-md-5"><Link to="/"><img src={logo} className="logo" alt="AngryUsers Logo" /></Link></div>
+                            
+                            <div className="search col-sm-12 col-md-4">
                                 <div className="wrap">
                                     <form method="post" className="form">
                                         <div className="pull-left txt"><input type="text" className="form-control" placeholder="Search Topics" /></div>
@@ -71,7 +68,7 @@ class SearchBar extends Component {
                                     </form>
                                 </div>
                             </div>
-                            <div className="col-lg-4 col-xs-12 col-sm-12 col-md-3 avt">
+                            <div className="col-xs-12 col-sm-12 col-md-3 avt">
                                 <div className="stnt pull-left">
                                     <button className="btn btn-primary" onClick={this.props.showComplaintForm}>Post Complaint</button>
                                 </div>

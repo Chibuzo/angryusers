@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 
 import UserInfo from "./UserInfoThumb";
+import FbShare from "./SocialPlugins.js/FbShare";
+import Tweet from "./SocialPlugins.js/Tweet";
 
 import LightBox from "react-image-lightbox";
 import 'react-image-lightbox/style.css';
 
 let images = [];
-
 class FullComplaint extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +20,8 @@ class FullComplaint extends Component {
     }
 
     componentDidMount() {
+        window.FB.XFBML.parse();
+        window.twttr.widgets.load();
         if (this.props.files && this.props.files.length > 0) {
             images = this.props.files.map(file => file.Filename);
             this.setState({ postImage: this.props.files.length });
@@ -37,6 +40,11 @@ class FullComplaint extends Component {
                         { this.props.company && <h1>{this.props.company.CompanyName}</h1> }
                         <h2>{this.props.title}</h2>
                         <p>{this.props.complaint}</p>
+                        <br />
+                        <div>
+                            <FbShare url={this.props.url} />&nbsp;
+                            <Tweet url={this.props.url} />
+                        </div>
                     </div>
                     <div className="clearfix"></div>
                 </div>
@@ -46,9 +54,10 @@ class FullComplaint extends Component {
             
                     <div className="next pull-right">
                         {this.state.postImage > 0 && <button type="button" className="btn btn-default" onClick={() => this.setState({ isOpen: true })}><i className="fa fa-image"></i> View Files</button> }
-                        &nbsp; &nbsp;<a href="" title="Share this content"><i className="fa fa-share"></i></a>
+                        
+                        &nbsp; &nbsp;<span title="Share this content"><i className="fa fa-share fa-1x"></i></span>
                 
-                        <a href="" title="Flag this content"><i className="fa fa-flag"></i></a>
+                        <span title="Flag this content"><i className="fa fa-flag"></i></span>
                     </div>
             
                     <div className="clearfix"></div>
