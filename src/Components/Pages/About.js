@@ -1,50 +1,51 @@
 import React from "react";
 import Page from "./Page"
+import MissionStatement from "./Mission";
+import VisionStatement from "./Vision";
 
 const About = () => {
     return(
-        <Page>
+        <Page title="AngryUsers - About AngryUsers">
             <div className="row">
                 <div className="col-md-8">
                     <h2>About AngryUsers</h2>
 
                     <p>
-                    AngryUsers is a platform inspired by anger and frustration resulting from failed promises and agreements made by corporate organisations to deliver a product or service as advertised. 
+                        AngryUsers is a platform inspired and designed as a response to the anger and frustration experienced by users and customers of different brands and organizations. 
+                        This usually stems from failed promises and agreements made by corporate organisations to deliver a product or service as advertised.
                     </p>
 
                     <p>
-                        AngryUsers as a platform encourages users/customers/clients to share with the public those breach of agreements, disappointments and failure to deliver as agreed or promised by 
-                        organisations, especially when the defaulting organisation has become unresponsive or too slow in addressing the issue.
+                        AngryUsers as a platform gives users/customers/clients a voice to share their negative experiences as regarding these breaches of agreements, disappointments 
+                        and service failures on the part of the brands and corporate organizations. This becomes much more necessary, especially when the defaulting organisation has 
+                        become unresponsive or too slow in addressing the issue.
                     </p>  
 
                     <p>
-                        AngryUsers is run by a group of individuals who are concerned about the way certain organisations treat their workers/clients/users/customer, and have decided to use the 
-                        power of public awareness and social media to highlight these challenges and create an environment that will move the organisations to swing into necessary action to put things right.
+                        AngryUsers is run and supported by a group of concerned individuals united by their passion and commitment to holding companies and brand accountable; and have 
+                        decided to use the influence of public awareness and social media to highlight these issues while creating an environment that will move the organizations to 
+                        quickly take the necessary action to put things right.
                     </p>  
 
-                    <p>AngryUsers also points out to clients/customer where there rights start, where it ends, and how not to be an ass.</p>
+                    <p>AngryUsers also educates the users on their rights, responsibilities, obligations and limits.</p>
 
                     <h3>Our Core Beliefs:</h3>
                     <ul>
-                        <li>An unsatisfied customer seeking attention must be attended to in timely manner</li>
-                        <li>Organisations must not keep advertising a product/service while some existing clients/customers are currently having issues with same product(s)/service(s). We expect them to prioritise 
-                            fixing known issues with their product/services to seeking to gain new customers
+                        <li>An unsatisfied customer with a reasonable complaint must have their issues resolved as quickly as possible</li>
+                        <li>Companies and organizations must take responsibility in ensuring that the advertised brand promise meets the integrity test at all times – the product or 
+                            service does what the advertisement/commercial says it would do
                         </li>
-                        <li>Public organisations must not keep wasting people’s time by requiring a prospective client/customer to go through some tedious sign up processes before 
-                            revealing those vital terms of their business which they feel could make some people turn away on discovery
-                        </li>
-                        <li>We believe that organisations must treat their workers right, otherwise, nobody will work for them eventually</li>
+                        <li>Both public and private organizations must be transparent with their Terms and Conditions, especially the downsides of the product/service</li>
+                        <li>Organizations must treat their workers with respect, fairness, equity and dignity.</li>
                     </ul>
                 </div>
 
                 <div className="col-md-3 text-center pull-right" style={{ fontStyle: 'italic', fontWeight: '100', fontSize: '16px' }}>
                     <br /><br />
-                    <h3>Mission</h3>
-                    <p>To bring organisations to admit, apologize (where necessary), take necessary actions and make immediate amends whenever they fall short of expectation, or fail a worker/client/customer/user.</p>
+                    <MissionStatement />
                
                     <br /><br />
-                    <h3>Vision</h3>
-                    <p>To build a lasting corporate culture that will persuade and can assist organisations to respond and treat their clients/customers dissatisfaction as priority.</p>
+                    <VisionStatement />
                 </div>
             </div>    
         </Page>

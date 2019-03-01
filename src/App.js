@@ -11,7 +11,8 @@ import PrivacyPolicy from "./Components/Pages/PrivacyPolicy";
 import TermsOfUse from "./Components/Pages/TermsOfUse";
 import Disclaimer from "./Components/Pages/Disclaimer";
 
-import Blog from "./Components/Blog/Home";
+//import BlogWrapper from "./Components/Blog/BlogWrapper";
+import BlogHome from "./Components/Blog/Home";
 import NewPost from "./Components/Blog/NewPost";
 import ManageEntries from "./Components/Blog/ManageEntries";
 import PostPage from './Components/Blog/PostPage';
@@ -34,11 +35,11 @@ class App extends Component {
                     <Route path="/termsofuse" component={TermsOfUse} />
                     <Route path="/disclaimer" component={Disclaimer} />
 
-                    <Route exact path="/blog" component={Blog} />
+                    <Route exact path="/blog" component={BlogHome} />
                     <Route path="/blog/newentry" component={NewPost} />
                     <Route path="/blog/manage" component={ManageEntries} />
                     <Route path="/blog/edit/:id" component={NewPost} />
-                    <Route path="/blog/category/:category" component={Blog} />
+                    <Route path="/blog/category/:category" component={BlogHome} />
                     <Route path="/blog/:id/:title" component={PostPage} />
                 </Switch>
             </Router>

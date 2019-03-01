@@ -164,7 +164,6 @@ class ComplaintForm extends Component {
             }
         }).then(res => {
             if (res.ok === true) {
-               console.log('Done')
             }
         }).catch(err => {
             console.log(err);

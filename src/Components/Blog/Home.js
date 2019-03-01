@@ -6,36 +6,52 @@ import RecentPosts from "./RecentPosts";
 import Categories from "./BlogCategories";
 import Footer from "../Footer";
 
+
+const fetchEntries = async category => {
+    let url = category ? 'BlogCategories/getPosts/' : 'BlogPosts';
+    const _category = category || '';
+    url += _category.split('-').join(' ');
+    const res = await fetch(process.env.REACT_APP_API_URL + url);
+    const json = await res.json();
+    const blog = await json[0].posts || json;
+
+    let posts = await blog.map(post => {
+        return (
+            <PostIntro
+                id={post.Id}
+                title={post.Title}
+                category={post.Category ? post.Category.CategoryTitle : json[0].category}
+                uri={post.Id + '/' + post.Title.split(' ').join('-')}
+                datePosted={post.CreatedAt}
+                key={post.Id}
+            />
+        );
+    });
+    return posts;
+}
+
 class Blog extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { posts: [] };
+        this.state = { posts: [], current_category: '' }; 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         document.title = 'AngryUsers - Recent Blog Entries';
-        let url = this.props.match.params.category ? 'BlogCategories/getPosts/' : 'BlogPosts';
-        const category = this.props.match.params.category || '';
-        url += category;
-        fetch(process.env.REACT_APP_API_URL + url).then(res => {
-            return res.json();
-        }).then(res => {
-            const blog = res[0].posts || res;
-            let posts = blog.map(post => {
-                return (
-                    <PostIntro
-                        id={post.Id}
-                        title={post.Title}
-                        category={post.Category ? post.Category.CategoryTitle : res[0].category}
-                        uri={post.Id + '/' + post.Title.split(' ').join('-')}
-                        datePosted={post.CreatedAt}
-                        Key={post.Id}
-                    />
-                );
-            });
-            this.setState({ posts: posts });
-        });
+        const posts = await fetchEntries(this.props.match.params.category);
+        this.setState({ posts: posts, current_category: this.props.match.params.category });
+    }
+
+    static async getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.match.params.category !== prevState.current_category) {
+            const posts = await fetchEntries(nextProps.match.params.category);
+            console.log(nextProps.match.params.category)
+            console.log(posts)
+            return { posts: posts, current_category: nextProps.match.params.category };
+        } else {
+            return null;
+        }
     }
 
     render() {
