@@ -14,6 +14,24 @@
     font-size :29px;
 }
 
+.tp-banner img {
+    object-fit: cover;
+    width: 100%;
+    position: relative;
+}
+
+.tp-banner h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 46px;
+    color: #fff;
+    position: absolute;
+    top: 200px;
+    z-index: 10;
+    text-align: center;
+    margin: auto;
+}
+
 /*------------------------------------------------------------------
 [Table of contents]
 
@@ -53,8 +71,9 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    color: #989c9e;
+    font-size: 16px;
+    color: #000;
+    font-weight: 300;
 }
 
 a {
@@ -91,10 +110,6 @@ footer {
     color: #f8f8f8;
 }
 
-.footer-logo {
-    
-}
-
 
 ul.socialicons li {
     display: inline-block;
@@ -119,6 +134,12 @@ ul.socialicons li a:hover {
 .headernav {
     height: 70px;
     border-bottom: 1px solid #c9cccd;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav.navbar-right:last-child {
+        margin-top: 10px;
+    }
 }
 
 .logo {
@@ -336,8 +357,13 @@ ul.socialicons li a:hover {
     font-family: 'Lato', sans-serif;
     font-weight: 600;
     margin: 0;
-    padding: 20px;
+    padding: 20px 28px;
     padding-bottom: 0;
+}
+
+.sidebarblock h3 {
+    padding-top: 35px;
+    text-transform: uppercase;
 }
 
 .sidebarblock .nav-tabs li a {
@@ -351,7 +377,7 @@ ul.socialicons li a:hover {
 }
 
 .sidebarblock .blocktxt {
-    padding:20px;
+    padding:20px 28px;
 }
 
 ul.cats li {
@@ -368,8 +394,8 @@ ul.cats {
 }
 
 ul.cats li a {
-    font-size: 14px;
-    color: #363838;
+    font-size: 16px;
+    color: #000;
     font-family: 'Open Sans', sans-serif;
     line-height: 30px;
 }
@@ -513,16 +539,18 @@ td.chbox {
 }
 
 .post p {
-    font-size: 14px;
-    line-height: 21px;
-    color: #414445
+    font-size: 16px;
+    line-height: 25px;
+    color: #000;
+    font-weight: 300;
 }
 
 .post h1 {
     color: #363838;
-    font-size: 24px;
-    font-family: 'Montserrat', 'Open Sans', sans-serif; 
+    font-size: 29px;
+    font-family: 'Lato', 'Open Sans', sans-serif; 
     margin-top: 0px;
+    margin-bottom: 20px;
 }
 
 .post h2 {
@@ -532,6 +560,7 @@ td.chbox {
     margin-top: 10px;
     font-weight: 500;
     margin-bottom: 21px;
+    text-transform: uppercase;
 }
 
 .post .comments {
@@ -798,6 +827,7 @@ a.down:hover {
 /*--- #03_new_topic.html - NEW TOPIC ---*/
 
 .newtopic input[type=text],
+.newtopic input[type=email],
 .newtopic input[type=password]
 {
     border-radius: 2px;
@@ -806,7 +836,7 @@ a.down:hover {
     background-color: #f1f1f1;
     padding: 20px;
     font-size: 14px;
-    color: #989c9e;
+    color: #353738;
     font-family: 'Open Sans Light', sans-serif; 
     margin-bottom: 20px;
     height: 50px;
@@ -819,7 +849,7 @@ a.down:hover {
     background-color: #f1f1f1;
 
     font-size: 14px;
-    color: #989c9e;
+    color: #353738;
     font-family: 'Open Sans Light', sans-serif; 
     margin-bottom: 20px;
     height: 50px;
@@ -839,7 +869,7 @@ a.down:hover {
     background-color: #f1f1f1;
     padding: 20px;
     font-size: 14px;
-    color: #989c9e;
+    color: #353738;
     font-family: 'Open Sans Light', sans-serif; 
     margin-bottom: 20px;
     height: 150px;
@@ -854,7 +884,7 @@ a.down:hover {
 .newtopic p {
     font-size: 14px;
     color: #363838;
-    font-family: 'Open Sans Light', sans-serif; 
+    font-family: 'Open Sans', sans-serif; 
 }
 
 
@@ -1045,6 +1075,10 @@ a.down:hover {
 
 @media (max-width: 767px) {
 
+    .logo {
+        margin-top: 2px;
+    }
+
     .au-post {
         padding: 30px;
     }
@@ -1151,7 +1185,7 @@ a.down:hover {
     }
 
     .textwraper textarea {
-        width: 175px;
+        /* width: 175px; */
     }
 
     footer ul.socialicons {

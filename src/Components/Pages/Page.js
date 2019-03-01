@@ -5,7 +5,7 @@ import Footer from "../Footer";
 const Page = (props) => {
     return (
         <div className="container-fluid">
-            <SearchBar />
+            <SearchBar nav={true} />
 
             <section className="content">
                 <div className="container">

@@ -20,8 +20,9 @@ class FullComplaint extends Component {
     }
 
     componentDidMount() {
-        window.FB.XFBML.parse();
-        window.twttr.widgets.load();
+        window.FB && window.FB.XFBML.parse();
+        window.twttr && window.twttr.widgets && window.twttr.widgets.load();
+
         if (this.props.files && this.props.files.length > 0) {
             images = this.props.files.map(file => file.Filename);
             this.setState({ postImage: this.props.files.length });
@@ -55,9 +56,9 @@ class FullComplaint extends Component {
                     <div className="next pull-right">
                         {this.state.postImage > 0 && <button type="button" className="btn btn-default" onClick={() => this.setState({ isOpen: true })}><i className="fa fa-image"></i> View Files</button> }
                         
-                        &nbsp; &nbsp;<span title="Share this content"><i className="fa fa-share fa-1x"></i></span>
+                        &nbsp; &nbsp;<span title="Share this content" className="hidden"><i className="fa fa-share fa-1x"></i></span>
                 
-                        <span title="Flag this content"><i className="fa fa-flag"></i></span>
+                        <span title="Flag this content" className="hidden"><i className="fa fa-flag"></i></span>
                     </div>
             
                     <div className="clearfix"></div>

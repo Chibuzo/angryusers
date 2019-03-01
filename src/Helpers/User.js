@@ -12,7 +12,7 @@ class User {
         this.Id = user.Id;
         this.Fullname = user.fullname;
         this.Email = user.email;
-        this.Photo_url = user.photo || 'https://angryusers.com/images/avatar.jpg';
+        this.Photo_url = user.photo || 'https://angryusers.com/images/angry.jpg';
         this.status = 'Active';
     }
 

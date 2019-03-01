@@ -63,8 +63,8 @@ class ComplaintPage extends Component {
         });
     }
 
-    showLoginModal = () => {
-        this.setState({ modal_toggle: true });
+    showLoginModal = (val) => {
+        this.setState({ modal_toggle: val });
     }
 
     render() {
@@ -99,7 +99,7 @@ class ComplaintPage extends Component {
 
                 <Footer />
 
-                {this.state.modal_toggle && <LoginModal />}
+                <LoginModal controlModal={this.state.modal_toggle} onClose={this.showLoginModal} />
             </div>
         );
     }

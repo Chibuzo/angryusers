@@ -52,12 +52,12 @@ class ComplaintForm extends Component {
     submitComplaint = (e) => {
         e.preventDefault();
 
-        // fetch user details
+        //fetch user details
         let user;
         if (Object.keys(User.getUserData()).length > 0) {
             user = User.getUserData();
         } else {
-            this.props.showLoginOpts('post-complaint');
+            this.props.showLoginOpts(true);
             return;
         }
         // let usr = {
@@ -104,7 +104,7 @@ class ComplaintForm extends Component {
 
                 // Send new complaint to home page for live update
                 complaint.Id = data.Id;
-                this.props.sendNewComplaint(complaint);
+                this.props.sendNewComplaint && this.props.sendNewComplaint(complaint);
 
                 // upload files if any
                 this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
@@ -118,6 +118,7 @@ class ComplaintForm extends Component {
             }
         }).catch(err => {
             console.log(err);
+            this.setState({ post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' } });            
         });
     }
 

@@ -14,7 +14,7 @@ class CommentForm extends Component {
         if (Object.keys(User.getUserData()).length > 0) {
             user = User.getUserData();
         } else {
-            this.props.showLoginOpts();
+            this.props.showLoginOpts(true);
             return;
         }
 

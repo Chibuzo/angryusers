@@ -5,33 +5,11 @@ import GoogleLogin from 'react-google-login';
 import Modal from 'react-awesome-modal';
 
 import User from "../Helpers/User";
-
-
-const loginUser = (user, $this) => {
-    fetch(process.env.REACT_APP_API_URL + 'Users/FindOrCreate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    }).then(res => {
-        return res.json();
-    }).then(valid_user => {
-        if (valid_user.Success === true) {
-            user.Id = valid_user.Id;
-            let newUser = new User(user);
-            newUser.saveUser(user);
-            $this.closeModal();
-        }
-    }).catch(err => {
-        console.log(err);
-    });
-}
     
 class LoginModal extends Component {
     constructor(props) {
         super(props);
-        this.state = { modal_toggle: true, User: null };
+        this.state = { modal_toggle: false };
     };
 
     // login user
@@ -41,7 +19,7 @@ class LoginModal extends Component {
             Email: res.email,
             Photo_url: res.picture.data.is_silhouette ? '' : res.picture.data.url
         };
-        loginUser(user, this);
+        this.loginUser(user, this);
     }
 
     responseGoogle = (res) => {
@@ -52,8 +30,30 @@ class LoginModal extends Component {
                 Email: result.email,
                 Photo_url: result.imageUrl
             }
-            loginUser(user, this);
+            this.loginUser(user, this);
         }
+    }
+
+    loginUser = (user, $this) => {
+        fetch(process.env.REACT_APP_API_URL + 'Users/FindOrCreate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }).then(res => {
+            return res.json();
+        }).then(valid_user => {
+            if (valid_user.Success === true) {
+                user.Id = valid_user.Id;
+                let newUser = new User(user);
+                newUser.saveUser(user);
+                this.props.triggerLoginAction(true);
+                $this.closeModal();
+            }
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     openModal = () => {
@@ -66,13 +66,14 @@ class LoginModal extends Component {
         this.setState({
             modal_toggle: false
         });
+        this.props.onClose(false)
     }
 
     render() {
         return(
             <Modal 
                 toggleModal={this.toggleModal}
-                visible={this.state.modal_toggle}
+                visible={this.props.controlModal}
                 width="400"
                 height="350"
                 effect="fadeInUp"
@@ -80,7 +81,7 @@ class LoginModal extends Component {
             >
                 <div className="Modal">
                     <h3>Login to Continue</h3>
-                    <br></br>
+                    <hr /><br />
                     <FacebookLogin
                         appId={process.env.REACT_APP_FB_APP_ID}
                         size='small'

@@ -29,21 +29,25 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500, 600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="%PUBLIC_URL%/font-awesome-4.0.3/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-        crossorigin="anonymous">
-
+    
     <!-- CSS STYLE-->
     <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/style.css" media="screen" />
-
-    <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
-    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/rs-plugin/css/settings.css" media="screen" />
 
     <title>Angry Users</title>
     <style>
         .Modal {
-            padding: 50px 50px;
             text-align: center;
+        }
+
+        .Modal h3 {
+            font-family: Lato, 'Open Sans', sans-serif;
+            color: #343436;
+            margin-top: 17px;
+        }
+
+        .Modal hr {
+            margin-top: 14px;
+            margin-bottom: 32px;
         }
 
         .kep-login-facebook {
@@ -68,7 +72,6 @@
   </head>
   <body>
 <div id="fb-root"></div>
-<!-- <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=216584885568861&autoLogAppEvents=1"></script> -->
 <script>
     window.fbAsyncInit = function () {
         FB.init({
@@ -104,34 +107,6 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <!-- get jQuery from the google apis -->
-    <script type="text/javascript" src="%PUBLIC_URL%/js/jquery.js"></script>
-
-
-    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-    <script type="text/javascript" src="%PUBLIC_URL%/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
-    <script type="text/javascript" src="%PUBLIC_URL%/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-
-    <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript">
-
-      var revapi;
-
-      jQuery(document).ready(function() {
-        "use strict";
-        revapi = jQuery('.tp-banner').revolution(
-                {
-                  delay: 15000,
-                  startwidth: 1200,
-                  startheight: 278,
-                  hideThumbs: 10,
-                  fullWidth: "on"
-                });
-
-      });	//ready
-
-    </script>
     <script>
     window.twttr = (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0],
@@ -150,5 +125,7 @@
             return t;
         }(document, "script", "twitter-wjs"));
     </script>
+    <script src="%PUBLIC_URL%/js/jquery.js"></script>
+    <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
   </body>
 </html>

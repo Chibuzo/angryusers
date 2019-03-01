@@ -41,7 +41,7 @@ class Blog extends Component {
     render() {
         return(
             <div className="container-fluid">
-                <SearchBar />
+                <SearchBar nav={true} />
 
                 <section className="content">
                     <div className="container">

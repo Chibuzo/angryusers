@@ -19,7 +19,7 @@ const post_utilities = require('../Helpers/PostUtilities');
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: false, show_login_modal: false };
+        this.state = { show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: null, update_login_view: false };
     }
 
     toggleComplaintForm = () => {
@@ -46,7 +46,9 @@ class Home extends Component {
                         postdate={post_utilities.formatDateSince(rant.CreatedAt)} 
                         comments={rant.Comments.length} key={rant.IssueDate} 
                         views={rant.ViewCount}
+                        anonymous={rant.Anonymous}
                         user={rant.User}
+                        onTouchEnd={() => this.props.history.push(`/complaint/${rant.Id}/${rant.Title.split(' ').join('-')}`)}
                     />
                 );
             });
@@ -72,15 +74,19 @@ class Home extends Component {
         });
     }
 
-    showLoginModal = () => {
-        this.setState({ modal_toggle: true });
+    showLoginModal = (val) => {
+        this.setState({ modal_toggle: val });
+    }
+
+    updateLoginView(val) {
+        this.setState({ update_login_view: true });
     }
 
     render() {
         return(
             <div className="container-fluid">
                 <Banner />
-                <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} />
+                <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} updateUserView={this.state.update_login_view} />
                 <Notification options={{ timeout: -1 }} />
 
                 <section className="content">
@@ -99,6 +105,7 @@ class Home extends Component {
                                     views='0'
                                     key={this.state.newComplaint.CreatedAt}
                                     user={User.getUserData()}
+                                    // onTapEnd={this.openComplaint(this.state)}
                                 /> }
 
                                 { this.state.complaints }
@@ -115,7 +122,7 @@ class Home extends Component {
 
                 <Footer />
 
-                { this.state.modal_toggle && <LoginModal /> }
+                <LoginModal controlModal={this.state.modal_toggle} onClose={this.showLoginModal} triggerLoginAction={this.updateLoginView} />
             </div>
         );
     }

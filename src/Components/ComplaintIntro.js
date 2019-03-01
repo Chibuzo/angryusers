@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 
 import UserInfo from "./UserInfoThumb";
+import avatar from "../images/angry.jpg";
 
 class ComplaintIntro extends Component {
     render() {
+        let user = this.props.anonymous ? { Fullname: 'AngryUser', Photo_url: avatar } : this.props.user;
         return(
             <div className="post">
                 <div className="wrap-ut pull-left">
-                    <UserInfo user={this.props.user} />
+                    <UserInfo user={user} />
 
                     <div className="posttext col-md-10">
                         <h1>{this.props.company.CompanyName}</h1>
