@@ -78,7 +78,7 @@ class Home extends Component {
         this.setState({ modal_toggle: val });
     }
 
-    updateLoginView(val) {
+    updateLoginView = (val) => {
         this.setState({ update_login_view: true });
     }
 

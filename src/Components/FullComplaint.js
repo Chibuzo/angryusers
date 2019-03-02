@@ -42,10 +42,12 @@ class FullComplaint extends Component {
                         <h2>{this.props.title}</h2>
                         <p>{this.props.complaint}</p>
                         <br />
-                        <div>
-                            <FbShare url={this.props.url} />&nbsp;
-                            <Tweet url={this.props.url} />
-                        </div>
+                        { this.props.company && 
+                            <div>
+                                <FbShare url={this.props.url} />&nbsp;<Tweet url={this.props.url} />
+                            </div> 
+                        }
+                        
                     </div>
                     <div className="clearfix"></div>
                 </div>

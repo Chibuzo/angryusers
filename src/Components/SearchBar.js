@@ -36,17 +36,17 @@ class SearchBar extends Component {
             let user = User.getUserData();
 
             menu = <div className="avatar pull-right dropdown">
-                <b className="caret"></b> <a data-toggle="dropdown" href=""><img src={user.Photo_url} alt={user.Fullname} title={user.Fullname} /></a>
+                <b className="caret"></b> <Link data-toggle="dropdown" to="/"><img src={user.Photo_url} alt={user.Fullname} title={user.Fullname} /></Link>
                 <ul className="dropdown-menu" role="menu">
                     {/* <li role="presentation"><a role="menuitem" tabIndex="-1" href="">My Complaints</a></li> */}
-                    <li role="presentation"><a role="menuitem" tabIndex="-3" href="" onClick={this.logOut}>Log Out</a></li>
+                    <li role="presentation"><Link role="menuitem" tabIndex="-3" to="/" onClick={this.logOut}>Log Out</Link></li>
                 </ul>
             </div>;
         } else {
             menu = <div className="avatar pull-right dropdown">
-                <b className="caret"></b> <a data-toggle="dropdown" href=""><img src={avatar} alt="" /></a>
+                <b className="caret"></b> <Link data-toggle="dropdown" to="#"><img src={avatar} alt="" /></Link>
                 <ul className="dropdown-menu" role="menu">
-                    <li role="presentation"><a role="menuitem" tabIndex="-1" onClick={this.showLoginModal}>Login</a></li>
+                    <li role="presentation"><Link to="" role="menuitem" onClick={this.showLoginModal}>Login</Link></li>
                 </ul>
             </div>;
         }

@@ -43,14 +43,10 @@ class Blog extends Component {
         this.setState({ posts: posts, current_category: this.props.match.params.category });
     }
 
-    static async getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.match.params.category !== prevState.current_category) {
-            const posts = await fetchEntries(nextProps.match.params.category);
-            console.log(nextProps.match.params.category)
-            console.log(posts)
-            return { posts: posts, current_category: nextProps.match.params.category };
-        } else {
-            return null;
+    async componentDidUpdate() {
+        if (this.props.match.params.category && this.props.match.params.category !== this.state.current_category) {
+            const posts = await fetchEntries(this.props.match.params.category);
+            this.setState({ posts: posts, current_category: this.props.match.params.category });
         }
     }
 

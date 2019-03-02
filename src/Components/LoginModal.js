@@ -34,7 +34,7 @@ class LoginModal extends Component {
         }
     }
 
-    loginUser = (user, $this) => {
+    loginUser = (user) => {
         fetch(process.env.REACT_APP_API_URL + 'Users/FindOrCreate', {
             method: 'POST',
             headers: {
@@ -49,7 +49,7 @@ class LoginModal extends Component {
                 let newUser = new User(user);
                 newUser.saveUser(user);
                 this.props.triggerLoginAction(true);
-                $this.closeModal();
+                this.closeModal();
             }
         }).catch(err => {
             console.log(err);

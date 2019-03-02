@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Editor from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import S3FileUpload from 'react-s3';
 
 class BlogEntry extends Component {
     constructor(props) {
@@ -78,7 +79,7 @@ class BlogEntry extends Component {
                 this.state.postPhotos.length > 0 && this.uploadPhotos(res.Id);
 
                 // redirect to new post
-                this.props.history.push('/blog/' + res.Id + '/' + res.Title.split(' ').join('-'));
+                //this.props.history.push('/blog/' + res.Id + '/' + res.Title.split(' ').join('-'));
             }
         }).catch(err => {
             console.log(err)
@@ -89,25 +90,64 @@ class BlogEntry extends Component {
         this.setState({ postPhotos: e.target.files });
     }
 
-    uploadPhotos = (PostId) => {
-        console.log(PostId)
-        let formData = new FormData();
-        formData.append("PostId", PostId);
-        let n = 1;
-        for (const file of this.state.postPhotos) {
-            formData.append("photos" + n, file);
-            n++;
+    uploadPhotos = async BlogId => {
+        const config = {
+            bucketName: 'angryusers-blog',
+            dirName: 'blog_photos',
+            region: 'us-east-2',
+            accessKeyId: process.env.REACT_APP_AWS_IAM_ACCESS_KEY,
+            secretAccessKey: process.env.REACT_APP_AWS_IAM_SECRET,
         }
-        fetch(process.env.REACT_APP_API_URL + 'BlogPhotos/uploadPhotos', {
+
+        let files = [];
+
+        for (const file of this.state.postPhotos) {
+            const ext = file.name.split('.').pop();
+            Object.defineProperty(file, 'name', {
+                writable: true,
+                value: 'b_' + new Date().getTime() + '.' + ext
+            });
+            try {
+                const res = await S3FileUpload.uploadFile(file, config);
+                files.push({
+                    PhotoSrc: res.location,
+                    BlogPostId: BlogId
+                });
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        // save the location of uploaded files
+        fetch(process.env.REACT_APP_API_URL + 'BlogPhotos/SaveUploadedFiles', {
             method: 'POST',
-            body: formData
+            body: JSON.stringify(files),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then(res => {
             if (res.ok === true) {
-                console.log('Done')
             }
         }).catch(err => {
             console.log(err);
         });
+        // let formData = new FormData();
+        // formData.append("PostId", PostId);
+        // let n = 1;
+        // for (const file of this.state.postPhotos) {
+        //     formData.append("photos" + n, file);
+        //     n++;
+        // }
+        // fetch(process.env.REACT_APP_API_URL + 'BlogPhotos/uploadPhotos', {
+        //     method: 'POST',
+        //     body: formData
+        // }).then(res => {
+        //     if (res.ok === true) {
+        //         console.log('Done')
+        //     }
+        // }).catch(err => {
+        //     console.log(err);
+        // });
     }
 
     updateTitle = (e) => {
