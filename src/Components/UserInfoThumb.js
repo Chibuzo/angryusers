@@ -4,7 +4,7 @@ const UserInfoThumb = (props) => {
     return(
         <div className="userinfo col-md-2 hidden-sm hidden-xs">
             <div className="avatar">
-                <img src={props.user.Photo_url} alt={props.user.fullname} title={props.user.Fullname} />
+                <img src={props.user.Photo_url || 'https://s3.amazonaws.com/angryusers-images/angry.jpg'} alt={props.user.fullname} title={props.user.Fullname} />
                 <div className=""></div>
             </div>
 

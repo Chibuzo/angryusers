@@ -3,7 +3,7 @@
     background-color: #fff;
     padding: 50px 60px;
     margin-bottom: 50px;
-    color: #0e1010;
+    color: ##4b4848;;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;   
     line-height: 25px;
@@ -395,7 +395,7 @@ ul.cats {
 
 ul.cats li a {
     font-size: 16px;
-    color: #000;
+    color: #4b4848;;
     font-family: 'Open Sans', sans-serif;
     line-height: 30px;
 }
@@ -412,7 +412,7 @@ ul.cats .badge {
 .sidebarblock .blocktxt {
 
     font-size: 14px;
-    color: #363838;
+    color: #4b4848;;
     font-family: 'Open Sans', sans-serif;
 
 }
@@ -498,9 +498,9 @@ td.chbox {
     margin-bottom: 20px;
 }
 
-.post .wrap-ut {
+/* .post .wrap-ut {
     width: 85%;
-}
+} */
 
 .post .userinfo {
     width: 15%;
@@ -513,7 +513,7 @@ td.chbox {
     padding-top: 20px;
     padding-bottom: 15px;
     white-space: pre-wrap;
-    color: #414445;
+    color: ##4b4848;;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;   
     line-height: 25px;
@@ -540,8 +540,8 @@ td.chbox {
 
 .post p {
     font-size: 16px;
-    line-height: 25px;
-    color: #000;
+    line-height: 27px;
+    color: #4b4848;;
     font-weight: 300;
 }
 
@@ -1077,6 +1077,10 @@ a.down:hover {
 
     .logo {
         margin-top: 2px;
+    }
+
+    .kep-login-facebook.small {
+        padding: 12px 30px !important;
     }
 
     .au-post {

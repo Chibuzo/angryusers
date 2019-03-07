@@ -79,7 +79,7 @@ class BlogEntry extends Component {
                 this.state.postPhotos.length > 0 && this.uploadPhotos(res.Id);
 
                 // redirect to new post
-                //this.props.history.push('/blog/' + res.Id + '/' + res.Title.split(' ').join('-'));
+                this.props.history.push('/blog/' + res.Id + '/' + res.Title.split(' ').join('-'));
             }
         }).catch(err => {
             console.log(err)

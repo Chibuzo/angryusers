@@ -11,7 +11,7 @@ const Footer = () => {
                     <div className="col-sm-12 col-md-3 textcenter">
                         <Link to="/"><img src={logo} className="footer-logo" alt="AngryUsers Logo"  /></Link>
                         <br /><br />
-                        <p className="text-left" style={{ fontSize: '12px', color: '#f0f0f0' }}>AngryUsers is a platform inspired and designed as a response to the anger and frustration experienced by users and customers of different brands and organizations.</p>
+                        <p className="text-left" style={{ fontSize: '13px', color: '#f0f0f0' }}>AngryUsers is a platform inspired and designed as a response to the anger and frustration experienced by users and customers of different brands and organizations.</p>
                     </div>
                     <div className="col-lg-1 col-md-1"></div>
                     <div className="col-lg-3 col-xs-6 col-sm-3">

@@ -35,5 +35,20 @@ module.exports = {
         if (post.length <= no_of_letters) return post;
         const intro = post.substr(0, no_of_letters - 1);
         return intro.substr(0, intro.lastIndexOf(' ')) + '...';
+    },
+
+    postOnFb: function(msg, link) {
+        const uri = `?message=${msg}&link=${link}&access_token=${process.env.REACT_APP_FB_PAGE_ACCESS_TOKEN}`;
+        fetch("https://graph.facebook.com/285499085314042/feed" + uri, {
+            method: 'POST'
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
+    },
+
+    PostOnTwitter: function() {
+
     }
 }

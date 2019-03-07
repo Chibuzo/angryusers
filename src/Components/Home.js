@@ -42,13 +42,15 @@ class Home extends Component {
                         id={rant.Id} 
                         company={rant.Company}
                         title={rant.Title} 
-                        complaint={post_utilities.postIntro(rant.Issue)} 
+                        intro={post_utilities.postIntro(rant.Issue)} 
+                        complaint={rant.Issue}
                         postdate={post_utilities.formatDateSince(rant.CreatedAt)} 
-                        comments={rant.Comments.length} key={rant.IssueDate} 
+                        // comments={rant.Comments.length} 
+                        key={rant.IssueDate} 
                         views={rant.ViewCount}
                         anonymous={rant.Anonymous}
                         user={rant.User}
-                        onTouchEnd={() => this.props.history.push(`/complaint/${rant.Id}/${rant.Title.split(' ').join('-')}`)}
+                        // onTouchEnd={() => alert() }
                     />
                 );
             });
@@ -99,7 +101,8 @@ class Home extends Component {
                                     id={this.state.newComplaint.Id}
                                     company={this.state.newComplaint.Company}
                                     title={this.state.newComplaint.Title}
-                                    complaint={post_utilities.postIntro(this.state.newComplaint.Issue)}
+                                    intrp={post_utilities.postIntro(this.state.newComplaint.Issue)}
+                                    complaint={this.state.newComplaint.Issue}
                                     postdate={post_utilities.formatDateSince(this.state.newComplaint.CreatedAt)}
                                     comments='0' 
                                     views='0'

@@ -19,6 +19,12 @@ class SearchBar extends Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.props.updateUserView !== this.state.loggedIn) {
+            this.setState({ loggedIn: this.props.updateUserView})
+        }
+    }
+
     showLoginModal = () => {
         this.props.triggerLogin(true);
     }
@@ -36,7 +42,7 @@ class SearchBar extends Component {
             let user = User.getUserData();
 
             menu = <div className="avatar pull-right dropdown">
-                <b className="caret"></b> <Link data-toggle="dropdown" to="/"><img src={user.Photo_url} alt={user.Fullname} title={user.Fullname} /></Link>
+                <b className="caret"></b> <Link data-toggle="dropdown" to="/"><img src={user.Photo_url || 'https://s3.amazonaws.com/angryusers-images/angry.jpg'} alt={user.Fullname} title={user.Fullname} /></Link>
                 <ul className="dropdown-menu" role="menu">
                     {/* <li role="presentation"><a role="menuitem" tabIndex="-1" href="">My Complaints</a></li> */}
                     <li role="presentation"><Link role="menuitem" tabIndex="-3" to="/" onClick={this.logOut}>Log Out</Link></li>
@@ -83,7 +89,7 @@ class SearchBar extends Component {
                     <div className="search col-sm-12 col-md-4">
                     <div className="wrap">
                         <form method="post" className="form">
-                            <div className="pull-left txt"><input type="text" className="form-control" placeholder="Search Topics" /></div>
+                            <div className="pull-left txt"><input type="text" className="form-control" placeholder="Search for Organisation, brand or website" /></div>
                             <div className="pull-right"><button className="btn btn-default" type="button"><i className="fa fa-search"></i></button></div>
                             <div className="clearfix"></div>
                         </form>

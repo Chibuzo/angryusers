@@ -7,6 +7,8 @@ import UserInfo from "./UserInfoThumb";
 
 import '../css/autosuggest.css';
 
+const post_utilities = require('../Helpers/PostUtilities');
+
 let companies = [];
 const fetchCompanies = () => {
     fetch(process.env.REACT_APP_API_URL + 'companies').then(function(response) {
@@ -46,28 +48,28 @@ class ComplaintForm extends Component {
 
     componentDidMount() {
         fetchCompanies();
-        document.title = 'AngryUsers - Vent your spleen here';
+        //document.title = 'AngryUsers - Vent your spleen here';
     }
 
     submitComplaint = (e) => {
         e.preventDefault();
 
         //fetch user details
-        let user;
-        if (Object.keys(User.getUserData()).length > 0) {
-            user = User.getUserData();
-        } else {
-            this.props.showLoginOpts(true);
-            return;
-        }
-        // let usr = {
-        //     Id: 1,
-        //     fullname: 'Chibuzo',
-        //     email: 'uzo.systems@gmail.com',
-        // };
-        // var u = new User(usr);
-        // u.saveUser(usr);
-        // let user = User.getUserData();
+        // let user;
+        // if (Object.keys(User.getUserData()).length > 0) {
+        //     user = User.getUserData();
+        // } else {
+        //     this.props.showLoginOpts(true);
+        //     return;
+        // }
+        let usr = {
+            Id: 1,
+            fullname: 'Chibuzo',
+            email: 'uzo.systems@gmail.com',
+        };
+        var u = new User(usr);
+        u.saveUser(usr);
+        let user = User.getUserData();
 
         // change post button state
         this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
@@ -102,12 +104,16 @@ class ComplaintForm extends Component {
             if (data.Success === true) {
                 this.props.toggleForm();
 
-                // Send new complaint to home page for live update
+                // Update the page with new complaint immediately
                 complaint.Id = data.Id;
                 this.props.sendNewComplaint && this.props.sendNewComplaint(complaint);
 
                 // upload files if any
                 this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
+
+                // share on social networks
+                const link = process.env.REACT_APP_BASEURL + `complaint/${complaint.Id}/${complaint.Title.split(' ').join('-')}`;
+                complaint.FacebookShare && post_utilities.postOnFb(post_utilities.postIntro(complaint.Issue), link);
 
                 // send review
                 review.ComplaintId = data.Id;
@@ -140,10 +146,13 @@ class ComplaintForm extends Component {
 
         for (const file of this.state.uploadFiles) {
             const ext = file.name.split('.').pop();
+
+            // first of all, this is insane but fuck it!
             Object.defineProperty(file, 'name', {
                 writable: true,
                 value: 'cp_' + new Date().getTime() + '.' + ext
             });
+
             try {
                 const res = await S3FileUpload.uploadFile(file, config);
                 files.push({
