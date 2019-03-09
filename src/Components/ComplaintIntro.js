@@ -35,8 +35,8 @@ class ComplaintIntro extends Component {
 
                     <div className="posttext col-md-10">
                         <h1>{this.props.company.CompanyName}</h1>
-                        {/* <h2><Link to={`/complaint/${this.props.id}/${this.props.title.split(' ').join('-')}`}>{this.props.title}</Link></h2> */}
-                        <h2>{this.props.title}</h2>
+                        <h2><Link to={`/complaint/${this.props.id}/${this.props.title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}>{this.props.title}</Link></h2>
+                        {/* <h2>{this.props.title}</h2> */}
                         <p>{complaint}<strong><Link to="" onClick={this.showFullPost}>{ more_link }</Link></strong></p>
                     </div>
                     <div className="clearfix"></div>

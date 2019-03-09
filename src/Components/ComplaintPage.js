@@ -9,6 +9,7 @@ import RecentPosts from "./Blog/RecentPosts";
 import Categories from "./Blog/BlogCategories";
 import Footer from "./Footer";
 import LoginModal from "./LoginModal";
+import { Helmet } from "react-helmet";
 
 import Notification, { notify } from 'react-notify-toast';
 
@@ -20,7 +21,7 @@ class ComplaintPage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { show_complain_form: false, complaint: '', comments: '', modal_toggle: false, new_comment: {}, show_new_comment: false };
+        this.state = { show_complain_form: false, complaint: '', complaint_data: {}, url: '', comments: '', modal_toggle: false, new_comment: {}, show_new_comment: false };
     }
 
     toggleComplaintForm = () => {
@@ -38,16 +39,16 @@ class ComplaintPage extends Component {
         fetch(process.env.REACT_APP_API_URL + 'complaints/' + this.props.match.params.id).then(function(response) {
             return response.json();
         }).then(rant => {
-            const url = process.env.REACT_APP_BASEURL + 'complaint/' + rant.Id + '/' + rant.Title.split(' ').join('-');
+            const url = process.env.REACT_APP_BASEURL + 'complaint/' + rant.Id + '/' + rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-');
             let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} complaint={rant.Issue} postdate={post_utilities.formatDate(rant.IssueDate)} files={rant.ComplaintFiles} url={url} user={rant.User} />
             let comments = rant.Comments && rant.Comments.map(comment => {
                 return (<Complaint id={comment.Id} complaint={comment.Body} user={comment.User} postdate={post_utilities.formatDate(comment.DatePosted)} key={comment.DatePosted} />);
             });
 
             // set page title
-            document.title = rant.Title;
+            //document.title = rant.Title;
 
-            this.setState({ complaint: complaint, comments: comments });
+            this.setState({ complaint: complaint, comments: comments, complaint_data: rant, url: url });
             notify.hide();
         });
     }
@@ -71,6 +72,14 @@ class ComplaintPage extends Component {
         return(
             <div className="container-fluid">
                 {/* <Banner /> */}
+                <Helmet>
+                    <title>{this.state.complaint_data.Title && this.state.complaint_data.Title}</title>
+                    <meta property="og:title" content={this.state.complaint_data.Title} />
+                    <meta property="og:url" content={this.state.url} />
+                    <meta property="og:description" content={this.state.complaint_data.Title} />
+                    <meta property="og:type" content="website" />
+                </Helmet>
+
                 <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} />
                 <Notification options={{ timeout: -1 }} />
 
