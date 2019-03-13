@@ -10,12 +10,14 @@ import BlogCategories from "./Blog/BlogCategories";
 import Footer from "./Footer";
 
 import Notification, { notify } from 'react-notify-toast';
+import LightBox from "react-image-lightbox";
 import LoginModal from "./LoginModal";
 
 import User from "../Helpers/User";
 
 const post_utilities = require('../Helpers/PostUtilities');
 
+let images = [];
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -53,6 +55,7 @@ class Home extends Component {
                         views={rant.ViewCount}
                         anonymous={rant.Anonymous}
                         user={rant.User}
+                        sendImages={this.loadImages}
                         // onTouchEnd={() => alert() }
                     />
                 );
@@ -79,6 +82,11 @@ class Home extends Component {
         });
     }
 
+    loadImages = (imgs) => {
+        images = imgs;
+        this.setState({ post_files: { postImage: images.length, isOpen: true, photoIndex: 0 }});
+    }
+
     showLoginModal = (val) => {
         this.setState({ modal_toggle: val });
     }
@@ -88,6 +96,8 @@ class Home extends Component {
     }
 
     render() {
+        const { photoIndex, isOpen } = this.state.post_files;
+
         return(
             <div className="container-fluid">
                 <Banner />
@@ -111,6 +121,7 @@ class Home extends Component {
                                     views='0'
                                     key={this.state.newComplaint.CreatedAt}
                                     user={User.getUserData()}
+                                    sendImages={this.loadImages}
                                     // onTapEnd={this.openComplaint(this.state)}
                                 /> }
 
@@ -125,6 +136,25 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
+
+                {isOpen && (
+                    <LightBox
+                        mainSrc={images[photoIndex]}
+                        nextSrc={images[(photoIndex + 1) % images.length]}
+                        prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+                        onCloseRequest={() => this.setState({ isOpen: false })}
+                        onMovePrevRequest={() =>
+                            this.setState({
+                                photoIndex: (photoIndex + images.length - 1) % images.length,
+                            })
+                        }
+                        onMoveNextRequest={() =>
+                            this.setState({
+                                photoIndex: (photoIndex + 1) % images.length,
+                            })
+                        }
+                    />
+                )}
 
                 <Footer />
 

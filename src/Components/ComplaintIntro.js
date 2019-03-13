@@ -1,23 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import UserInfo from "./UserInfoThumb";
-import LightBox from "react-image-lightbox";
 import avatar from "../images/angry.jpg";
 
 class ComplaintIntro extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { complaint: '', more_link: 'Read more' };
+        this.state = { complaint: '', more_link: 'Read more', contain_files: false };
     }
 
     componentDidMount() {
         this.setState({ complaint: this.props.intro });
-
-        // if (this.props.files && this.props.files.length > 0) {
-        //     images = this.props.files.map(file => file.Filename);
-        //     this.setState({ postImage: this.props.files.length });
-        // }
     }
 
     showFullPost = e => {
@@ -27,18 +21,27 @@ class ComplaintIntro extends Component {
             this.setState({ complaint: this.props.complaint, more_link: 'Read less' })
         :
             this.setState({ complaint: this.props.intro, more_link: 'Read more' });
+
+        if (this.props.files && this.props.files.length > 0) {
+            this.setState({ contain_files: true });
+        }    
+    }
+
+    loadImages = () => {
+        const images = this.props.files.map(file => file.Filename);
+        this.props.sendImages(images);
     }
 
     render() {
         let user = this.props.anonymous ? { Fullname: 'AngryUser', Photo_url: avatar } : this.props.user;
-        const { complaint, more_link } = this.state;
+        const { complaint, more_link, contain_files } = this.state;
 
         return(
             <div className="post">
                 <div className="wrap-ut pullleft">
                     <UserInfo user={user} />
 
-                    <div className="posttext col-md-10">
+                    <div className="posttext col-md-11">
                         <h1>{this.props.company.CompanyName}</h1>
                         <h2><Link to={`/complaint/${this.props.id}/${this.props.title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}>{this.props.title}</Link></h2>
                         {/* <h2>{this.props.title}</h2> */}
@@ -59,10 +62,10 @@ class ComplaintIntro extends Component {
                 </div> */}
                 <div className="postinfobot">
 
-                    <div className="posted pull-left"><i className="fa fa-clock"></i> Posted on : {this.props.postdate}</div>
+                    <div className="posted pull-left"><i className="fa fa-clock"></i> Posted: {this.props.postdate} ago</div>
 
                     <div className="next pull-right">
-                        {this.state.postImage > 0 && <button type="button" className="btn btn-default" onClick={() => this.setState({ isOpen: true })}><i className="fa fa-image"></i> View Files</button>}
+                        { contain_files && <button type="button" className="btn btn-default" onClick={this.loadImages}><i className="fa fa-image"></i> View Files</button>}
 
                         &nbsp; &nbsp;<span title="Share this content" className="hidden"><i className="fa fa-share fa-1x"></i></span>
 

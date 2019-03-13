@@ -503,15 +503,13 @@ td.chbox {
 } */
 
 .post .userinfo {
-    width: 15%;
-    padding: 20px 0 15px 15px;
+    /* width: 15%; */
+    padding: 27px 0 15px 20px;
 }
 
 .post .posttext {
     /* width: 85%; */
-    padding-right: 30px;
-    padding-top: 20px;
-    padding-bottom: 15px;
+    padding: 20px 30px 15px 30px;
     white-space: pre-wrap;
     color: ##4b4848;;
     font-size: 14px;
@@ -549,7 +547,7 @@ td.chbox {
     color: #363838;
     font-size: 29px;
     font-family: 'Lato', 'Open Sans', sans-serif; 
-    margin-top: 0px;
+    margin-top: 6px;
     margin-bottom: 20px;
 }
 
@@ -672,7 +670,6 @@ td.chbox {
 
 .postinfobot .posted {
     width: 300px;
-    margin-left: 18px;
     font-size: 12px;
     color: #bdc3c7;
     font-family: 'Open Sans Regular', sans-serif; 

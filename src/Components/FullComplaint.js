@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import UserInfo from "./UserInfoThumb";
 import FbShare from "./SocialPlugins.js/FbShare";
@@ -37,7 +37,7 @@ class FullComplaint extends Component {
                 <div className="topwrap">
                     <UserInfo user={this.props.user} />
 
-                    <div className="posttext col-md-10">
+                    <div className="posttext col-md-11">
                         { this.props.company && <h1>{this.props.company.CompanyName}</h1> }
                         <h2>{this.props.title}</h2>
                         <p>{this.props.complaint}</p>
@@ -66,7 +66,7 @@ class FullComplaint extends Component {
                     <div className="clearfix"></div>
                 </div>
 
-                {isOpen && (
+                { isOpen && (
                     <LightBox
                         mainSrc={images[photoIndex]}
                         nextSrc={images[(photoIndex + 1) % images.length]}
