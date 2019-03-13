@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import UserInfo from "./UserInfoThumb";
+import LightBox from "react-image-lightbox";
 import avatar from "../images/angry.jpg";
 
 class ComplaintIntro extends Component {
@@ -13,6 +13,11 @@ class ComplaintIntro extends Component {
 
     componentDidMount() {
         this.setState({ complaint: this.props.intro });
+
+        // if (this.props.files && this.props.files.length > 0) {
+        //     images = this.props.files.map(file => file.Filename);
+        //     this.setState({ postImage: this.props.files.length });
+        // }
     }
 
     showFullPost = e => {
@@ -52,6 +57,20 @@ class ComplaintIntro extends Component {
                     <div className="views"><i className="fa fa-eye"></i> &nbsp;{this.props.views}</div>
                     <div className="time">{this.props.postdate} ago</div>
                 </div> */}
+                <div className="postinfobot">
+
+                    <div className="posted pull-left"><i className="fa fa-clock"></i> Posted on : {this.props.postdate}</div>
+
+                    <div className="next pull-right">
+                        {this.state.postImage > 0 && <button type="button" className="btn btn-default" onClick={() => this.setState({ isOpen: true })}><i className="fa fa-image"></i> View Files</button>}
+
+                        &nbsp; &nbsp;<span title="Share this content" className="hidden"><i className="fa fa-share fa-1x"></i></span>
+
+                        <span title="Flag this content" className="hidden"><i className="fa fa-flag"></i></span>
+                    </div>
+
+                    <div className="clearfix"></div>
+                </div>
                 <div className="clearfix"></div>
             </div>
         );

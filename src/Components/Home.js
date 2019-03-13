@@ -19,7 +19,9 @@ const post_utilities = require('../Helpers/PostUtilities');
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: null, update_login_view: false };
+        this.state = {
+            show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: null, update_login_view: false, 
+            post_files: { postImage: 0, photoIndex: 0, isOpen: false, }};
     }
 
     toggleComplaintForm = () => {
@@ -45,6 +47,7 @@ class Home extends Component {
                         intro={post_utilities.postIntro(rant.Issue)} 
                         complaint={rant.Issue}
                         postdate={post_utilities.formatDateSince(rant.CreatedAt)} 
+                        files={rant.ComplaintFiles}
                         // comments={rant.Comments.length} 
                         key={rant.IssueDate} 
                         views={rant.ViewCount}

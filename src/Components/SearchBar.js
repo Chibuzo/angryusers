@@ -42,7 +42,7 @@ class SearchBar extends Component {
             let user = User.getUserData();
 
             menu = <div className="avatar pull-right dropdown">
-                <b className="caret"></b> <Link data-toggle="dropdown" to="/"><img src={user.Photo_url || 'https://s3.amazonaws.com/angryusers-images/angry.jpg'} alt={user.Fullname} title={user.Fullname} /></Link>
+                <b className="caret"></b> <Link data-toggle="dropdown" to="#"><img src={user.Photo_url || 'https://s3.amazonaws.com/angryusers-images/angry.jpg'} alt={user.Fullname} title={user.Fullname} /></Link>
                 <ul className="dropdown-menu" role="menu">
                     {/* <li role="presentation"><a role="menuitem" tabIndex="-1" href="">My Complaints</a></li> */}
                     <li role="presentation"><Link role="menuitem" tabIndex="-3" to="/" onClick={this.logOut}>Log Out</Link></li>
@@ -84,7 +84,7 @@ class SearchBar extends Component {
             </div>;
         } else {
             nav = <div className="row">
-                    {logo_div }
+                    { logo_div }
 
                     <div className="search col-sm-12 col-md-4">
                     <div className="wrap">
