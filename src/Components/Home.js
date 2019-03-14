@@ -142,7 +142,7 @@ class Home extends Component {
                         mainSrc={images[photoIndex]}
                         nextSrc={images[(photoIndex + 1) % images.length]}
                         prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-                        onCloseRequest={() => this.setState({ isOpen: false })}
+                        onCloseRequest={() => this.setState({ post_files: { isOpen: false }})}
                         onMovePrevRequest={() =>
                             this.setState({
                                 photoIndex: (photoIndex + images.length - 1) % images.length,
