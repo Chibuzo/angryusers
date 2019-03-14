@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 80;
 const path = require('path');
 const Renderer = require('./render');
 
 
 app.get('/', async function (req, res) {
-    const param = { title: 'AngryUsers - Home', desc: 'Public Compilation of angry users stories', img: '' };
+    const param = {
+        title: "Public Compilation of angry customers/users's stories", 
+        desc: "AngryUsers is a bad review platform where customers/users share their bad experience with a brand or an organisation. New customers/users are also encouraged to check up the performance of a brand/organisation before engaging them.", img: '' };
     try {
         const result = await Renderer.render(param);
         res.send(result);
