@@ -46,7 +46,7 @@ class PostPage extends Component {
                                     <h2>{ post.title }</h2>
                                     <div>Category: { post.category } | { post.postdate } ago</div><br />
                                     <div>
-                                        { post.photo && <img src={this.state.post.photo} alt={ post.title } style={{ width: '100%', marginBottom: '30px' }} />}
+                                        { post.photo && <img src={ post.photo } alt={ post.title } style={{ width: '100%', marginBottom: '30px' }} />}
                                         <div dangerouslySetInnerHTML={{ __html: post.article }}></div>
                                     </div>
                                 </article>
