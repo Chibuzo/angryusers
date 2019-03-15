@@ -33,7 +33,7 @@ class ComplaintIntro extends Component {
     }
 
     render() {
-        let user = this.props.anonymous ? { Fullname: 'AngryUser', Photo_url: avatar } : this.props.user;
+        let user = this.props.anonymous ? { Fullname: 'Anonymous', Photo_url: avatar } : this.props.user;
         const { complaint, more_link, contain_files } = this.state;
 
         return(

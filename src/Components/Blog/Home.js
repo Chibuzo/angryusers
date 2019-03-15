@@ -16,12 +16,13 @@ const fetchEntries = async category => {
     const blog = await json[0].posts || json;
 
     let posts = await blog.map(post => {
+        const image = post.Photos ? '/' + btoa(post.Photos[0].PhotoSrc.split('b_')[1]) : '';
         return (
             <PostIntro
                 id={post.Id}
                 title={post.Title}
                 category={post.Category ? post.Category.CategoryTitle : json[0].category}
-                uri={post.Id + '/' + post.Title.split(' ').join('-')}
+                uri={post.Id + '/' + post.Title.split(' ').join('-') + image }
                 datePosted={post.CreatedAt}
                 key={post.Id}
             />

@@ -11,8 +11,10 @@ class RecentPosts extends Component {
         }).then(res => {
             let posts = res.recentPosts || [];
             let recent = posts.map(p => {
+                const image = p.Photos ? '/' + btoa(p.Photos[0].PhotoSrc.split('b_')[1]) : '';
+
                 return (
-                    <li key={p.id}><Link to={"/blog/" + p.id + "/" + p.title.split(' ').join('-')}>{p.title}</Link></li>
+                    <li key={p.id}><Link to={"/blog/" + p.id + "/" + p.title.split(' ').join('-') + image}>{p.title}</Link></li>
                 );
             });
 

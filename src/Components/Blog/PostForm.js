@@ -179,7 +179,7 @@ class BlogEntry extends Component {
                             <div className="clearfix"></div>
                             <div>
                                 <label>Attach Photos</label>
-                                <input type="file" name="photos" onChange={this.getSelectedFiles} accept="image/*" multiple />
+                                <input type="file" name="photos" onChange={this.getSelectedFiles} accept="image/*" multiple required />
                             </div>
                             <div className="clearfix"></div>
                             <div className="postfobot">

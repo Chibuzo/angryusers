@@ -27,8 +27,9 @@ app.get('/complaint/:id/:title', async function (req, res) {
 });
 
 
-app.get('/blog/:id/:title', async function (req, res) {
-    const param = { title: req.params.title, desc: '', img: '' };
+app.get('/blog/:id/:title/:image', async function (req, res) {
+    const image = "https://angryusers-blog.s3.amazonaws.com/blog_photos/b_" + atob(req.params.image);
+    const param = { title: req.params.title, desc: '', img: image };
     try {
         const result = await Renderer.render(param);
         res.send(result);

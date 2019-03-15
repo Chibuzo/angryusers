@@ -60,7 +60,7 @@ class Home extends Component {
                     />
                 );
             });
-            document.title = "AngryUsers - Public compilation of angry users' stories";
+            //document.title = "AngryUsers - Public compilation of angry customers/users' stories";
             this.setState({ complaints: complaints });
             notify.hide();
         }).catch(err => {
@@ -114,7 +114,7 @@ class Home extends Component {
                                     id={this.state.newComplaint.Id}
                                     company={this.state.newComplaint.Company}
                                     title={this.state.newComplaint.Title}
-                                    intrp={post_utilities.postIntro(this.state.newComplaint.Issue)}
+                                    intro={post_utilities.postIntro(this.state.newComplaint.Issue)}
                                     complaint={this.state.newComplaint.Issue}
                                     postdate={post_utilities.formatDateSince(this.state.newComplaint.CreatedAt)}
                                     comments='0' 

@@ -3,10 +3,14 @@
     background-color: #fff;
     padding: 50px 60px;
     margin-bottom: 50px;
-    color: ##4b4848;;
+    color: #4b4848;;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;   
     line-height: 25px;
+}
+
+.au-post p {
+    line-height: 18px;
 }
 
 .blog-post h2 a {
@@ -869,7 +873,7 @@ a.down:hover {
     color: #353738;
     font-family: 'Open Sans Light', sans-serif; 
     margin-bottom: 20px;
-    height: 150px;
+    /* height: 150px; */
 }
 
 .newtopic textarea:hover,
