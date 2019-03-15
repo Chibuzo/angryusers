@@ -10,8 +10,9 @@ module.exports = {
                 if (err) {
                     reject(err)
                 }
-                data = data.replace(/\$OG_TITLE/g, params.title);
-                data = data.replace(/\$OG_DESCRIPTION/g, params.desc);
+                data = data.replace(/\$TITLE/g, params.title.split('-').join(' ') + ' . AngryUsers');
+                data = data.replace(/\$OG_TITLE/g, params.title.split('-').join(' '));
+                data = data.replace(/\$DESCRIPTION/g, params.desc);
                 result = data.replace(/\$OG_IMAGE/g, params.img);
                 resolve(result);
             });
