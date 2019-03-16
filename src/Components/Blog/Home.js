@@ -7,22 +7,22 @@ import Categories from "./BlogCategories";
 import Footer from "../Footer";
 
 
-const fetchEntries = async category => {
-    let url = category ? 'BlogCategories/getPosts/' : 'BlogPosts';
-    const _category = category || '';
+const fetchEntries = async params => {
+    let url = params.category ? 'BlogCategories/getPosts/' : 'BlogPosts';
+    const _category = params.category || '';
     url += _category.split('-').join(' ');
     const res = await fetch(process.env.REACT_APP_API_URL + url);
     const json = await res.json();
     const blog = await json[0].posts || json;
 
     let posts = await blog.map(post => {
-        const image = post.Photos ? '/' + btoa(post.Photos[0].PhotoSrc.split('b_')[1]) : '';
         return (
             <PostIntro
                 id={post.Id}
                 title={post.Title}
                 category={post.Category ? post.Category.CategoryTitle : json[0].category}
-                uri={post.Id + '/' + post.Title.split(' ').join('-') + image }
+                article={post.Article}
+                uri={post.Id + '/' + post.Title.split(' ').join('-') }
                 datePosted={post.CreatedAt}
                 key={post.Id}
             />
@@ -40,18 +40,19 @@ class Blog extends Component {
 
     async componentDidMount() {
         document.title = 'AngryUsers - Recent Blog Entries';
-        const posts = await fetchEntries(this.props.match.params.category);
+        const posts = await fetchEntries(this.props.match.params);
         this.setState({ posts: posts, current_category: this.props.match.params.category });
     }
 
     async componentDidUpdate() {
-        if (this.props.match.params.category && this.props.match.params.category !== this.state.current_category) {
-            const posts = await fetchEntries(this.props.match.params.category);
+        if (this.props.match.params.category !== this.state.current_category) {
+            const posts = await fetchEntries(this.props.match.params);
             this.setState({ posts: posts, current_category: this.props.match.params.category });
         }
     }
 
     render() {
+        const posts = this.state.posts;
         return(
             <div className="container-fluid">
                 <SearchBar nav={true} />
@@ -61,7 +62,7 @@ class Blog extends Component {
                         <div className="row">
                             <div className="col-lg-8 col-md-8">
                                 <article className="au-post" style={{ paddingTop: '15px', overflow: 'auto' }}>
-                                    {this.state.posts}  
+                                    { posts.length > 0 && posts }  
                                 </article>
                             </div>
 

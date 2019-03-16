@@ -3,6 +3,8 @@ import Editor from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import S3FileUpload from 'react-s3';
 
+const post_utilities = require('../../Helpers/PostUtilities');
+
 class BlogEntry extends Component {
     constructor(props) {
         super(props);
@@ -59,8 +61,7 @@ class BlogEntry extends Component {
             Article: this.state.post.article,
             CategoryId: e.target.elements.category.value
         };
-        let uri = '';
-        let method = 'POST';
+        let uri = '', method = 'POST';
         if (e.target.elements.id.value > 0) {
             post.Id = e.target.elements.id.value;
             post.CreatedAt = this.state.edit.createdAt;
@@ -76,7 +77,7 @@ class BlogEntry extends Component {
             return res.json();
         }).then(res => {
             if (res.Success === true) {
-                this.state.postPhotos.length > 0 && this.uploadPhotos(res.Id);
+                this.state.postPhotos.length > 0 && this.uploadPhotos({ id: res.Id, title: post.Title, article: post.Article, method: method });
 
                 // redirect to new post
                 this.props.history.push('/blog/' + res.Id + '/' + res.Title.split(' ').join('-'));
@@ -90,7 +91,7 @@ class BlogEntry extends Component {
         this.setState({ postPhotos: e.target.files });
     }
 
-    uploadPhotos = async BlogId => {
+    uploadPhotos = async blog => {
         const config = {
             bucketName: 'angryusers-blog',
             dirName: 'blog_photos',
@@ -111,7 +112,7 @@ class BlogEntry extends Component {
                 const res = await S3FileUpload.uploadFile(file, config);
                 files.push({
                     PhotoSrc: res.location,
-                    BlogPostId: BlogId
+                    BlogPostId: blog.id
                 });
             } catch (err) {
                 console.log(err)
@@ -127,31 +128,17 @@ class BlogEntry extends Component {
             }
         }).then(res => {
             if (res.ok === true) {
+                // share on social networks
+                const link = process.env.REACT_APP_BASEURL + `blog/${blog.id}/${blog.title.split(' ').join('-') + '/' + btoa(files[0].PhotoSrc.split('b_')[1]) }`;
+                blog.method === 'POST' && post_utilities.postOnFb(post_utilities.postIntro(blog.article.replace(/<(?:.|\n)*?>/gm, ''), 250), link);
             }
         }).catch(err => {
             console.log(err);
         });
-        // let formData = new FormData();
-        // formData.append("PostId", PostId);
-        // let n = 1;
-        // for (const file of this.state.postPhotos) {
-        //     formData.append("photos" + n, file);
-        //     n++;
-        // }
-        // fetch(process.env.REACT_APP_API_URL + 'BlogPhotos/uploadPhotos', {
-        //     method: 'POST',
-        //     body: formData
-        // }).then(res => {
-        //     if (res.ok === true) {
-        //         console.log('Done')
-        //     }
-        // }).catch(err => {
-        //     console.log(err);
-        // });
     }
 
     updateTitle = (e) => {
-        this.setState({ edit: {title: e.target.title.value }});
+        this.setState({ edit: { title: e.target.title.value }});
     }
 
     updateCategory = (e) => {
@@ -179,7 +166,7 @@ class BlogEntry extends Component {
                             <div className="clearfix"></div>
                             <div>
                                 <label>Attach Photos</label>
-                                <input type="file" name="photos" onChange={this.getSelectedFiles} accept="image/*" multiple required />
+                                <input type="file" name="photos" onChange={this.getSelectedFiles} accept="image/*" />
                             </div>
                             <div className="clearfix"></div>
                             <div className="postfobot">

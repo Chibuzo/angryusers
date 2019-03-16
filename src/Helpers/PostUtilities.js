@@ -42,7 +42,6 @@ module.exports = {
         fetch("https://graph.facebook.com/285499085314042/feed" + uri, {
             method: 'POST'
         }).then(res => {
-            console.log(res);
         }).catch(err => {
             console.log(err);
         });
