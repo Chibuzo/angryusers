@@ -46,16 +46,18 @@ class Home extends Component {
                         id={rant.Id} 
                         company={rant.Company}
                         title={rant.Title} 
-                        intro={post_utilities.postIntro(rant.Issue)} 
+                        intro={post_utilities.postIntro(rant.Issue, 360)}
                         complaint={rant.Issue}
                         postdate={post_utilities.formatDateSince(rant.CreatedAt)} 
                         files={rant.ComplaintFiles}
-                        // comments={rant.Comments.length} 
+                        comments={rant.Comments.length} 
                         key={rant.IssueDate} 
                         views={rant.ViewCount}
+                        url={`/complaint/${rant.Id}/${rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
                         anonymous={rant.Anonymous}
                         user={rant.User}
                         sendImages={this.loadImages}
+                        showLoginModal={this.showLoginModal}
                         // onTouchEnd={() => alert() }
                     />
                 );
@@ -114,11 +116,12 @@ class Home extends Component {
                                     id={this.state.newComplaint.Id}
                                     company={this.state.newComplaint.Company}
                                     title={this.state.newComplaint.Title}
-                                    intro={post_utilities.postIntro(this.state.newComplaint.Issue)}
+                                    intro={post_utilities.postIntro(this.state.newComplaint.Issue, 350)}
                                     complaint={this.state.newComplaint.Issue}
                                     postdate={post_utilities.formatDateSince(this.state.newComplaint.CreatedAt)}
                                     comments='0' 
                                     views='0'
+                                    url={`/complaint/${this.state.newComplaint.Id}/${this.state.newComplaint.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
                                     key={this.state.newComplaint.CreatedAt}
                                     user={User.getUserData()}
                                     sendImages={this.loadImages}
@@ -137,7 +140,7 @@ class Home extends Component {
                     </div>
                 </section>
 
-                {isOpen && (
+                { isOpen && (
                     <LightBox
                         mainSrc={images[photoIndex]}
                         nextSrc={images[(photoIndex + 1) % images.length]}

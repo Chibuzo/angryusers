@@ -4,7 +4,8 @@ import React, {Component} from "react";
 import SearchBar from "./SearchBar";
 import ComplaintForm from "./ComplaintForm";
 import Complaint from "./FullComplaint";
-import CommentBox from "./CommentForm";
+import CommentWrapper from "./Comments";
+import Comment from "./Comment";
 import RecentPosts from "./Blog/RecentPosts";
 import Categories from "./Blog/BlogCategories";
 import Footer from "./Footer";
@@ -21,7 +22,7 @@ class ComplaintPage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { show_complain_form: false, complaint: '', complaint_data: {}, url: '', comments: '', modal_toggle: false, new_comment: {}, show_new_comment: false };
+        this.state = { show_complain_form: false, complaint: '', complaint_data: {}, url: '', comments: [], modal_toggle: false, new_comment: {}, show_new_comment: false };
     }
 
     toggleComplaintForm = () => {
@@ -40,9 +41,9 @@ class ComplaintPage extends Component {
             return response.json();
         }).then(rant => {
             const url = process.env.REACT_APP_BASEURL + 'complaint/' + rant.Id + '/' + rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-');
-            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} complaint={rant.Issue} postdate={post_utilities.formatDate(rant.IssueDate)} files={rant.ComplaintFiles} url={url} user={rant.User} />
+            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} complaint={rant.Issue} comments={rant.Comments.length} postdate={post_utilities.formatDateSince(rant.IssueDate)} files={rant.ComplaintFiles} url={url} user={rant.User} />
             let comments = rant.Comments && rant.Comments.map(comment => {
-                return (<Complaint id={comment.Id} complaint={comment.Body} user={comment.User} postdate={post_utilities.formatDate(comment.DatePosted)} key={comment.DatePosted} />);
+                return (<Comment id={comment.Id} comment={comment.Body} user={comment.User} postdate={post_utilities.formatDateSince(comment.DatePosted)} key={comment.Id} />);
             });
 
             // set page title
@@ -55,13 +56,11 @@ class ComplaintPage extends Component {
 
 
     updateComment = (comment) => {
-        this.setState({
-            new_comment: {
-                comment: comment.Body,
-                date: comment.DatePosted
-            },
-            show_new_comment: true
-        });
+        let comments = this.state.comments;
+        comments.push(
+            <Comment id={0} comment={comment.Body} user={User.getUserData()} postdate={post_utilities.formatDateSince(comment.DatePosted)} key={1} />
+        );
+        this.setState({ comments: comments });
     }
 
     showLoginModal = (val) => {
@@ -89,13 +88,15 @@ class ComplaintPage extends Component {
                             <div className="col-lg-8 col-md-8">
                                 { this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} showNotification={this.newPostNotification} showLoginOpts={this.showLoginModal} /> }    
                                 { this.state.complaint }
-                                { this.state.comments }
+
+                                <CommentWrapper complaintId={this.state.complaint_data.Id} triggerLogin={this.showLoginModal} sendNewComment={this.updateComment}>{this.state.comments}</CommentWrapper>
+
                                 { this.state.show_new_comment && <Complaint 
                                     complaint={this.state.new_comment.comment} 
                                     postdate={post_utilities.formatDate(this.state.new_comment.date)} 
                                     user={User.getUserData()}
                                 />}
-                                { typeof this.state.complaint === 'object' && <CommentBox complaintId={this.props.match.params.id} user={User.getUserData()} sendNewComment={this.updateComment} showLoginOpts={this.showLoginModal} /> }
+                                {/* { typeof this.state.complaint === 'object' && <CommentBox complaintId={this.props.match.params.id} sendNewComment={this.updateComment} showLoginOpts={this.showLoginModal} /> } */}
                             </div>
 
                             <div className="col-lg-4 col-md-4">

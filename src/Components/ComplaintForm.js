@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import S3FileUpload from 'react-s3';
 
 import User from "../Helpers/User";
-import UserInfo from "./UserInfoThumb";
+// import UserInfo from "./UserInfoThumb";
 
 import '../css/autosuggest.css';
 
@@ -55,21 +55,21 @@ class ComplaintForm extends Component {
         e.preventDefault();
 
         //fetch user details
-        // let user;
-        // if (Object.keys(User.getUserData()).length > 0) {
-        //     user = User.getUserData();
-        // } else {
-        //     this.props.showLoginOpts(true);
-        //     return;
-        // }
-        let usr = {
-            Id: 1,
-            fullname: 'Chibuzo',
-            email: 'uzo.systems@gmail.com',
-        };
-        var u = new User(usr);
-        u.saveUser(usr);
-        let user = User.getUserData();
+        let user;
+        if (Object.keys(User.getUserData()).length > 0) {
+            user = User.getUserData();
+        } else {
+            this.props.showLoginOpts(true);
+            return;
+        }
+        // let usr = {
+        //     Id: 1,
+        //     fullname: 'Chibuzo',
+        //     email: 'uzo.systems@gmail.com',
+        // };
+        // var u = new User(usr);
+        // u.saveUser(usr);
+        // let user = User.getUserData();
 
         // change post button state
         this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
@@ -240,9 +240,9 @@ class ComplaintForm extends Component {
             <div className='post make-post'>
                 <form className="form newtopic" method="post" onSubmit={this.submitComplaint}>
                     <div className="topwrap">
-                        <UserInfo user={User.getUserData()} />
+                        {/* <UserInfo user={User.getUserData()} /> */}
 
-                        <div className="posttext col-md-10">
+                        <div className="posttext col-md-12">
                             <Autosuggest
                                 suggestions={suggestions}
                                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

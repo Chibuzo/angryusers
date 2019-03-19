@@ -1,7 +1,6 @@
 import React, {Component} from "react"
 
 import User from "../Helpers/User";
-import UserInfo from "./UserInfoThumb";
 
 class CommentForm extends Component {
     state = { comment_btn: { text: 'Post Comment', icon: 'fa-upload', disabled: '' }};
@@ -45,38 +44,35 @@ class CommentForm extends Component {
 
     render() {
         return(
-            <div className="post">
-                <form className="form" method="post" onSubmit={this.postComment}>
-                    <div className="topwrap">
-                        <UserInfo user={this.props.user} />
-
-                        <div className="posttext col-md-11 col-sm-12 col-xs-12">
-                            <div className="textwraper">
-                                <div className="postreply">Post a Comment</div>
-                                <textarea name="comment" placeholder="Type your comment here" required></textarea>
-                            </div>
+            <form className="form" method="post" onSubmit={this.postComment}>
+                <div className="topwrap">
+                    <div className="posttext col-md-12 col-sm-12 col-xs-12">
+                        <div className="textwraper">
+                            <div className="postreply">Post a Comment</div>
+                            <textarea name="comment" placeholder="Type your comment here" required></textarea>
+                            <input type="hidden" name="complaint_id" value={this.props.postId} />
                         </div>
-                        <div className="clearfix"></div>
                     </div>
-                    <div className="postinfobot">
-                        <input type="hidden" name="complaint_id" value={this.props.complaintId} />
+                    <div className="clearfix"></div>
+                </div>
+                <div className="postinfobot">
+                    <div className="col-md-8">
                         <div className="notechbox pull-left">
                             <input type="checkbox" name="notify" className="form-control" />
                         </div>
                 
-                        <div className="pull-left">
+                        <div className="">
                             <label> Email me when some one post a reply</label>
                         </div>
-                
-                        <div className="pull-right postreply">
-                            <div className="pull-left"><button type="submit" className="btn btn-primary" {...this.state.comment_btn.disabled}><i className={"fa " + this.state.comment_btn.icon}></i>&nbsp;&nbsp;{this.state.comment_btn.text}</button></div>
-                            <div className="clearfix"></div>
-                        </div>
-
-                        <div className="clearfix"></div>
+                    </div>    
+            
+                    <div className="col-md-4 text-right">
+                        <button type="submit" className="btn btn-primary" {...this.state.comment_btn.disabled}><i className={"fa " + this.state.comment_btn.icon}></i>&nbsp;&nbsp;{this.state.comment_btn.text}</button>
                     </div>
-                </form>
-            </div>
+
+                    <div className="clearfix"></div>
+                </div>
+            </form>
         );
     }
 }

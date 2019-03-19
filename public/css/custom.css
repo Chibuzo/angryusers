@@ -9,6 +9,34 @@
     line-height: 25px;
 }
 
+.au-post p {
+    margin: 18px 0;
+}
+
+.fa-grey {
+    color: #ccc;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border-radius: 7px;
+    padding: 10px 20px;
+    margin-bottom: 22px;
+}
+
+.comment p {
+    font-size: 14px !important;
+    color: #4b4848;
+    font-family: 'Open Sans', 'Lato', sans-serif'
+}
+
+.comment .name {
+    font-size: 14px;
+    font-family: 'Open Sans', 'Lato', sans-serif;
+    font-weight: 600;
+    color: #333;
+}
+
 .blog-post h2 a {
     font-family: 'Lato', sans-serif;
     font-size :29px;
@@ -72,7 +100,6 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    color: #000;
     font-weight: 300;
 }
 
@@ -501,24 +528,43 @@ td.chbox {
 /* .post .wrap-ut {
     width: 85%;
 } */
+.userinfo {
+    padding-left: 24px;
+}
 
-.post .userinfo {
-    /* width: 15%; */
-    padding: 27px 0 15px 20px;
+.userinfo small {
+    color: #999;
+}
+
+.userinfo .name {
+    font-weight: 600;
+    font-size:14px;
+    font-family: 'Open Sans', 'Lato', sans-serif;
+    position: relative;
+    margin-bottom: 2px;
+    top: 4px;
+}
+
+.userinfo img {
+    width: 45px;
 }
 
 .post .posttext {
     /* width: 85%; */
-    padding: 20px 30px 15px 30px;
-    white-space: pre-wrap;
-    color: ##4b4848;;
+    padding: 20px 30px 15px 40px;
+    /* white-space: pre-wrap; */
+    color: #4b4848;;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;   
     line-height: 25px;
 }
 
+.post .posthead {
+    padding: 20px 30px 10px 40px;
+}
+
 .post .postinfo {
-    width: 15%;
+    /* width: 15%; */
     border-left: solid 1px #f1f1f1;
 
 
@@ -548,7 +594,7 @@ td.chbox {
     font-size: 29px;
     font-family: 'Lato', 'Open Sans', sans-serif; 
     margin-top: 6px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .post h2 {
@@ -557,7 +603,6 @@ td.chbox {
     font-family: 'Open Sans', sans-serif;   
     margin-top: 10px;
     font-weight: 500;
-    margin-bottom: 21px;
     text-transform: uppercase;
 }
 
@@ -618,6 +663,10 @@ td.chbox {
     font-size: 14px;
 }
 
+.post-details-link a {
+    color: #999;
+}
+
 
 
 
@@ -639,19 +688,10 @@ td.chbox {
     text-decoration: underline;
 }
 
-/*--- Topic ---*/
-.topic .userinfo {
-    width: 12%;
-}
-
-.topic .posttext {
-    /* width: 88%; */
-}
-
 .postinfobot {
     border-top: solid 1px #f1f1f1;
     line-height: 50px;
-    padding: 0 30px 0 94px;
+    padding: 0 20px 0 20px;
 }
 
 
@@ -959,67 +999,6 @@ a.down:hover {
 
 
 
-/*-----------------------------------------------------------------*/
-/*--- #04_new_account.html - NEW ACCOUNT ---*/
-
-.acccap h3 {
-    padding: 7px;
-    margin: 0;
-    border-radius: 2px;
-    background-color: #697683;
-    display: inline-block;
-    color: #ffffff;
-    font-size: 12px;
-    font-family: 'Open Sans Regular', sans-serif;
-
-
-}
-
-.acccap .posttext {
-    padding-bottom: 0;
-}
-
-.acccap .userinfo {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.accsection.privacy h3 {
-    background-color: #9b59b6;
-}
-
-.accsection.privacy .posttext {
-    padding: 0;
-    padding-top: 20px;
-}
-
-.accsection.privacy p {
-    margin-bottom: 0;
-}
-
-.accsection.privacy .checkbox {
-    margin: 20px 0 10px 0;
-}
-
-.accsection.survey h3 {
-    background-color: #e67e22;
-}
-
-.accsection.networks h3 {
-    background-color: #80d3ab;
-
-}
-
-.accsection .htext {
-    width: 40%;
-    float: left; 
-}
-
-.accsection .hnotice {
-    width: 60%;
-    float: left;
-    text-align: right;
-}
 
 .networks .btn {
     display: block;
@@ -1093,15 +1072,13 @@ a.down:hover {
     }
 
     .post .userinfo {
-        width: 30%;
-        padding: 15px 0 15px 15px;
+        padding: 0 0 0 5px;
     }
 
-    .post .posttext {
+    .post .posttext, .post .posthead {
         /* width: 70%; */
         padding-right: 15px;
         padding-top: 15px;
-        padding-bottom: 15px;
         padding-left: 22px;
     }
 
@@ -1167,7 +1144,7 @@ a.down:hover {
     /*--- 02_topic.html ---*/
 
     .postinfobot {
-        padding: 10px;
+        padding: 0;
         padding-right: 2px;
     }
 
@@ -1240,11 +1217,11 @@ a.down:hover {
     }
 
     .post .userinfo {
-        width: 15%;
+        /* width: 15%; */
         padding: 15px 0 15px 15px;
     }
 
-    .post .posttext {
+    .post .posttext, .post .posthead {
         /* width: 85%; */
         padding-right: 15px;
         padding-top: 15px;

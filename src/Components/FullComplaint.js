@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import UserInfo from "./UserInfoThumb";
+import avatar from "../images/angry.jpg";
 import FbShare from "./SocialPlugins.js/FbShare";
 import Tweet from "./SocialPlugins.js/Tweet";
 
@@ -30,16 +31,22 @@ class FullComplaint extends Component {
     }
 
     render() {
+        let user = this.props.anonymous ? { Fullname: 'Anonymous', Photo_url: avatar } : this.props.user;
         const { photoIndex, isOpen } = this.state;
 
         return(
             <div className="post">
                 <div className="topwrap">
-                    <UserInfo user={this.props.user} />
+                    <div className="">
+                        <div className="posthead col-md-12 col-xs-12">
+                            <h1>{this.props.company.CompanyName}</h1>
+                            <h2><Link to={this.props.url}>{this.props.title}</Link></h2>
+                        </div>
 
-                    <div className="posttext col-md-11">
-                        { this.props.company && <h1>{this.props.company.CompanyName}</h1> }
-                        <h2>{this.props.title}</h2>
+                        <UserInfo user={user} date={this.props.postdate} />
+                    </div>
+
+                    <div className="posttext col-md-12 col-xs-12" style={{ whiteSpace: 'pre-wrap' }}>
                         <p>{this.props.complaint}</p>
                         <br />
                         { this.props.company && 
@@ -52,15 +59,13 @@ class FullComplaint extends Component {
                     <div className="clearfix"></div>
                 </div>
                 <div className="postinfobot">
-            
-                    <div className="posted pull-left"><i className="fa fa-clock"></i> Posted on : {this.props.postdate}</div>
-            
-                    <div className="next pull-right">
+                    <div className="col-md-3 col-xs-5">
                         {this.state.postImage > 0 && <button type="button" className="btn btn-default" onClick={() => this.setState({ isOpen: true })}><i className="fa fa-image"></i> View Files</button> }
-                        
-                        &nbsp; &nbsp;<span title="Share this content" className="hidden"><i className="fa fa-share fa-1x"></i></span>
-                
-                        <span title="Flag this content" className="hidden"><i className="fa fa-flag"></i></span>
+                    </div>
+
+                    <div className="col-md-9 col-xs-7 post-details-link text-right" style={{ fontSize: '13px' }}>
+                        {this.props.comments} Comments <strong>.</strong>&nbsp;
+                        <Link to="#" onClick={this.reportPost} title="Report this post">Report</Link>
                     </div>
             
                     <div className="clearfix"></div>
