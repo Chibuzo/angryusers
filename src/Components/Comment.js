@@ -15,11 +15,11 @@ class Comment extends Component {
 
         return (
             <div>
-                <div className="col-md-1 col-xs-1">
+                <div className="col-md-1 col-xs-2">
                     <UserInfo user={user} />
                 </div>
 
-                <div className="comment col-md-11 col-xs-11 pull-right" style={{ whiteSpace: 'pre-wrap', width: '90.666667%' }}>
+                <div className="comment col-md-11 col-xs-10 pull-right" style={{ whiteSpace: 'pre-wrap' }}>
                     <p className="name">{user.Fullname}</p>
                     <p>{this.props.comment}</p>
                     <br />

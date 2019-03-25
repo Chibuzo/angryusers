@@ -17,7 +17,7 @@ class LoginModal extends Component {
         let user = {
             Fullname: res.name,
             Email: res.email,
-            Photo_url: res.picture.data.is_silhouette ? '' : res.picture.data.url
+            Photo_url: res.picture.data.is_silhouette ? '' : `https://graph.facebook.com/${res.id}/picture`
         };
         this.loginUser(user, this);
     }
@@ -48,8 +48,8 @@ class LoginModal extends Component {
                 user.Id = valid_user.Id;
                 let newUser = new User(user);
                 newUser.saveUser(user);
-                this.props.triggerLoginAction(true);
                 this.closeModal();
+                this.props.triggerLoginAction(true);
             }
         }).catch(err => {
             console.log(err);

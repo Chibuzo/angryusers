@@ -41,7 +41,7 @@ class ComplaintPage extends Component {
             return response.json();
         }).then(rant => {
             const url = process.env.REACT_APP_BASEURL + 'complaint/' + rant.Id + '/' + rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-');
-            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} complaint={rant.Issue} comments={rant.Comments.length} postdate={post_utilities.formatDateSince(rant.IssueDate)} files={rant.ComplaintFiles} url={url} user={rant.User} />
+            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} anonymous={rant.Anonymous} complaint={rant.Issue} comments={rant.Comments.length} postdate={post_utilities.formatDateSince(rant.IssueDate)} files={rant.ComplaintFiles} url={url} user={rant.User} />
             let comments = rant.Comments && rant.Comments.map(comment => {
                 return (<Comment id={comment.Id} comment={comment.Body} user={comment.User} postdate={post_utilities.formatDateSince(comment.DatePosted)} key={comment.Id} />);
             });
@@ -64,6 +64,7 @@ class ComplaintPage extends Component {
     }
 
     showLoginModal = (val) => {
+        console.log('Atr')
         this.setState({ modal_toggle: val });
     }
 

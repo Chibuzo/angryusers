@@ -83,6 +83,7 @@ class ComplaintForm extends Component {
             FacebookShare: e.target.elements.fb_share.checked ? true : false,
             TwitterShare: e.target.elements.tw_share.checked ? true : false,
             Anonymous: e.target.elements.anonymous.checked ? true : false,
+            Notify: e.target.elements.notify.checked ? true : false,
             UserId: user.Id
         };
 

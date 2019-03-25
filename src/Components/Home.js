@@ -62,7 +62,7 @@ class Home extends Component {
                     />
                 );
             });
-            //document.title = "AngryUsers - Public compilation of angry customers/users' stories";
+            document.title = "AngryUsers - Public compilation of angry customers/users' stories";
             this.setState({ complaints: complaints });
             notify.hide();
         }).catch(err => {

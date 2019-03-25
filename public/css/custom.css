@@ -18,6 +18,7 @@
 }
 
 .comment {
+    font-family: 'Open Sans', 'Lato', sans-serif;
     background-color: #f9f9f9;
     border-radius: 7px;
     padding: 10px 20px;
@@ -25,9 +26,10 @@
 }
 
 .comment p {
-    font-size: 14px !important;
+    font-size: 13px;
+    font-weight: 400;
     color: #4b4848;
-    font-family: 'Open Sans', 'Lato', sans-serif'
+    line-height: 19px;
 }
 
 .comment .name {
@@ -35,6 +37,18 @@
     font-family: 'Open Sans', 'Lato', sans-serif;
     font-weight: 600;
     color: #333;
+}
+
+.comment-wrapper {
+    background-color: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px #c9cccd;
+    margin-bottom: 20px;
+}
+
+.comment-wrapper .topwrap {
+    padding-right: 30px;
+    padding-top: 22px;
 }
 
 .blog-post h2 a {
@@ -350,8 +364,6 @@ ul.socialicons li a:hover {
 
 }
 
-
-
 .paginationforum {
     margin: 19px auto;
     padding: 0;
@@ -435,7 +447,6 @@ ul.cats .badge {
     margin-top: 7px;
 }
 
-
 .sidebarblock .blocktxt {
 
     font-size: 14px;
@@ -443,7 +454,6 @@ ul.cats .badge {
     font-family: 'Open Sans', sans-serif;
 
 }
-
 
 .sidebarblock .blocktxt .smal {
     font-size: 12px;
@@ -547,6 +557,12 @@ td.chbox {
 
 .userinfo img {
     width: 45px;
+    border-radius: 50%;
+}
+
+.comment-user img {
+    border-radius: 50%;
+    width: 36px;
 }
 
 .post .posttext {
@@ -598,12 +614,15 @@ td.chbox {
 }
 
 .post h2 {
-    color: #363838;
-    font-size: 21px;
-    font-family: 'Open Sans', sans-serif;   
-    margin-top: 10px;
+    font-size: 25px;
+    font-family: Lato, 'Open Sans', sans-serif;   
+    margin-top: -3px;
     font-weight: 500;
     text-transform: uppercase;
+}
+
+.post h2 a {
+    color: #747777;
 }
 
 .post .comments {
@@ -1053,6 +1072,20 @@ a.down:hover {
 
     .logo {
         margin-top: 2px;
+    }
+
+    .comment-wrapper .topwrap {
+        padding-right: 7px;
+        /* padding-top: 22px; */
+    }
+
+    .comment-wrapper .topwrap .comment {
+        padding: 4px 10px;
+    }
+
+    .comment-user img {
+        position: relative;
+        left: -8px;
     }
 
     .kep-login-facebook.small {

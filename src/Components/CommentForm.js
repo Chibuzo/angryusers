@@ -17,11 +17,21 @@ class CommentForm extends Component {
             return;
         }
 
+        // let usr = {
+        //     Id: 1,
+        //     Fullname: 'Chibuzo',
+        //     email: 'uzo.systems@gmail.com',
+        // };
+        // var u = new User(usr);
+        // u.saveUser(usr);
+        // let user = User.getUserData();
+
         this.setState({ comment_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
 
         let comment = {
             ComplaintId: e.target.elements.complaint_id.value,
             Body: e.target.elements.comment.value,
+            Notify: e.target.elements.notify.checked ? true : false,
             DatePosted: new Date().toISOString(),
             userId: user.Id
         };
@@ -45,7 +55,7 @@ class CommentForm extends Component {
     render() {
         return(
             <form className="form" method="post" onSubmit={this.postComment}>
-                <div className="topwrap">
+                <div className="row">
                     <div className="posttext col-md-12 col-sm-12 col-xs-12">
                         <div className="textwraper">
                             <div className="postreply">Post a Comment</div>

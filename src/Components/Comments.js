@@ -3,8 +3,8 @@ import CommentForm from "./CommentForm";
 
 const Comments = (props) => {
     return(
-        <div className="post">
-            <div className="topwrap" style={{ paddingRight: '30px', paddingTop: '22px' }}>
+        <div className="comment-wrapper">
+            <div className="topwrap">
                 {props.children}
             </div>
 

@@ -20,12 +20,13 @@ class SearchBar extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.updateUserView !== this.state.loggedIn) {
-            this.setState({ loggedIn: this.props.updateUserView})
+        if (this.props.updateUserView === true && this.state.loggedIn === false) {
+            this.setState({ loggedIn: this.props.updateUserView });
         }
     }
 
-    showLoginModal = () => {
+    showLoginModal = (e) => {
+        e.preventDefault();
         this.props.triggerLogin(true);
     }
 
