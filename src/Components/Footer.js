@@ -13,7 +13,7 @@ const Footer = () => {
                         <br /><br />
                         <p className="text-left" style={{ fontSize: '13px', color: '#f0f0f0' }}>AngryUsers is a platform inspired and designed as a response to the anger and frustration experienced by users and customers of different brands and organizations.</p>
                     </div>
-                    <div className="col-lg-1 col-md-1"></div>
+                    {/* <div className="col-lg-1 col-md-1"></div> */}
                     <div className="col-lg-3 col-xs-6 col-sm-3">
                         
                         <ul className='footer-nav'>
@@ -23,7 +23,16 @@ const Footer = () => {
                             <li><a href='/blog'>Blog</a></li>
                             <li><a href='/contact'>Contact Us</a></li>
                         </ul>
-                        
+                    </div>
+
+                    <div className="col-lg-3 col-xs-6 col-sm-5">
+                        <ul className="footer-nav">
+                            <li><h4>organizations</h4></li>
+                            <li><Link to="/company/claim-account">Claim Account</Link></li>
+                            <li><Link to="/company">What to Expect</Link></li>
+                            <li><Link to="/company/contactus">Contact Us</Link></li>
+                            <li><Link to="/company/signin">Sign In</Link></li>
+                        </ul>
                     </div>
 
                     <div className="col-lg-2 col-xs-6 col-sm-5 ">
@@ -35,13 +44,6 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className="col-lg-3 col-xs-6 col-sm-5 hidden">
-                        <ul className="footer-nav">
-                            <li><h4>For Companies</h4></li>
-                            <li><Link to="/privacypolicy">Privacy Policy</Link></li>
-                            <li><Link to="/termsofuse">Terms of Use</Link></li>
-                        </ul>
-                    </div>
 
                     {/* <div className="col-lg-3 col-xs-12 col-sm-5 pull-right">
                         <div className="fb-page" data-href="https://web.facebook.com/angryusers.online/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://web.facebook.com/angryusers.online/" className="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/angryusers.online/">AngryUsers</a></blockquote></div>
@@ -52,7 +54,7 @@ const Footer = () => {
                 <br /><br />
                 <div className="row">
                     <div className="col-lg-6 col-xs-12 col-sm-6 hidden">Copyrights &copy; {new Date().getFullYear()}, angryusers.com</div>
-                    <div className="col-lg-6 col-xs-12 col-sm-6 pull-right text-right">
+                    <div className="col-xs-12 col-sm-6 pull-right text-right">
                         <ul className="socialicons">
                             <li><a href="https://web.facebook.com/angryusers.online/"><i className="fab fa-facebook-square"></i></a></li>
                             <li><a href="https://twitter.com/angry_users"><i className="fab fa-twitter"></i></a></li>

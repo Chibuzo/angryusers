@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import UserInfo from "./UserInfoThumb";
 import avatar from "../images/angry.jpg";
-import FbShare from "./SocialPlugins.js/FbShare";
-import Tweet from "./SocialPlugins.js/Tweet";
+import FbShare from "./SocialPlugins/FbShare";
+import Tweet from "./SocialPlugins/Tweet";
 
 import LightBox from "react-image-lightbox";
 import 'react-image-lightbox/style.css';

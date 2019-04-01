@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Page from "./Page"
+import Page from "./Page";
 
 class ContactPage extends Component {
-    state = { post_btn: { text: 'Send Message', icon: 'fa-send', disabled: '' }, alert: { msg: 'kk', alert_type: '', status: 'hidden' } };
+    state = { post_btn: { text: 'Send Message', icon: 'fa-send', disabled: '' }, alert: { msg: '', alert_type: '', status: 'hidden' } };
 
     componentDidMount() {
         document.title = 'AngryUsers - Contact Us';
@@ -27,7 +27,6 @@ class ContactPage extends Component {
         }).then(res => {
             this.setState({ alert: { msg: 'We have received your email. We will be in touch shortly', type: 'success', status: '' }});
         }).catch(err => {
-            console.log(err)
             this.setState({ alert: { msg: 'something went wrong. Your email can not be sent at this time', alert_type: 'danger', status: '' } });
         });
     }

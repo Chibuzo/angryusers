@@ -270,7 +270,7 @@ class ComplaintForm extends Component {
                             </div>
 
                             <div className="row">
-                                <div className="col-md-12"><label>How would rate the customer service?</label></div>
+                                <div className="col-md-12"><label>How would you rate the customer service?</label></div>
                                 <div className="col-md-4 col-xs-4"><input type="radio" name="customer_care" className="au-input-button" value="1" /> &nbsp;Good</div>
                                 <div className="col-md-4 col-xs-6"><input type="radio" name="customer_care" className="au-input-button" value="0" /> &nbsp;Bad</div>
                             </div>
@@ -278,22 +278,19 @@ class ComplaintForm extends Component {
                             <input type="hidden" name="companyId" value="1" />
                             <div className="row newtopcheckbox">
                                 <div className="col-lg-12 col-md-12">
-                                    <div>
-                                        <label>Share on AngryUsers' Social Networks</label>
+                                    <label>Share on AngryUsers' Social Networks</label>
+                                </div>
+                                                                  
+                                <div className="col-md-4 col-xs-4">
+                                    <div className="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="fb_share" id="fb"/> <i className="fab fa-facebook-square"></i>
+                                        </label>
                                     </div>
                                 </div>
-                                <div className="">                                    
-                                    <div className="col-lg-4 col-md-5 col-xs-4">
-                                        <div className="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="fb_share" id="fb"/> <i className="fab fa-facebook-square"></i>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-6 col-xs-6">
-                                        <div className="checkbox">
-                                            <label><input type="checkbox" name="tw_share" id="tw" /> <i className="fab fa-twitter"></i></label>
-                                        </div>
+                                <div className="col-md-6 col-xs-6">
+                                    <div className="checkbox">
+                                        <label><input type="checkbox" name="tw_share" id="tw" /> <i className="fab fa-twitter"></i></label>
                                     </div>
                                 </div>
                             </div>

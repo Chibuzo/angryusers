@@ -98,11 +98,11 @@ class SearchBar extends Component {
                 </div>
                 <div className="col-xs-12 col-sm-12 col-md-3 avt">
                     <div className="stnt pull-left">
-                        <button className="btn btn-primary" onClick={this.props.showComplaintForm}>Post Complaint</button>
+                        <button className="btn btn-primary" onClick={this.props.showComplaintForm}>Share Complaint</button>
                     </div>
 
                     {menu}
-                    <div className="env pull-right"><i className="fa fa-envelope"></i></div>
+                    <div className="env pull-right hidden"><i className="fa fa-envelope"></i></div>
                     <div className="clearfix"></div>
                 </div>
             </div>;

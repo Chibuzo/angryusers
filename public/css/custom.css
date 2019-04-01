@@ -144,6 +144,7 @@ footer {
 .footer-nav li h4 {
     font-size: 16px;
     text-transform: uppercase;
+    color: #c8dfe7;
     /* color: #222728; */
 }
 
@@ -618,7 +619,7 @@ td.chbox {
     font-family: Lato, 'Open Sans', sans-serif;   
     margin-top: -3px;
     font-weight: 500;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .post h2 a {
@@ -875,6 +876,12 @@ a.down:hover {
     width: 18px;
     top: 3px;
     position: relative;
+}
+
+label {
+    margin-top: 10px;
+    margin-bottom: 0 !important;
+    font-weight: 600;
 }
 
 

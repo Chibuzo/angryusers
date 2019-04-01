@@ -17,6 +17,11 @@ import NewPost from "./Components/Blog/NewPost";
 import ManageEntries from "./Components/Blog/ManageEntries";
 import PostPage from './Components/Blog/PostPage';
 
+import CompanyHome from "./Components/Company/Index";
+import CompanyRedeem from "./Components/Company/Redeem";
+import CompanySignIn from "./Components/Company/SignIn";
+import CompanyContact from "./Components/Company/Contact";
+
 class App extends Component {
 
     render() {
@@ -41,6 +46,11 @@ class App extends Component {
                     <Route path="/blog/edit/:id" component={NewPost} />
                     <Route path="/blog/category/:category" component={BlogHome} />
                     <Route path="/blog/:id/:title" component={PostPage} />
+
+                    <Route exact path="/company" component={CompanyHome} />
+                    <Route path="/company/claim-account" component={CompanyRedeem} />
+                    <Route path="/company/signin" component={CompanySignIn} />
+                    <Route path="/company/contact" component={CompanyContact} />
                 </Switch>
             </Router>
         );
