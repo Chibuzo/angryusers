@@ -20,7 +20,7 @@ class Index extends Component {
             <div>           
                 <Nav />
 
-                <div className="hero-wrap js-fullheight" style={{ backgroundImage: `url(${bg})`, height: '100vh', backgroundPosition: '50% 0%'}} data-stellar-background-ratio="0.5">
+                <div className="hero-wrap js-fullheight" style={{ backgroundImage: `url(${bg})`, height: '100vh', backgroundPosition: '50% 1%'}} data-stellar-background-ratio="0.5">
                     <div className="overlay"></div>
                     <div className="container">
                         <div className="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true" style={{ height: '711px'}}>

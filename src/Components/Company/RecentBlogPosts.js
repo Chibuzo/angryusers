@@ -7,15 +7,21 @@ class RecentBlogPosts extends Component {
 
     async componentDidMount() {
         try {
-            const res = await fetch(process.env.REACT_APP_API_URL + 'BlogPosts');
+            const res = await fetch(process.env.REACT_APP_API_URL + 'BlogCategories/getPosts/Customer%20Tips');
             const json = await res.json();
             const blog = await json[0].posts || json;
-            let posts = await blog.map(post => {
+            let blogs = [];
+            // this hack must be removed asap
+            for (let i = 0; i < blog.length; i++) {
+                if (i > 2) break;
+                blogs.push(blog[i]);
+            }
+            let posts = await blogs.map(post => {
                 return (
                     <BlogPost
                         title={post.Title}
                         article={PostUtilities.postIntro(post.Article.replace(/<(?:.|\n)*?>/gm, ''), 120)}
-                        url={post.Id + '/' + post.Title.split(' ').join('-')}
+                        url={'/blog/' + post.Id + '/' + post.Title.split(' ').join('-')}
                         datePosted={new Date(post.CreatedAt)}
                         image={post.Photos.length > 0 ? post.Photos[0].PhotoSrc : null}
                         key={post.Id}

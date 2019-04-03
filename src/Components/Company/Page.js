@@ -5,7 +5,7 @@ import Footer from "../Footer";
 class Page extends Component {
 
     componentDidMount() {
-        document.title = this.props.title;
+        document.title = this.props.title + ' . AngryUsers';
     }
 
     render() {
@@ -16,7 +16,12 @@ class Page extends Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-6">
-                                <div className="row" style={this.props.contentStyle}><div className="col-md-10 offset-md-1">{this.props.children}</div></div>
+                                <div className="row" style={this.props.contentStyle}>
+                                    <div className="col-md-10 offset-md-1">
+                                        <h1>{this.props.title}</h1>
+                                        {this.props.children}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

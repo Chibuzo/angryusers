@@ -10,11 +10,11 @@ const Redeem = () => {
     }
 
     const content_style = {
-        marginTop: '190px'
+        marginTop: '170px'
     }
     return(
-        <Page title="Claim your Brand Name . AngryUsers" bgStyle={bg_style} contentStyle={content_style}>
-            <div className="alert alert-info">You can edit your organization's name after verificatioin</div>
+        <Page title="Claim your Brand Name" bgStyle={bg_style} contentStyle={content_style}>
+            <div className="alert alert-info">Search for your business name or submit it to claim it. You can edit your business name after verificatioin</div>
             <br />
             <Form />
         </Page>

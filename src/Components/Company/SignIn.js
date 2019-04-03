@@ -27,7 +27,7 @@ class SignIn extends Component {
 
     render() {
         return (
-            <Page title="Sign In to Manage Customers Complaints . AngryUsers" bgStyle={bg_style} contentStyle={content_style}>
+            <Page title="Sign In" bgStyle={bg_style} contentStyle={content_style}>
                 <p>Sign in to manage your customers' complaints</p>
                 <form className="form newtopic" method="post" onSubmit={this.signIn}>
                     <div className="topwrap">

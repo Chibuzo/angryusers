@@ -13,7 +13,7 @@ const Contact = () => {
         marginTop: '120px'
     }
     return (
-        <Page title="Claim your Brand Name . AngryUsers" bgStyle={bg_style} contentStyle={content_style}>
+        <Page title="Contact Us" bgStyle={bg_style} contentStyle={content_style}>
             <br />
             <Form />
         </Page>
