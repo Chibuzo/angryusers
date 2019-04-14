@@ -36,10 +36,10 @@ const About = () => {
                             service does what the advertisement/commercial says it would do
                         </li>
                         <li>Both public and private organizations must be transparent with their Terms and Conditions, especially the downsides of the product/service</li>
-                        <li>Organizations must treat their workers with respect, fairness, equity and dignity.</li>
+                        {/* <li>Organizations must treat their workers with respect, fairness, equity and dignity.</li> */}
                     </ul>
                 </div>
-
+                <div className="col-md-1"></div>
                 <div className="col-md-3 text-center pull-right" style={{ fontStyle: 'italic', fontWeight: '100', fontSize: '16px' }}>
                     <br /><br />
                     <MissionStatement />

@@ -1,16 +1,16 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 04/01/2019 13:45
+  	Creation date: 12/04/2019 20:47
   	*/
-
 
 @font-face {
   font-family: "Flaticon";
-  src: url("../fonts/flaticon/font/Flaticon.eot");
-  src: url("../fonts/flaticon/font/Flaticon.eot?#iefix") format("embedded-opentype"),
-       url("../fonts/flaticon/font/Flaticon.woff") format("woff"),
-       url("../fonts/flaticon/font/Flaticon.ttf") format("truetype"),
-       url("../fonts/flaticon/font/Flaticon.svg#Flaticon") format("svg");
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff2") format("woff2"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -18,29 +18,24 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "Flaticon";
-    src: url("../fonts/flaticon/font/Flaticon.svg#Flaticon") format("svg");
+    src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
   }
 }
 
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+        font-size: 50px;
+font-style: normal;
+/* margin-left: 20px; */
 }
 
-.flaticon-placeholder:before { content: "\f100"; }
-.flaticon-world:before { content: "\f101"; }
-.flaticon-hotel:before { content: "\f102"; }
-.flaticon-cooking:before { content: "\f103"; }
-.flaticon-guest:before { content: "\f104"; }
-.flaticon-idea:before { content: "\f105"; }
-.flaticon-handshake:before { content: "\f106"; }
-.flaticon-chair:before { content: "\f107"; }
+.flaticon-goal:before { content: "\f100"; }
+.flaticon-goal-1:before { content: "\f101"; }
+.flaticon-mindset:before { content: "\f102"; }
+.flaticon-training:before { content: "\f103"; }
+.flaticon-support:before { content: "\f104"; }
+.flaticon-storyboard:before { content: "\f105"; }
+.flaticon-consultant:before { content: "\f106"; }
+.flaticon-assigment:before { content: "\f107"; }
+.flaticon-newspaper:before { content: "\f108"; }

@@ -1,9 +1,9 @@
-    /*
-    Flaticon icon font: Flaticon
-    Creation date: 25/03/2019 20:46
-    */
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 12/04/2019 20:47
+  	*/
 
-    @font-face {
+@font-face {
   font-family: "Flaticon";
   src: url("./Flaticon.eot");
   src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
@@ -22,31 +22,20 @@
   }
 }
 
-    .fi:before{
-        display: inline-block;
-  font-family: "Flaticon";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  line-height: 1;
-  text-decoration: inherit;
-  text-rendering: optimizeLegibility;
-  text-transform: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-    }
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
 
-    .flaticon-goal:before { content: "\f100"; }
+.flaticon-goal:before { content: "\f100"; }
 .flaticon-goal-1:before { content: "\f101"; }
 .flaticon-mindset:before { content: "\f102"; }
 .flaticon-training:before { content: "\f103"; }
 .flaticon-support:before { content: "\f104"; }
 .flaticon-storyboard:before { content: "\f105"; }
-    
-    $font-Flaticon-goal: "\f100";
-    $font-Flaticon-goal-1: "\f101";
-    $font-Flaticon-mindset: "\f102";
-    $font-Flaticon-training: "\f103";
-    $font-Flaticon-support: "\f104";
-    $font-Flaticon-storyboard: "\f105";
+.flaticon-consultant:before { content: "\f106"; }
+.flaticon-assigment:before { content: "\f107"; }
+.flaticon-newspaper:before { content: "\f108"; }

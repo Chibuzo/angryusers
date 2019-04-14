@@ -1,7 +1,7 @@
 import React from "react";
 import Page from "./Page";
 import Form from "./ClaimAccountForm";
-import bg from "../../../src/images/bg_1.jpg";
+import bg from "../../../src/images/claim.jpg";
 
 const Redeem = () => {
     const bg_style = {
@@ -9,13 +9,11 @@ const Redeem = () => {
         backgroundPosition: '50% 0'
     }
 
-    const content_style = {
-        marginTop: '170px'
-    }
+    const content_style_cls = 'claim-acc';
     return(
-        <Page title="Claim your Brand Name" bgStyle={bg_style} contentStyle={content_style}>
+        <Page title="Claim your Brand Name" bgStyle={bg_style} contentStyle={content_style_cls}>
             <div className="alert alert-info">Search for your business name or submit it to claim it. You can edit your business name after verificatioin</div>
-            <br />
+            
             <Form />
         </Page>
     );

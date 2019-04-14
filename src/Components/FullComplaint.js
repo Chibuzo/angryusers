@@ -4,6 +4,7 @@ import UserInfo from "./UserInfoThumb";
 import avatar from "../images/angry.jpg";
 import FbShare from "./SocialPlugins/FbShare";
 import Tweet from "./SocialPlugins/Tweet";
+import User from "../Helpers/User";
 
 import LightBox from "react-image-lightbox";
 import 'react-image-lightbox/style.css';
@@ -30,8 +31,19 @@ class FullComplaint extends Component {
         }
     }
 
+    reportPost = () => {
+        //fetch user details
+        let user = null;
+        if (Object.keys(User.getUserData()).length < 1) {
+            this.props.showLoginModal(true);
+            return;
+        }
+        user = User.getUserData();
+        this.props.triggerFlag({ userId: user.Id, postTitle: this.props.title, postId: this.props.id, postType: 'complaint' });
+    }
+
     render() {
-        let user = this.props.anonymous ? { Fullname: 'Anonymous', Photo_url: avatar } : this.props.user;
+        const user = this.props.anonymous ? { Fullname: 'Anonymous', Photo_url: avatar } : this.props.user;
         const { photoIndex, isOpen } = this.state;
 
         return(

@@ -29,7 +29,7 @@ const WhyAngryusers = () => {
                     </ul>
 
                 </div>
-
+                <div className="col-md-1"></div>
                 <div className="col-md-3 text-center pull-right" style={{ fontStyle: 'italic', fontWeight: '100', fontSize: '16px' }}>
                     <br /><br />
                     <MissionStatement />

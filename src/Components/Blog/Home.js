@@ -35,24 +35,24 @@ class Blog extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { posts: [], current_category: '' }; 
+        this.state = { posts: [], current_category: '', show_msg: false }; 
     }
 
     async componentDidMount() {
         document.title = 'AngryUsers - Recent Blog Entries';
         const posts = await fetchEntries(this.props.match.params);
-        this.setState({ posts: posts, current_category: this.props.match.params.category });
+        posts.length > 0 ? this.setState({ posts: posts, current_category: this.props.match.params.category, show_msg: false }) : this.setState({ posts: posts, show_msg: true });
     }
 
     async componentDidUpdate() {
         if (this.props.match.params.category !== this.state.current_category) {
             const posts = await fetchEntries(this.props.match.params);
-            this.setState({ posts: posts, current_category: this.props.match.params.category });
+            posts.length > 0 ? this.setState({ posts: posts, current_category: this.props.match.params.category, show_msg: false }) : this.setState({ posts: posts, show_msg: true });
         }
     }
 
     render() {
-        const posts = this.state.posts;
+        const { posts, show_msg } = this.state;
         return(
             <div className="container-fluid">
                 <SearchBar nav={true} />
@@ -60,13 +60,18 @@ class Blog extends Component {
                 <section className="content">
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-8 col-md-8">
+                            <div className="col-lg-8 col-md-8 col-xs-12">
                                 <article className="au-post" style={{ paddingTop: '15px', overflow: 'auto' }}>
                                     { posts.length > 0 && posts }  
+
+                                    { show_msg && <React.Fragment>
+                                        <br />
+                                        <div className="alert alert-info">No entiries found for the selected category</div> 
+                                    </React.Fragment>}
                                 </article>
                             </div>
 
-                            <div className="col-lg-4 col-md-4">
+                            <div className="col-lg-4 col-md-4 col-xs-12">
                                 <RecentPosts />
                                 <Categories />
                             </div>

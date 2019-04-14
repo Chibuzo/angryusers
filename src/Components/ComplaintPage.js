@@ -6,6 +6,7 @@ import ComplaintForm from "./ComplaintForm";
 import Complaint from "./FullComplaint";
 import CommentWrapper from "./Comments";
 import Comment from "./Comment";
+import FlagPost from "./FlagPost";
 import RecentPosts from "./Blog/RecentPosts";
 import Categories from "./Blog/BlogCategories";
 import Footer from "./Footer";
@@ -22,7 +23,8 @@ class ComplaintPage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { show_complain_form: false, complaint: '', complaint_data: {}, url: '', comments: [], modal_toggle: false, new_comment: {}, show_new_comment: false };
+        this.state = { show_complain_form: false, complaint: '', complaint_data: {}, url: '', comments: [], modal_toggle: false, new_comment: {}, show_new_comment: false,
+            flag: { postTitle: '', postId: 0, postType: '', userId: 0, visible: false }  };
     }
 
     toggleComplaintForm = () => {
@@ -43,9 +45,32 @@ class ComplaintPage extends Component {
             document.title = rant.Title + ' . AngryUsers';
             
             const url = process.env.REACT_APP_BASEURL + 'complaint/' + rant.Id + '/' + rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-');
-            let complaint = <Complaint id={rant.Id} company={rant.Company} title={rant.Title} anonymous={rant.Anonymous} complaint={rant.Issue} comments={rant.Comments.length} postdate={post_utilities.formatDateSince(rant.IssueDate)} files={rant.ComplaintFiles} url={url} user={rant.User} />
+            const complaint = <Complaint 
+                                id={rant.Id} 
+                                company={rant.Company} 
+                                title={rant.Title} 
+                                anonymous={rant.Anonymous} 
+                                complaint={rant.Issue} 
+                                comments={rant.Comments.length} 
+                                postdate={post_utilities.formatDateSince(rant.IssueDate)} 
+                                files={rant.ComplaintFiles} 
+                                url={url} 
+                                user={rant.User} 
+                                showLoginModal={this.showLoginModal}
+                                triggerFlag={this.flagComplaint}
+                            />
+
             let comments = rant.Comments && rant.Comments.map(comment => {
-                return (<Comment id={comment.Id} comment={comment.Body} user={comment.User} postdate={post_utilities.formatDateSince(comment.DatePosted)} key={comment.Id} />);
+                return (
+                    <Comment 
+                        id={comment.Id} 
+                        comment={comment.Body} 
+                        user={comment.User} 
+                        postdate={post_utilities.formatDateSince(comment.DatePosted)} 
+                        key={comment.Id} 
+                        showLoginModal={() => this.props.triggerLogin}
+                    />
+                );
             });
 
             // set page title
@@ -66,11 +91,17 @@ class ComplaintPage extends Component {
     }
 
     showLoginModal = (val) => {
-        console.log('Atr')
         this.setState({ modal_toggle: val });
     }
 
+    flagComplaint = flag => {
+        flag.visible = true;
+        this.setState({ flag: flag });
+    }
+
     render() {
+        const flag = this.state.flag; 
+
         return(
             <div className="container-fluid">
                 {/* <Banner /> */}
@@ -111,6 +142,8 @@ class ComplaintPage extends Component {
                 </section>
 
                 <Footer />
+
+                <FlagPost postId={flag.postId} postTitle={flag.postTitle} postType={flag.postType} userId={flag.userId} visible={flag.visible} hideVisibilty={() => this.setState({ flag: { visible: false } })} />
 
                 <LoginModal controlModal={this.state.modal_toggle} onClose={this.showLoginModal} />
             </div>

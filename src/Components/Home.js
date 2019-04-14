@@ -10,6 +10,7 @@ import BlogCategories from "./Blog/BlogCategories";
 import Footer from "./Footer";
 
 import Notification, { notify } from 'react-notify-toast';
+import FlagPost from "./FlagPost";
 import LightBox from "react-image-lightbox";
 import LoginModal from "./LoginModal";
 
@@ -23,7 +24,9 @@ class Home extends Component {
         super(props);
         this.state = {
             show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: null, update_login_view: false, 
-            post_files: { postImage: 0, photoIndex: 0, isOpen: false, }};
+            post_files: { postImage: 0, photoIndex: 0, isOpen: false, }, 
+            flag: { postTitle: '', postId: 0, postType: '', userId: 0, visible: false } 
+        };
     }
 
     toggleComplaintForm = () => {
@@ -58,6 +61,7 @@ class Home extends Component {
                         user={rant.User}
                         sendImages={this.loadImages}
                         showLoginModal={this.showLoginModal}
+                        triggerFlag={this.flagComplaint}
                         // onTouchEnd={() => alert() }
                     />
                 );
@@ -97,8 +101,14 @@ class Home extends Component {
         this.setState({ update_login_view: true });
     }
 
+    flagComplaint = flag => {
+        flag.visible = true;
+        this.setState({ flag: flag });
+    }
+
     render() {
         const { photoIndex, isOpen } = this.state.post_files;
+        const flag = this.state.flag;
 
         return(
             <div className="container-fluid">
@@ -109,7 +119,7 @@ class Home extends Component {
                 <section className="content">
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-8 col-md-8">
+                            <div className="col-lg-8 col-md-8 col-xs-12">
                                 {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} showLoginOpts={this.showLoginModal} /> }
                                
                                 {this.state.new_complaint && <ComplaintIntro
@@ -131,7 +141,7 @@ class Home extends Component {
                                 { this.state.complaints }
                             </div>
 
-                            <div className="col-lg-4 col-md-4">
+                            <div className="col-lg-4 col-md-4 col-xs-12">
                                 {/* <StatWidget /> */}
                                 <RecentPosts />
                                 <BlogCategories />
@@ -139,6 +149,8 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
+
+                <FlagPost postId={flag.postId} postTitle={flag.postTitle} postType={flag.postType} userId={flag.userId} visible={flag.visible} hideVisibilty={() => this.setState({ flag: { visible: false }})} />
 
                 { isOpen && (
                     <LightBox

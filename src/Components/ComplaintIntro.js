@@ -38,13 +38,13 @@ class ComplaintIntro extends Component {
 
     reportPost = () => {
         //fetch user details
-        if (Object.keys(User.getUserData()).length > 0) {
-            User.getUserData();
-        } else {
+        let user = null;
+        if (Object.keys(User.getUserData()).length < 1) {
             this.props.showLoginModal(true);
             return;
-        }
-        console.log('Post: ' + this.props.id + ' Reported!')
+        } 
+        user = User.getUserData();
+        this.props.triggerFlag({ userId: user.Id, postTitle: this.props.title, postId: this.props.id, postType: 'complaint' });
     }
 
     render() {
@@ -70,17 +70,7 @@ class ComplaintIntro extends Component {
 
                     <div className="clearfix"></div>
                 </div>
-                {/* <div className="postinfo pull-left">
-                    <div className="comments">
-                        <div className="commentbg">
-                            {this.props.comments}
-                            <div className="mark"></div>
-                        </div>
-            
-                    </div>
-                    <div className="views"><i className="fa fa-eye"></i> &nbsp;{this.props.views}</div>
-                    <div className="time">{this.props.postdate} ago</div>
-                </div> */}
+                
                 <div className="postinfobot">
                     <div className="col-md-3 col-xs-5">
                         { contain_files && <button type="button" className="btn btn-default" onClick={this.loadImages}><i className="fa fa-image"></i> View Files</button>}

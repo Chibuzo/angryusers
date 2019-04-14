@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 25/03/2019 20:46
+    Creation date: 12/04/2019 20:47
     */
 
     @font-face {
@@ -43,6 +43,9 @@
 .flaticon-training:before { content: "\f103"; }
 .flaticon-support:before { content: "\f104"; }
 .flaticon-storyboard:before { content: "\f105"; }
+.flaticon-consultant:before { content: "\f106"; }
+.flaticon-assigment:before { content: "\f107"; }
+.flaticon-newspaper:before { content: "\f108"; }
     
     $font-Flaticon-goal: "\f100";
     $font-Flaticon-goal-1: "\f101";
@@ -50,3 +53,6 @@
     $font-Flaticon-training: "\f103";
     $font-Flaticon-support: "\f104";
     $font-Flaticon-storyboard: "\f105";
+    $font-Flaticon-consultant: "\f106";
+    $font-Flaticon-assigment: "\f107";
+    $font-Flaticon-newspaper: "\f108";

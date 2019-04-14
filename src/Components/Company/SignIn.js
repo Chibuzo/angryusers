@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import Page from "./Page";
-import bg from "../../../src/images/bg_.jpg";
+import bg from "../../../src/images/login.jpg";
 
 const bg_style = {
     backgroundImage: `url(${bg})`,
     backgroundPosition: '50% 0'
 };
 
-const content_style = {
-    marginTop: '190px'
-}
+const content_style_cls = 'sigin-in';
 
 class SignIn extends Component {
-    state = { post_btn: { text: 'Sign In', icon: 'fa-signin', disabled: '' }, alert: { msg: '', alert_type: '', status: 'hidden' } };
+    state = { post_btn: { text: 'Sign In', icon: 'fa-sign-in-alt', disabled: '' }, alert: { msg: '', alert_type: '', status: 'hidden' } };
     
     signIn = e => {
         e.preventDefault();
@@ -27,7 +25,7 @@ class SignIn extends Component {
 
     render() {
         return (
-            <Page title="Sign In" bgStyle={bg_style} contentStyle={content_style}>
+            <Page title="Sign In" bgStyle={bg_style} contentStyle={content_style_cls}>
                 <p>Sign in to manage your customers' complaints</p>
                 <form className="form newtopic" method="post" onSubmit={this.signIn}>
                     <div className="topwrap">
@@ -39,7 +37,7 @@ class SignIn extends Component {
                         <div className={'alert alert-' + this.state.alert.alert_type + ' ' + this.state.alert.status}>{this.state.alert.msg}</div>
                     </div>
 
-                    <div className="pull-right"><button type="submit" className="btn btn-primary btn-lg" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>
+                    <div className="pull-right"><button type="submit" className="btn btn-default btn-lg" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>
                 </form>        
             </Page>
         );

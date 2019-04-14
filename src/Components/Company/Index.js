@@ -4,28 +4,26 @@ import Blog from "./RecentBlogPosts";
 import ContactForm from "./ContactForm";
 import Footer from "../Footer";
 
-import "../../../src/css/open-iconic-bootstrap.min.css";
 import "../../../src/css/animate.css";
 import "../../../src/css/flaticon.css";
-//import "../../../src/css/icomoon.css";
-import "../../../src/css/style.css";
 
 import bg from "../../../src/images/bg_.jpg";
-import about from "../../../src/images/about.jpg";
+import about from "../../../src/images/fun.jpg";
+import sub from "../../../src/images/sub.jpg";
 
 class Index extends Component {
 
     render() {
         return(
-            <div>           
+            <div className="coy-body">           
                 <Nav />
 
                 <div className="hero-wrap js-fullheight" style={{ backgroundImage: `url(${bg})`, height: '100vh', backgroundPosition: '50% 1%'}} data-stellar-background-ratio="0.5">
                     <div className="overlay"></div>
                     <div className="container">
                         <div className="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true" style={{ height: '711px'}}>
-                            <div className="col-xl-10 ftco-animate fadeInUp ftco-animated" data-scrollax=" properties: { translateY: &#39;70%&#39; }" style={{ transform: 'translateZ(0px) translateY(0%)' }}>
-                                <h1 className="mb-4" data-scrollax="properties: { translateY: &#39;30%&#39;, opacity: 1.6 }" style={{ opacity: '1', transform: 'translateZ(0px) translateY(0%)' }}> Developer <br /><span>Conference 2019</span></h1>
+                            <div className="col-xl-10 ftco-animate fadeInUp ftco-animated" data-scrollax=" properties: { translateY: &#39;70%&#39; }" style={{ transform: 'translateZ(0px) translateY(0%)', padding: '10px' }}>
+                                <h1 className="mb-4" data-scrollax="properties: { translateY: &#39;30%&#39;, opacity: 1.6 }" style={{ opacity: '1', transform: 'translateZ(0px) translateY(0%)' }}> AngryUsers <br /><span>Customers, first</span></h1>
                                 <p className="mb-4" data-scrollax="properties: { translateY: &#39;30%&#39;, opacity: 1.6 }" style={{ opacity: 1, transform: 'translateZ(0px) translateY(0%)' }}>Use Angry Customers to your advantage</p>
                             </div>
                         </div>
@@ -36,8 +34,8 @@ class Index extends Component {
                     <div className="container">
                         <div className="row d-flex">
                             <div className="col-md-3 d-flex align-self-stretch ftco-animate fadeInUp ftco-animated">
-                                <div className="media block-6 services d-block text-center">
-                                    <div className="icon"><span className="flaticon-hotel"></span></div>
+                                <div className="media block-6 services d-block text-left">
+                                    <div className="icon"><span className="flaticon-mindset"></span></div>
                                     <div className="media-body">
                                         <h3 className="heading mb-3">Knowledge Base</h3>
                                         <p>Respond to your customer complaints and build a public knowledge base for your brand</p>
@@ -45,8 +43,8 @@ class Index extends Component {
                                 </div>
                             </div>
                             <div className="col-md-3 d-flex align-self-stretch ftco-animate fadeInUp ftco-animated">
-                                <div className="media block-6 services d-block text-center">
-                                    <div className="icon"><span className="flaticon-placeholder"></span></div>
+                                <div className="media block-6 services d-block text-left">
+                                    <div className="icon"><span className="flaticon-assigment"></span></div>
                                     <div className="media-body">
                                         <h3 className="heading mb-3">CRM</h3>
                                         <p>Attend to your angry customers using our Issue Tracking software  on sign up.</p>
@@ -54,20 +52,20 @@ class Index extends Component {
                                 </div>
                             </div>
                             <div className="col-md-3 d-flex align-self-stretch ftco-animate fadeInUp ftco-animated">
-                                <div className="media block-6 services d-block text-center">
-                                    <div className="icon"><span className="flaticon-world"></span></div>
+                                <div className="media block-6 services d-block text-left">
+                                    <div className="icon"><span className="flaticon-goal-1"></span></div>
                                     <div className="media-body">
                                         <h3 className="heading mb-3">Performance</h3>
-                                        <p>Show off your customer service Performance and earn more public trust</p>
+                                        <p>Show off your customer service performance and earn more public trust</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-md-3 d-flex align-self-stretch ftco-animate fadeInUp ftco-animated">
-                                <div className="media block-6 services d-block text-center">
-                                    <div className="icon"><span className="flaticon-cooking"></span></div>
+                                <div className="media block-6 services d-block text-left">
+                                    <div className="icon"><span className="flaticon-training"></span></div>
                                     <div className="media-body">
                                         <h3 className="heading mb-3">Auto Recommendation</h3>
-                                        <p>Health brand ranking can would get you featured where your competitors are not meeting up</p>
+                                        <p>Healthy brand ranking can would get you featured where your competitors are not meeting up</p>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +76,7 @@ class Index extends Component {
                 <section className="ftco-counter img" id="section-counter">
                     <div className="container">
                         <div className="row d-flex">
-                            <div className="col-md-6 d-flex">
+                            <div className="col-md-6 col-xs-12 d-flex">
                                 <div className="img d-flex align-self-stretch" style={{ backgroundImage: `url(${about})` }}></div>
                             </div>
                             <div className="col-md-6 pl-md-5 py-5">
@@ -86,51 +84,51 @@ class Index extends Component {
                                     <div className="col-md-12 heading-section ftco-animate fadeInUp ftco-animated">
                                         <span className="subheading">Fun Facts</span>
                                         <h2 className="mb-4"><span>Fun</span> Facts</h2>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                                        <p>Get some public opinion about your company in comparison to your contemporary rivalry</p>
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                                    <div className="col-md-6 col-xs-12 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
                                         <div className="block-18 text-center py-4 bg-light mb-4">
                                             <div className="text">
                                                 <div className="icon d-flex justify-content-center align-items-center">
-                                                    <span className="flaticon-guest"></span>
+                                                    <span className="flaticon-training"></span>
                                                 </div>
-                                                <strong className="number" data-number="30">30</strong>
-                                                <span>Speakers</span>
+                                                
+                                                <span>Recommendations</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                                    <div className="col-md-6 col-xs-12 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
                                         <div className="block-18 text-center py-4 bg-light mb-4">
                                             <div className="text">
                                                 <div className="icon d-flex justify-content-center align-items-center">
-                                                    <span className="flaticon-handshake"></span>
+                                                    <span className="flaticon-newspaper"></span>
                                                 </div>
-                                                <strong className="number" data-number="200">200</strong>
-                                                <span>Sponsor</span>
+                                                {/* <strong className="number" data-number="200">200</strong> */}
+                                                <span>Bad Reviews</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                                    <div className="col-md-6 col-xs-12 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
                                         <div className="block-18 text-center py-4 bg-light mb-4">
                                             <div className="text">
                                                 <div className="icon d-flex justify-content-center align-items-center">
-                                                    <span className="flaticon-chair"></span>
+                                                    <span className="flaticon-assigment"></span>
                                                 </div>
-                                                <strong className="number" data-number="2500">2,500</strong>
-                                                <span>Total Seats</span>
+                                                
+                                                <span>Customer Support</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-6 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
+                                    <div className="col-md-6 col-xs-12 justify-content-center counter-wrap ftco-animate fadeInUp ftco-animated">
                                         <div className="block-18 text-center py-4 bg-light mb-4">
                                             <div className="text">
                                                 <div className="icon d-flex justify-content-center align-items-center">
-                                                    <span className="flaticon-idea"></span>
+                                                    <span className="flaticon-consultant"></span>
                                                 </div>
-                                                <strong className="number" data-number="40">40</strong>
-                                                <span>Topics</span>
+                                                
+                                                <span>In the News</span>
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +190,7 @@ class Index extends Component {
                 </section>
 
                 <section className="ftco-section-parallax">
-                    <div className="parallax-img d-flex align-items-center">
+                    <div className="parallax-img d-flex align-items-center" style={{ background: `url(${sub}) 0% 0% no-repeat`}}>
                         <div className="container">
                             <div className="row d-flex justify-content-center">
                                 <div className="col-md-7 text-center heading-section heading-section-white ftco-animate fadeInUp ftco-animated">

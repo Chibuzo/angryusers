@@ -28,6 +28,19 @@ app.get('/complaint/:id/:title', async function (req, res) {
     };
 });
 
+app.get('/blog', async function (req, res) {
+    const param = {
+        title: "Blog Home . AngryUsers",
+        desc: "Get updates on recent events relating to customers, brands/organisations etc. AngryUsers also shares her opinions on certain trending or interesting topic going on.", img: ''
+    };
+    try {
+        const result = await Renderer.render(param);
+        res.send(result);
+    } catch (err) {
+        console.log(err)
+    };
+});
+
 
 app.get('/blog/:id/:title/:image', async function (req, res) {
     const image = "https://angryusers-blog.s3.amazonaws.com/blog_photos/b_" + atob(req.params.image);

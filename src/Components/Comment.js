@@ -1,14 +1,22 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import UserInfo from "./CommentUserThumb";
+// import User from "../Helpers/User";
 import avatar from "../images/angry.jpg";
 
 
 class Comment extends Component {
 
-    componentDidMount() {
-        
-    }
+    // reportPost = () => {
+    //     //fetch user details
+    //     let user = null;
+    //     if (Object.keys(User.getUserData()).length < 1) {
+    //         this.props.showLoginModal(true);
+    //         return;
+    //     }
+    //     user = User.getUserData();
+    //     this.props.triggerFlag({ userId: user.Id, postTitle: this.props.title, postId: this.props.id, postType: 'complaint' });
+    // }
 
     render() {
         let user = this.props.anonymous ? { Fullname: 'Anonymous', Photo_url: avatar } : this.props.user;
@@ -24,7 +32,7 @@ class Comment extends Component {
                     <p>{this.props.comment}</p>
                     <br />
                     <div className="col-md-9 col-xs-7 pull-right post-details-link text-right" style={{ fontSize: '13px' }}>
-                        <Link to="#" onClick={this.reportPost} title="Report this post">Report</Link>
+                        {/* <Link to="#" onClick={this.reportPost} title="Report this post">Report</Link> */}
                     </div>
                 </div>
                 <div className="clearfix"></div>

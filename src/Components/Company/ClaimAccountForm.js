@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CompanyAutosuggest from "../CompanyAutosuggest";
 
 class ClaimAccount extends Component {
-    state = { company_value: '', company_id: 0, post_btn: { text: 'Send Message', icon: 'fa-send', disabled: '' }, alert: { msg: '', alert_type: '', status: 'hidden' } };
+    state = { company_value: '', company_id: 0, post_btn: { text: 'Submit Request', icon: 'fa-send', disabled: '' }, alert: { msg: '', alert_type: '', status: 'hidden' } };
 
     postRequest = async e => {
         e.preventDefault();
@@ -89,15 +89,17 @@ class ClaimAccount extends Component {
                             <div><input type="text" name="name" placeholder="Name of contact person..." className="form-control input-lg" required /></div>
 
                             <div className="row">
-                                <div className="col-md-6"><input type="email" name="email" placeholder="Contact email..." className="form-control" required /></div>
-                                <div className="col-md-6"><input type="text" name="phone" placeholder="Contact Phone..." className="form-control" required /></div>
+                                <div className="col-md-6 col-xs-12"><input type="email" name="email" placeholder="Contact email..." className="form-control" required /></div>
+                                <div className="col-md-6 col-xs-12"><input type="text" name="phone" placeholder="Contact Phone..." className="form-control" required /></div>
                             </div>
                         </div>
                         <div className={'alert alert-' + this.state.alert.alert_type + ' ' + this.state.alert.status}>{this.state.alert.msg}</div>
                     </div>
 
-                    <div className="pull-right"><button type="submit" className="btn btn-primary btn-lg" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>
+                    <div className="pull-right"><button type="submit" className="btn btn-default btn-lg" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>
+                    <div className="clearfix"></div>
                 </form>
+                <div className="clearfix"></div>
             </div>
         );
     }

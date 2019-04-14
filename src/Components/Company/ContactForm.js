@@ -1,23 +1,25 @@
 import React, { Component } from "react";
 
 class ContactFrom extends Component {
-    state = { post_btn: { text: 'Send Message', icon: 'fa-send', disabled: '' }, alert: { msg: '', alert_type: '', status: 'hidden' } };
+    state = { post_btn: { text: 'Send Message', icon: 'fa-paper-plane', disabled: '' }, alert: { msg: '', alert_type: '', status: 'hidden' } };
     
     sendMessage = async e => {
         e.preventDefault();
 
+        this.setState({ post_btn: { text: 'Sending...', icon: 'fa-redo fa-spin', disabled: 'disabled' } });
+
         const form = e.target.elements;
         const message = {
-            company_name: form.company_name,
-            contact_person: form.contact_person,
-            email: form.email,
-            phone: form.phone,
-            subject: form.subject,
-            message: form.message
+            company_name: form.company_name.value,
+            contact_person: form.contact_person.value,
+            email: form.email.value,
+            phone: form.phone.value,
+            subject: form.subject.value,
+            message: form.message.value
         };
 
         try {
-            const res = await fetch(process.env.REACT_APP_API_URL, {
+            const res = await fetch(process.env.REACT_APP_API_URL + 'CompanyRequests/sendMessage', {
                 method: 'POST',
                 body: JSON.stringify(message),
                 headers: {
@@ -44,6 +46,8 @@ class ContactFrom extends Component {
                 }
             });
             console.log(err);
+        } finally {
+            this.setState({ post_btn: { text: 'Send Message', icon: 'fa-paper-plane', disabled: '' } });
         }
     }
 
@@ -57,8 +61,8 @@ class ContactFrom extends Component {
                         <div><input type="text" name="contact_person" placeholder="Name of contact person..." className="form-control input-lg" required /></div>
 
                         <div className="row">
-                            <div className="col-md-6"><input type="email" name="email" placeholder="Contact email..." className="form-control" required /></div>
-                            <div className="col-md-6"><input type="text" name="phone" placeholder="Contact Phone..." className="form-control" required /></div>
+                            <div className="col-md-6 col-xs-12"><input type="email" name="email" placeholder="Contact email..." className="form-control" required /></div>
+                            <div className="col-md-6 col-xs-12"><input type="text" name="phone" placeholder="Contact Phone..." className="form-control" required /></div>
                         </div>
 
                         <div><input type="text" name="subject" placeholder="Subject..." className="form-control" required /></div>

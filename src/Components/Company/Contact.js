@@ -1,7 +1,7 @@
 import React from "react";
 import Page from "./Page";
 import Form from "./ContactForm";
-import bg from "../../../src/images/bg_.jpg";
+import bg from "../../../src/images/contact.jpg";
 
 const Contact = () => {
     const bg_style = {
@@ -9,12 +9,10 @@ const Contact = () => {
         backgroundPosition: '50% 0'
     }
 
-    const content_style = {
-        marginTop: '120px'
-    }
+    const content_style_cls = 'contact-page';
+        
     return (
-        <Page title="Contact Us" bgStyle={bg_style} contentStyle={content_style}>
-            <br />
+        <Page title="Contact Us" bgStyle={bg_style} contentStyle={content_style_cls}>
             <Form />
         </Page>
     );

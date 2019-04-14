@@ -99,7 +99,7 @@ class LoginModal extends Component {
                     />    
                 </div>
             </Modal>
-        )
+        );
     }
 }
 
