@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import ComplaintForm from "./ComplaintForm";
 import ComplaintIntro from "./ComplaintIntro";
 // import StatWidget from "./StatWidget";
+import TagWidget from "./TagWidget";
 import RecentPosts from "./Blog/RecentPosts";
 import BlogCategories from "./Blog/BlogCategories";
 import Footer from "./Footer";
@@ -17,6 +18,40 @@ import LoginModal from "./LoginModal";
 import User from "../Helpers/User";
 
 const post_utilities = require('../Helpers/PostUtilities');
+
+const fetchComplaints = async ($this, path) => {
+    try {
+        const res = await fetch(process.env.REACT_APP_API_URL + path);
+        const data = await res.json();
+    
+        let complaints = data.map(rant => {
+            return (
+                <ComplaintIntro
+                    id={rant.Id}
+                    company={rant.Company}
+                    title={rant.Title}
+                    intro={post_utilities.postIntro(rant.Issue, 360)}
+                    complaint={rant.Issue}
+                    postdate={post_utilities.formatDateSince(rant.CreatedAt)}
+                    files={rant.ComplaintFiles}
+                    comments={rant.Comments.length}
+                    key={rant.IssueDate}
+                    views={rant.ViewCount}
+                    url={`/complaint/${rant.Id}/${rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
+                    anonymous={rant.Anonymous}
+                    user={rant.User}
+                    sendImages={$this.loadImages}
+                    showLoginModal={$this.showLoginModal}
+                    triggerFlag={$this.flagComplaint}
+                // onTouchEnd={() => alert() }
+                />
+            );
+        });
+        return complaints;
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 let images = [];
 class Home extends Component {
@@ -37,41 +72,24 @@ class Home extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        document.title = "AngryUsers - Public compilation of angry customers/users' stories";
         notify.show('Loading recent complaints, in a moment...');
 
-        fetch(process.env.REACT_APP_API_URL + 'complaints').then(function(response) {
-            return response.json();
-        }).then(res => {
-            let complaints = res.map(rant => {
-                return (
-                    <ComplaintIntro 
-                        id={rant.Id} 
-                        company={rant.Company}
-                        title={rant.Title} 
-                        intro={post_utilities.postIntro(rant.Issue, 360)}
-                        complaint={rant.Issue}
-                        postdate={post_utilities.formatDateSince(rant.CreatedAt)} 
-                        files={rant.ComplaintFiles}
-                        comments={rant.Comments.length} 
-                        key={rant.IssueDate} 
-                        views={rant.ViewCount}
-                        url={`/complaint/${rant.Id}/${rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
-                        anonymous={rant.Anonymous}
-                        user={rant.User}
-                        sendImages={this.loadImages}
-                        showLoginModal={this.showLoginModal}
-                        triggerFlag={this.flagComplaint}
-                        // onTouchEnd={() => alert() }
-                    />
-                );
-            });
-            document.title = "AngryUsers - Public compilation of angry customers/users' stories";
-            this.setState({ complaints: complaints });
-            notify.hide();
-        }).catch(err => {
-            console.log(err);
-        });
+        const complaints = await fetchComplaints(this, 'complaints');
+        this.setState({ complaints: complaints });
+        notify.hide();
+    }
+
+    filterComplaint = async tag => {
+        notify.show('Loading complaints under ' + tag + ' category, please wait...');
+
+        let complaints = await fetchComplaints(this, 'complaints/getComplaintsByTag/' + escape(tag));
+        if (complaints.length < 1) {
+            complaints = <div className="post"><div className="wrap-ut"><div><div className="posthead col-md-12 col-xs-12"></div><div className='alert'><h1>No Content Found!</h1>No complaint has being submitted under this tag category yet. You may want to select a related tag<br /><br /></div></div></div></div>;
+        }
+        this.setState({ complaints: complaints });
+        notify.hide();
     }
 
     // Update complaint list with new complaint
@@ -143,6 +161,7 @@ class Home extends Component {
 
                             <div className="col-lg-4 col-md-4 col-xs-12">
                                 {/* <StatWidget /> */}
+                                <TagWidget filterComplaint={this.filterComplaint} />
                                 <RecentPosts />
                                 <BlogCategories />
                             </div>

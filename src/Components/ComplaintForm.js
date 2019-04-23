@@ -1,54 +1,15 @@
 import React, { Component } from "react";
-import Autosuggest from 'react-autosuggest';
+import CompanyAutosuggest from "./CompanyAutosuggest";
+import Tag from "./Tag";
 import S3FileUpload from 'react-s3';
-
 import User from "../Helpers/User";
-// import UserInfo from "./UserInfoThumb";
-
-import '../css/autosuggest.css';
 
 const post_utilities = require('../Helpers/PostUtilities');
-
-let companies = [];
-const fetchCompanies = () => {
-    fetch(process.env.REACT_APP_API_URL + 'companies').then(function(response) {
-        return response.json();
-    }).then(res => {
-        companies = res.map(coy => {
-            return { 'companyName': coy.CompanyName, 'id': coy.Id };
-        });
-    });
-}
-
-const getSuggestions = (value) => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-    
-    return inputLength === 0 ? [] : companies.filter(coy =>
-        coy.companyName.toLowerCase().slice(0, inputLength) === inputValue
-    );
-};
-
-const getSuggestionValue = suggestion => suggestion.companyName;
-
-// render suggestions.
-const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.companyName}
-  </div>
-);
-
-let companyId = 0;
 
 class ComplaintForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: '', suggestions: [], uploadFiles: [], post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' }, modal_visibility: false };
-    }
-
-    componentDidMount() {
-        fetchCompanies();
-        //document.title = 'AngryUsers - Vent your spleen here';
+        this.state = { company_value: '', company_id: 0, uploadFiles: [], post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' }, modal_visibility: false };
     }
 
     submitComplaint = (e) => {
@@ -62,24 +23,22 @@ class ComplaintForm extends Component {
             this.props.showLoginOpts(true);
             return;
         }
-        // let usr = {
-        //     Id: 1,
-        //     fullname: 'Chibuzo',
-        //     email: 'uzo.systems@gmail.com',
-        // };
-        // var u = new User(usr);
-        // u.saveUser(usr);
-        // let user = User.getUserData();
 
         // change post button state
         this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
 
+        // make tag(s) are included
+        if (e.target.elements.tags.value.length < 2) {
+            
+        }
+        
         const complaint = {
             Title: e.target.elements.title.value,
             Issue: e.target.elements.complaint.value,
             IssueDate: new Date().toISOString(),
-            CompanyId: companyId,
+            CompanyId: this.state.company_id,
             CompanyName: e.target.elements.company_name.value,
+            Tags: e.target.elements.tags.value,
             FacebookShare: e.target.elements.fb_share.checked ? true : false,
             TwitterShare: e.target.elements.tw_share.checked ? true : false,
             Anonymous: e.target.elements.anonymous.checked ? true : false,
@@ -94,7 +53,6 @@ class ComplaintForm extends Component {
 
         fetch(process.env.REACT_APP_API_URL + 'complaints/save', {
             method: 'POST',
-            //mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -118,7 +76,7 @@ class ComplaintForm extends Component {
 
                 // send review
                 review.ComplaintId = data.Id;
-                review.CompanyId = companyId;
+                review.CompanyId = this.state.company_id;
                 this.postReview(review);
                 
                 this.setState({ post_btn: { text: 'Post Complaint', icon: 'fa-upload', disabled: '' }});
@@ -129,10 +87,7 @@ class ComplaintForm extends Component {
         });
     }
 
-    getSelectedFiles = (e) => {
-        this.setState({ uploadFiles: e.target.files });
-    }
-
+    getSelectedFiles = (e) => this.setState({ uploadFiles: e.target.files });
 
     uploadFiles = async (complaint_id) => {
         const config = {
@@ -156,10 +111,7 @@ class ComplaintForm extends Component {
 
             try {
                 const res = await S3FileUpload.uploadFile(file, config);
-                files.push({
-                    Filename: res.location,
-                    ComplaintId: complaint_id
-                });
+                files.push({ Filename: res.location, ComplaintId: complaint_id });
             } catch(err) {
                 console.log(err)
             }
@@ -173,11 +125,7 @@ class ComplaintForm extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-            if (res.ok === true) {
-            }
-        }).catch(err => {
-            console.log(err);
-        });
+        }).catch(err => console.log(err));
     }
 
     postReview = (review) => {
@@ -188,46 +136,21 @@ class ComplaintForm extends Component {
             },
             body: JSON.stringify(review)
         }).then(res => {
-
-        }).catch(err => {
-            console.log(err);
-        });
+        }).catch(err => console.log(err));
     }
 
-    onChange = (event, { newValue }) => {
-        this.setState({
-          value: newValue
-        });
-    };
-    
-    // Autosuggest will call this function every time you need to update suggestions.
-    onSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
-          suggestions: getSuggestions(value)
-        });
-    };
+    // for company autosuggest
+    onChange = (e, { newValue }) => this.setState({ company_value: newValue });
 
-    onSuggestionSelected = (event, { suggestion, suggestionValue }) => {
-        companyId = suggestion.id;
-    };
+    updateCompanyId = id => this.setState({ company_id: id });
     
-    // Autosuggest will call this function every time you need to clear suggestions.
-    onSuggestionsClearRequested = () => {
-        this.setState({
-          suggestions: []
-        });
-    };
-
     closeModal() {
-        this.setState({
-            modal_visibility: false
-        });
+        this.setState({ modal_visibility: false });
     }
 
     render() {
-        const { value, suggestions } = this.state;
+        const value = this.state.company_value;
 
-        // Autosuggest will pass through all these props to the input.
         const inputProps = {
             name: 'company_name',
             placeholder: 'Name of Organisation...',
@@ -241,41 +164,37 @@ class ComplaintForm extends Component {
             <div className='post make-post'>
                 <form className="form newtopic" method="post" onSubmit={this.submitComplaint}>
                     <div className="topwrap">
-                        {/* <UserInfo user={User.getUserData()} /> */}
-
                         <div className="posttext col-md-12">
-                            <Autosuggest
-                                suggestions={suggestions}
-                                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                                onSuggestionSelected={this.onSuggestionSelected}
-                                getSuggestionValue={getSuggestionValue}
-                                renderSuggestion={renderSuggestion}
-                                inputProps={inputProps}
-                            />
+                            <CompanyAutosuggest inputProps={inputProps} updateCompanyId={this.updateCompanyId} />
                     
                             <div><input type="text" name="title" placeholder="Brief caption for your displeasure..." className="form-control" /></div>
                     
                             <div><textarea name="complaint" id="desc" placeholder="Full description of what happened" rows="10"  className="form-control"></textarea></div>
 
                             <div>
-                                <label>Include Evidence (Screenshots, receipts etc)</label>
+                                <label>Add Tags <small>Eg Bank, Tech, Ecommerce etc.</small> (Add at least one tag)</label>
+                                <Tag />
+                            </div>
+                            <br />
+                            <div>
+                                <label>Include Evidence <small>if any</small> (Screenshots, receipts etc)</label>
                                 <input type="file" name="files" onChange={this.getSelectedFiles} accept="image/*|audio/*|video/*" multiple />
                             </div>
                             
-                            <div className="row">
+                            <div className="row hidden">
                                 <div className="col-md-12"><label>Do you think this organisation is legit?</label></div>
                                 <div className="col-md-4 col-xs-4"><input type="radio" name="legit" className="au-input-button" value="1" /> &nbsp;Yes</div>
                                 <div className="col-md-4 col-xs-6"><input type="radio" name="legit" className="au-input-button" value="0" /> &nbsp;No</div>    
                             </div>
 
-                            <div className="row">
+                            <div className="row hidden">
                                 <div className="col-md-12"><label>How would you rate the customer service?</label></div>
                                 <div className="col-md-4 col-xs-4"><input type="radio" name="customer_care" className="au-input-button" value="1" /> &nbsp;Good</div>
                                 <div className="col-md-4 col-xs-6"><input type="radio" name="customer_care" className="au-input-button" value="0" /> &nbsp;Bad</div>
                             </div>
 
                             <input type="hidden" name="companyId" value="1" />
+                            <br /><br />
                             <div className="row newtopcheckbox">
                                 <div className="col-lg-12 col-md-12">
                                     <label>Share on AngryUsers' Social Networks</label>
@@ -300,7 +219,6 @@ class ComplaintForm extends Component {
                         <div className="clearfix"></div>
                     </div>
                     <div className="postinfobot">
-
                         <div className="pull-right postreply">
                             <div className="pull-left"><button type="submit" className="btn btn-primary" {...this.state.post_btn.disabled}><i className={"fa " + this.state.post_btn.icon}></i>&nbsp;&nbsp;{this.state.post_btn.text}</button></div>
                             <div className="clearfix"></div>

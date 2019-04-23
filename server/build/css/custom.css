@@ -51,18 +51,9 @@
     padding-top: 22px;
 }
 
-.blog-intro {
-    margin-bottom: 38px;
-}
-
 .blog-post h2 a {
     font-family: 'Lato', sans-serif;
     font-size :29px;
-}
-
-
-.nav>li>a:hover {
-    background: none !important;
 }
 
 .tp-banner img {
@@ -124,12 +115,10 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-weight: 300;
-    color: #333;
-    line-height: 1.5;
 }
 
 a {
-    color: #676969;    
+    color: #363838;    
 }
 a:hover {
     color: #989c9e;    
@@ -139,6 +128,7 @@ a:hover {
 /*--- Footer ---*/
 
 footer {
+    font-family: 'Open Sans', sans-serif;
     height: 100%;
     color: #c8dfe7;
     background-color: #37474F;
@@ -149,20 +139,16 @@ footer {
 .footer-nav {
     font-family: 'Open Sans', Helvetica, sans-serif;
     font-size: 13px;
-    padding-inline-start: 7px;
-    margin-top: 13px;
 }
 
 .footer-nav li h4 {
-    font-size: 19px;
-    color: #c8dfe7;
-    font-family: 'Lato', Tahoma;
-    margin-bottom: 18px;
+    font-size: 16px;
+    text-transform: uppercase;
+    /* color: #222728; */
 }
 
 .footer-nav li a {
     color: #f8f8f8;
-    font-weight: 300;
 }
 
 
@@ -378,6 +364,8 @@ ul.socialicons li a:hover {
 
 }
 
+
+
 .paginationforum {
     margin: 19px auto;
     padding: 0;
@@ -451,7 +439,6 @@ ul.cats li a {
     color: #4b4848;;
     font-family: 'Open Sans', sans-serif;
     line-height: 30px;
-    font-weight: 300;
 }
 
 ul.cats .badge {
@@ -462,6 +449,7 @@ ul.cats .badge {
     margin-top: 7px;
 }
 
+
 .sidebarblock .blocktxt {
 
     font-size: 14px;
@@ -469,6 +457,7 @@ ul.cats .badge {
     font-family: 'Open Sans', sans-serif;
 
 }
+
 
 .sidebarblock .blocktxt .smal {
     font-size: 12px;
@@ -566,14 +555,12 @@ td.chbox {
     font-size:14px;
     font-family: 'Open Sans', 'Lato', sans-serif;
     position: relative;
-    /* margin-bottom: 2px; */
+    margin-bottom: 2px;
     top: 4px;
 }
 
 .userinfo img {
-    width: 40px;
-    /* margin-left: 5px; */
-    margin-top: 3px;
+    width: 45px;
     border-radius: 50%;
 }
 
@@ -624,22 +611,19 @@ td.chbox {
 
 .post h1 {
     color: #363838;
-    font-size: 25px;
+    font-size: 29px;
     font-family: 'Lato', 'Open Sans', sans-serif; 
     margin-top: 6px;
-    /* margin-bottom: 0; */
+    /* margin-bottom: 20px; */
 }
 
 .post h2 {
-    font-size: 20px;
-    font-family: Lato, 'Open Sans', sans-serif;   
-    margin-top: -3px;
+    color: #363838;
+    font-size: 21px;
+    font-family: 'Open Sans', sans-serif;   
+    margin-top: 10px;
     font-weight: 500;
-    text-transform: capitalize;
-}
-
-.post h2 a {
-    color: #747777;
+    text-transform: uppercase;
 }
 
 .post .comments {
@@ -894,12 +878,6 @@ a.down:hover {
     position: relative;
 }
 
-label {
-    margin-top: 10px;
-    margin-bottom: 0 !important;
-    font-weight: 600;
-}
-
 
 
 /*-----------------------------------------------------------------*/
@@ -1119,7 +1097,7 @@ label {
         padding: 30px;
     }
     .headernav .search {
-        /* margin-top: 71px; */
+        margin-top: 71px;
     }
     
     /*--- index.html ---*/

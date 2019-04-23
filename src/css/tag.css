@@ -1,0 +1,75 @@
+.react-tags__selected {
+    padding: 9px 0;
+}
+
+.react-tags__selected .react-tags__selected-tag {
+    padding: 0px 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    margin: 2px;
+}
+
+.react-tags__selected-tag::after {
+    content: "x";
+}
+
+.react-tags__selected-tag-name {
+    color: #0b0a0a;
+    font-weight: 400;
+    font-size: 13px;
+    padding-right: 8px;
+}
+
+.react-tags__selected .react-tags__selected-tag ~ .react-tags__selected-tag{
+    margin-left:7px;
+}
+
+.react-tags__suggestions {
+    border: 1px solid #ccc;
+}
+
+.react-tags__search-input input {
+    width: 100%;
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+}
+
+.react-tags__suggestions ul {
+    list-style-type: none;
+    margin-left: -40px;
+}
+
+.react-tags__suggestions ul li {
+    padding: 4px 10px
+}
+
+.react-tags__suggestions ul li.is-active {
+    background: #f0f0f0 !important;
+    padding: 4px 10px;
+}
+
+mark {
+    background-color: #fff;
+    font-weight: bold;
+}
+
+.react-tags__suggestions ul li.is-active mark {
+    background: #f0f0f0 !important;
+}
+
+.tag-display {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    color: #000;
+    margin: 3px;
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.tag-display:hover {
+    font-weight: bold
+}

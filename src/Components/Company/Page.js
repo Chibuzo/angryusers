@@ -13,11 +13,11 @@ class Page extends Component {
             <div>
                 <Nav />
                 <div className="hero-wrap js-fullheight" style={{ height: '100vh' }} data-stellar-background-ratio="0.5">
-                    <div className="container-fluid">
+                    <div className="container-fluid" style={{ paddingLeft: '15px', paddingRight: '15px' }}>
                         <div className="row">
                             <div className="col-md-6 col-xs-12">
                                 <div className={"row " + this.props.contentStyle}>
-                                    <div className="col-md-10 offset-md-1">
+                                    <div className="col-md-10 col-xs-12 offset-md-1">
                                         <h2 style={{ fontFamily: 'Lato' }}>{this.props.title}</h2>
                                         <br />
                                         {this.props.children}

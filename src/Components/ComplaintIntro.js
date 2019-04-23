@@ -53,9 +53,9 @@ class ComplaintIntro extends Component {
 
         return(
             <div className="post">
-                <div className="wrap-ut pullleft">
+                <div className="wrap-ut">
 
-                    <div className="">
+                    <div>
                         <div className="posthead col-md-12 col-xs-12">
                             <h1>{this.props.company.CompanyName}</h1>
                             <h2><Link to={this.props.url}>{this.props.title}</Link></h2>
