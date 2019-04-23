@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-// import Tag from "./Tag";
-// import { Link } from "react-router-dom";
-// import SideBarWidget from "./SideBarWidget";
 
 class TagWidget extends Component {
     state = { selecteg_tags: [], tags: '' };
