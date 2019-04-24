@@ -22,7 +22,7 @@ class TagWidget extends Component {
     render() {
         return (
             <div className="sidebarblock">
-                <h3>Complaint Tags</h3>
+                {this.props.title && <h3>Complaint Tags</h3>}
                 <div className="blocktxt">{this.state.tags}</div>
             </div>
         );

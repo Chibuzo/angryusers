@@ -60,6 +60,7 @@ class Home extends Component {
         this.state = {
             show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: null, update_login_view: false, 
             post_files: { postImage: 0, photoIndex: 0, isOpen: false, }, 
+            mFilter: { caret: 'fa-caret-right', tagwidget: false },
             flag: { postTitle: '', postId: 0, postType: '', userId: 0, visible: false } 
         };
     }
@@ -84,11 +85,15 @@ class Home extends Component {
     filterComplaint = async tag => {
         notify.show('Loading complaints under ' + tag + ' category, please wait...');
 
-        let complaints = await fetchComplaints(this, 'complaints/getComplaintsByTag/' + escape(tag));
-        if (complaints.length < 1) {
-            complaints = <div className="post"><div className="wrap-ut"><div><div className="posthead col-md-12 col-xs-12"></div><div className='alert'><h1>No Content Found!</h1>No complaint has being submitted under this tag category yet. You may want to select a related tag<br /><br /></div></div></div></div>;
+        try {
+            let complaints = await fetchComplaints(this, 'complaints/getComplaintsByTag/' + escape(tag));
+            if (complaints.length < 1) {
+                complaints = <div className="post"><div className="wrap-ut"><div><div className="posthead col-md-12 col-xs-12"></div><div className='alert'><h1>No Content Found!</h1>No complaint has being submitted under this tag category yet. You may want to select a related tag<br /><br /></div></div></div></div>;
+            }
+            this.state.mFilter.tagwidget === true ? this.setState({ complaints: complaints, mFilter: { caret: 'fa-caret-right', tagwidget: false } }) : this.setState({ complaints: complaints });
+        } catch (err) {
+            console.error(err);
         }
-        this.setState({ complaints: complaints });
         notify.hide();
     }
 
@@ -124,8 +129,18 @@ class Home extends Component {
         this.setState({ flag: flag });
     }
 
+    // only for mobile view
+    showTags = () => {
+        if (this.state.mFilter.tagwidget === false) {
+            this.setState({ mFilter: { caret: 'fa-caret-down', tagwidget: true } });
+        } else {
+            this.setState({ mFilter: { caret: 'fa-caret-right', tagwidget: false } });
+        }
+    }
+
     render() {
         const { photoIndex, isOpen } = this.state.post_files;
+        const mFilter = this.state.mFilter;
         const flag = this.state.flag;
 
         return(
@@ -138,6 +153,11 @@ class Home extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-md-8 col-xs-12">
+                                <div className="row">
+                                    <div className="col-md-12 d-block d-sm-none"><span onClick={this.showTags} style={{ padding: '4px', position: 'relative', top: '-15px' }}><i className="fa fa-filter"></i> &nbsp;Filter Complaints &nbsp;<i className={'fa ' + mFilter.caret }></i></span> <br /></div>
+                                    <div className="clearfix"></div>
+                                    { mFilter.tagwidget && <TagWidget filterComplaint={this.filterComplaint} /> }
+                                </div>
                                 {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} showLoginOpts={this.showLoginModal} /> }
                                
                                 {this.state.new_complaint && <ComplaintIntro
@@ -161,7 +181,7 @@ class Home extends Component {
 
                             <div className="col-lg-4 col-md-4 col-xs-12">
                                 {/* <StatWidget /> */}
-                                <TagWidget filterComplaint={this.filterComplaint} />
+                                <TagWidget filterComplaint={this.filterComplaint} title={true} />
                                 <RecentPosts />
                                 <BlogCategories />
                             </div>

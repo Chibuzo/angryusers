@@ -57,8 +57,7 @@ class ComplaintPage extends Component {
                                 url={url} 
                                 user={rant.User} 
                                 showLoginModal={this.showLoginModal}
-                                triggerFlag={this.flagComplaint}
-                            />
+                                triggerFlag={this.flagComplaint} />
 
             let comments = rant.Comments && rant.Comments.map(comment => {
                 return (

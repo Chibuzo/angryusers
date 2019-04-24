@@ -172,7 +172,7 @@ class ComplaintForm extends Component {
                             <div><textarea name="complaint" id="desc" placeholder="Full description of what happened" rows="10"  className="form-control"></textarea></div>
 
                             <div>
-                                <label>Add Tags <small>Eg Bank, Tech, Ecommerce etc.</small> (Add at least one tag)</label>
+                                <label>Add Tags <small>Eg Bank, Tech, Ecommerce etc.</small> (At least one)</label>
                                 <Tag />
                             </div>
                             <br />
