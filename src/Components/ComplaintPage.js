@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 
-//import Banner from "./Banner";
 import SearchBar from "./SearchBar";
 import ComplaintForm from "./ComplaintForm";
 import Complaint from "./FullComplaint";
@@ -52,7 +51,7 @@ class ComplaintPage extends Component {
                                 anonymous={rant.Anonymous} 
                                 complaint={rant.Issue} 
                                 comments={rant.Comments.length} 
-                                postdate={post_utilities.formatDateSince(rant.IssueDate)} 
+                                postdate={post_utilities.formatDate(rant.IssueDate)} 
                                 files={rant.ComplaintFiles} 
                                 url={url} 
                                 user={rant.User} 
@@ -122,7 +121,7 @@ class ComplaintPage extends Component {
                                 { this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} showNotification={this.newPostNotification} showLoginOpts={this.showLoginModal} /> }    
                                 { this.state.complaint }
 
-                                <CommentWrapper complaintId={this.state.complaint_data.Id} triggerLogin={this.showLoginModal} sendNewComment={this.updateComment}>{this.state.comments}</CommentWrapper>
+            { this.state.complaint && <CommentWrapper complaintId={this.state.complaint_data.Id} triggerLogin={this.showLoginModal} sendNewComment={this.updateComment}>{this.state.comments}</CommentWrapper> }
 
                                 { this.state.show_new_comment && <Complaint 
                                     complaint={this.state.new_comment.comment} 

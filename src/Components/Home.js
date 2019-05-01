@@ -32,7 +32,7 @@ const fetchComplaints = async ($this, path) => {
                     title={rant.Title}
                     intro={post_utilities.postIntro(rant.Issue, 360)}
                     complaint={rant.Issue}
-                    postdate={post_utilities.formatDateSince(rant.CreatedAt)}
+                    postdate={post_utilities.formatDate(rant.CreatedAt)}
                     files={rant.ComplaintFiles}
                     comments={rant.Comments.length}
                     key={rant.IssueDate}
@@ -166,7 +166,7 @@ class Home extends Component {
                                     title={this.state.newComplaint.Title}
                                     intro={post_utilities.postIntro(this.state.newComplaint.Issue, 350)}
                                     complaint={this.state.newComplaint.Issue}
-                                    postdate={post_utilities.formatDateSince(this.state.newComplaint.CreatedAt)}
+                                    postdate={post_utilities.formatDate(this.state.newComplaint.CreatedAt)}
                                     comments='0' 
                                     views='0'
                                     url={`/complaint/${this.state.newComplaint.Id}/${this.state.newComplaint.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}

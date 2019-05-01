@@ -77,7 +77,7 @@ class ComplaintIntro extends Component {
                     </div>
 
                     <div className="col-md-9 col-xs-7 post-details-link text-right" style={{ fontSize: '13px' }}>
-                        <Link to={this.props.url}>{this.props.comments} Comments</Link> <strong>.</strong>&nbsp; 
+                        <Link to={this.props.url}>Comments</Link> <strong>.</strong>&nbsp; 
                         <Link to="#" onClick={this.reportPost} title="Report this post">Report</Link>
                     </div>
 

@@ -27,7 +27,7 @@ class ComplaintForm extends Component {
         // change post button state
         this.setState({ post_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
 
-        // make tag(s) are included
+        // make sure tag(s) are included
         if (e.target.elements.tags.value.length < 2) {
             
         }

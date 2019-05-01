@@ -5,7 +5,7 @@ import VisionStatement from "./Vision";
 
 const About = () => {
     return(
-        <Page title="AngryUsers - About AngryUsers">
+        <Page title="About . AngryUsers">
             <div className="row">
                 <div className="col-md-8">
                     <h2>About AngryUsers</h2>
