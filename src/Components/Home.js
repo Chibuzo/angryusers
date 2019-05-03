@@ -32,7 +32,7 @@ const fetchComplaints = async ($this, path) => {
                     title={rant.Title}
                     intro={post_utilities.postIntro(rant.Issue, 360)}
                     complaint={rant.Issue}
-                    postdate={post_utilities.formatDateSince(rant.CreatedAt)}
+                    postdate={post_utilities.formatDate(rant.CreatedAt)}
                     files={rant.ComplaintFiles}
                     comments={rant.Comments.length}
                     key={rant.IssueDate}
@@ -97,6 +97,20 @@ class Home extends Component {
         notify.hide();
     }
 
+    findCompanyComplaints = async company => {
+        notify.show('Loading complaints against ' + company + ', please wait...');
+        try {
+            let complaints = await fetchComplaints(this, 'complaints/getComplaintsByCompany/' + escape(company));
+            if (complaints.length < 1) {
+                complaints = <div className="post"><div className="wrap-ut"><div><div className="posthead col-md-12 col-xs-12"></div><div className='alert'><h1>No Content Found!</h1>No complaint has being submitted under this tag category yet. You may want to select a related tag<br /><br /></div></div></div></div>;
+            }
+            this.setState({ complaints: complaints });
+        } catch (err) {
+            console.error(err);
+        }
+        notify.hide();
+    }
+
     // Update complaint list with new complaint
     repostNewPost(new_complaint) {
         this.setState({ 
@@ -146,7 +160,7 @@ class Home extends Component {
         return(
             <div className="container-fluid">
                 <Banner />
-                <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} updateUserView={this.state.update_login_view} />
+                <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} updateUserView={this.state.update_login_view} searchCompanyComplaints={this.findCompanyComplaints} />
                 <Notification options={{ timeout: -1 }} />
 
                 <section className="content">

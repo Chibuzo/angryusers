@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
+import CompanyAutosuggest from "./CompanyAutosuggest";
 
 import logo from "../images/logo.png";
 import avatar from "../images/angry.jpg";
@@ -10,7 +11,7 @@ class SearchBar extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { loggedIn: false };
+        this.state = { loggedIn: false, company_value: '', company_id: 0 };
     }
 
     componentDidMount() {
@@ -35,8 +36,27 @@ class SearchBar extends Component {
         this.setState({ loggedIn: false });
     }
 
+    submitSearchForm = e => {
+        e.preventDefault();
+        this.state.company_id > 0 && this.props.searchCompanyComplaints(this.state.company_id);
+    }
+
+    // for company autosuggest
+    onChange = (e, { newValue }) => this.setState({ company_value: newValue });
+
+    updateCompanyId = id => this.setState({ company_id: id });
+
     render() {
-        const isLoggedIn = this.state.loggedIn;
+        const { isLoggedIn, company_value } = this.state;
+        const value = company_value;
+        const inputProps = {
+            name: 'company_name',
+            placeholder: 'Name of Organisation...',
+            value,
+            className: 'form-control',
+            onChange: this.onChange,
+            required: 'required'
+        };
         let menu, nav;
 
         if (isLoggedIn) {
@@ -68,7 +88,7 @@ class SearchBar extends Component {
                         {/* <span class="icon-bar"></span> */}
                         <i className="fa fa-list fa-lg"></i> &nbsp; Menu
                     </button>
-                    { logo_div}
+                    { logo_div }
                 </div>
 
                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -88,9 +108,12 @@ class SearchBar extends Component {
 
                 <div className="search col-md-4 col-sm12 col-xs-12">
                     <div className="wrap">
-                        <form method="post" className="form">
-                            <div className="pull-left txt"><input type="text" className="form-control" placeholder="Search for Organisation, brand or website" /></div>
-                            <div className="pull-right"><button className="btn btn-default" type="button"><i className="fa fa-search"></i></button></div>
+                        <form method="post" className="form" onSubmit={this.submitSearchForm}>
+                            <div className="pull-left txt">
+                                {/* <input type="text" className="form-control" placeholder="Search for Organisation, brand or website" /> */}
+                                <CompanyAutosuggest inputProps={inputProps} updateCompanyId={this.updateCompanyId} />
+                            </div>
+                            <div className="pull-right"><button className="btn btn-default" type="submit"><i className="fa fa-search"></i></button></div>
                             <div className="clearfix"></div>
                         </form>
                     </div>

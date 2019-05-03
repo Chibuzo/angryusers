@@ -27,8 +27,10 @@ module.exports = {
     },
 
     formatDate: function(date) {
-        var options = { weekday: "short", year: "numeric", month: "short", day: "numeric" };
-        return new Date(date).toLocaleDateString("en-US", options);
+        const _date = new Date(date);
+        //const options = { weekday: "short", year: "numeric", month: "short", day: "numeric" };
+        return _date.getDate() + "/" + (_date.getMonth() + 1) + "/" + _date.getFullYear();
+        //return new Date(date).toLocaleDateString("en-US", options);
     },
 
     postIntro: function(post, no_of_letters = 500) {
