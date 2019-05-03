@@ -28,8 +28,13 @@ module.exports = {
 
     formatDate: function(date) {
         const _date = new Date(date);
+        Date.prototype.getMonthName = function () {
+            let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            return months[this.getMonth()];
+        };
         //const options = { weekday: "short", year: "numeric", month: "short", day: "numeric" };
-        return _date.getDate() + "/" + (_date.getMonth() + 1) + "/" + _date.getFullYear();
+        return _date.getMonthName() + " " + _date.getDate();
         //return new Date(date).toLocaleDateString("en-US", options);
     },
 
