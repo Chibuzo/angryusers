@@ -201,6 +201,10 @@ ul.socialicons li a:hover {
     margin-top: 7px;
 }
 
+.nav-logo {
+    margin-top: -8px;
+}
+
 
 .content {
     padding-top: 30px;
@@ -1095,6 +1099,16 @@ label {
 
     .logo {
         margin-top: 2px;
+    }
+
+    .nav-logo {
+        margin-top: -10px;
+        margin-left: -16px;
+        width: 133px;
+    }
+
+    .navbar-toggle {
+        margin-right: -8px;
     }
 
     .comment-wrapper .topwrap {

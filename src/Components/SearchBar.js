@@ -79,7 +79,7 @@ class SearchBar extends Component {
         }
 
         if (this.props.nav === true) {
-            let logo_div = <Link className="navbar-brand" to="/"><img src={logo} style={{ marginTop: '-8px' }} alt="AngryUsers Logo" /></Link>;
+            let logo_div = <Link className="navbar-brand" to="/"><img src={logo} className="nav-logo" alt="AngryUsers Logo" /></Link>;
 
             nav = <div className="">
                 <div className="navbar-header">

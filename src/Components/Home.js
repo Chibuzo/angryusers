@@ -180,7 +180,7 @@ class Home extends Component {
                                     title={this.state.newComplaint.Title}
                                     intro={post_utilities.postIntro(this.state.newComplaint.Issue, 350)}
                                     complaint={this.state.newComplaint.Issue}
-                                    postdate={post_utilities.formatDateSince(this.state.newComplaint.CreatedAt)}
+                                    postdate={post_utilities.formatDate(this.state.newComplaint.CreatedAt)}
                                     comments='0' 
                                     views='0'
                                     url={`/complaint/${this.state.newComplaint.Id}/${this.state.newComplaint.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
