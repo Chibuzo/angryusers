@@ -35,7 +35,8 @@ class FlagPost extends Component {
         }
     }
 
-    closeModal() {
+    closeModal(e) {
+        e.preventDefault();
         this.props.hideVisibilty();
         this.setState({ modal_visibility: false });
     }
@@ -54,7 +55,7 @@ class FlagPost extends Component {
             >
                 <div className="Modal">
                     <h3>Report Post for Moderation</h3>
-                    <span style={{ position: 'relative', top: '-31px', right: '17px', color: '#000' }} className="pull-right"><a href="#" onClick={() => this.closeModal()}>X</a></span>
+                    <span style={{ position: 'relative', top: '-31px', right: '17px', color: '#000' }} className="pull-right"><a href="/" onClick={() => this.closeModal()}>X</a></span>
                     <hr />
                     <p>Go ahead if you think this {this.props.postType} is inappropiate.</p>
                     <form onSubmit={this.postReport}>

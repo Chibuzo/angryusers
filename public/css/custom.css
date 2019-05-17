@@ -548,10 +548,10 @@ td.chbox {
 /*--- Post --*/
 .post {
     background-color: #ffffff;
-
+    width: 100%;
     border-radius: 2px;
     box-shadow: 0 1px 2px #c9cccd;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* .post .wrap-ut {

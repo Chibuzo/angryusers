@@ -47,8 +47,8 @@ class SearchBar extends Component {
     updateCompanyId = id => this.setState({ company_id: id });
 
     render() {
-        const { isLoggedIn, company_value } = this.state;
-        const value = company_value;
+        const isLoggedIn = this.state.loggedIn;
+        const value = this.state.company_value;
         const inputProps = {
             name: 'company_name',
             placeholder: 'Name of Organisation...',

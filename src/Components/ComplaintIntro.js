@@ -32,7 +32,7 @@ class ComplaintIntro extends Component {
     }
 
     loadImages = () => {
-        const images = this.props.files.map(file => file.Filename);
+        let images = this.props.files.map(file => file.Filename);
         this.props.sendImages(images);
     }
 

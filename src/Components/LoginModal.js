@@ -9,7 +9,7 @@ import User from "../Helpers/User";
 class LoginModal extends Component {
     constructor(props) {
         super(props);
-        this.state = { modal_toggle: false };
+        this.state = { modal_toggle: false, login_msg: 'hidden' };
     };
 
     // login user
@@ -35,6 +35,7 @@ class LoginModal extends Component {
     }
 
     loginUser = (user) => {
+        this.setState({ login_msg: '' });
         fetch(process.env.REACT_APP_API_URL + 'Users/FindOrCreate', {
             method: 'POST',
             headers: {
@@ -49,6 +50,7 @@ class LoginModal extends Component {
                 let newUser = new User(user);
                 newUser.saveUser(user);
                 this.closeModal();
+                this.setState({ login_msg: 'hidden' });
                 this.props.triggerLoginAction(true);
             }
         }).catch(err => {
@@ -97,6 +99,8 @@ class LoginModal extends Component {
                         onSuccess={this.responseGoogle}
                         onFailure={this.responseGoogle}
                     />    
+                    <br /><br />
+                    <div className={this.state.login_msg + " alert alert-info"}><em>Logging in, please wait...</em></div>
                 </div>
             </Modal>
         );

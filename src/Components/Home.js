@@ -127,7 +127,8 @@ class Home extends Component {
 
     loadImages = (imgs) => {
         images = imgs;
-        this.setState({ post_files: { postImage: images.length, isOpen: true, photoIndex: 0 }});
+        console.log(imgs.length)
+        this.setState({ post_files: { postImage: imgs.length, isOpen: true, photoIndex: 0 }});
     }
 
     showLoginModal = (val) => {
@@ -172,25 +173,30 @@ class Home extends Component {
                                     <div className="clearfix"></div>
                                     { mFilter.tagwidget && <TagWidget filterComplaint={this.filterComplaint} /> }
                                 </div>
-                                {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} showLoginOpts={this.showLoginModal} /> }
-                               
-                                {this.state.new_complaint && <ComplaintIntro
-                                    id={this.state.newComplaint.Id}
-                                    company={this.state.newComplaint.Company}
-                                    title={this.state.newComplaint.Title}
-                                    intro={post_utilities.postIntro(this.state.newComplaint.Issue, 350)}
-                                    complaint={this.state.newComplaint.Issue}
-                                    postdate={post_utilities.formatDate(this.state.newComplaint.CreatedAt)}
-                                    comments='0' 
-                                    views='0'
-                                    url={`/complaint/${this.state.newComplaint.Id}/${this.state.newComplaint.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
-                                    key={this.state.newComplaint.CreatedAt}
-                                    user={User.getUserData()}
-                                    sendImages={this.loadImages}
-                                    // onTapEnd={this.openComplaint(this.state)}
-                                /> }
 
-                                { this.state.complaints }
+                                <div className="row">
+                                    {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} showLoginOpts={this.showLoginModal} /> }
+                                </div>       
+
+                                <div className="row">
+                                    {this.state.new_complaint && <ComplaintIntro
+                                        id={this.state.newComplaint.Id}
+                                        company={this.state.newComplaint.Company}
+                                        title={this.state.newComplaint.Title}
+                                        intro={post_utilities.postIntro(this.state.newComplaint.Issue, 350)}
+                                        complaint={this.state.newComplaint.Issue}
+                                        postdate={post_utilities.formatDate(this.state.newComplaint.CreatedAt)}
+                                        comments='0'            
+                                        views='0'
+                                        url={`/complaint/${this.state.newComplaint.Id}/${this.state.newComplaint.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
+                                        key={this.state.newComplaint.CreatedAt}
+                                        user={User.getUserData()}
+                                        sendImages={this.loadImages}
+                                        // onTapEnd={this.openComplaint(this.state)}
+                                    /> }
+                                </div>    
+
+                                <div className="row">{ this.state.complaints }</div>
                             </div>
 
                             <div className="col-lg-4 col-md-4 col-xs-12">
