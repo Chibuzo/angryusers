@@ -25,6 +25,7 @@ const fetchComplaints = async ($this, path) => {
         const data = await res.json();
     
         let complaints = data.map(rant => {
+            const doc_title = rant.Company.CompanyName + ' - ' + rant.Title;
             return (
                 <ComplaintIntro
                     id={rant.Id}
@@ -37,7 +38,7 @@ const fetchComplaints = async ($this, path) => {
                     comments={rant.Comments.length}
                     key={rant.IssueDate}
                     views={rant.ViewCount}
-                    url={`/complaint/${rant.Id}/${rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
+                    url={`/complaint/${rant.Id}/${doc_title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
                     anonymous={rant.Anonymous}
                     user={rant.User}
                     sendImages={$this.loadImages}
