@@ -52,7 +52,7 @@ class FullComplaint extends Component {
                     <div className="">
                         <div className="posthead col-md-12 col-xs-12">
                             <h1>{this.props.company.CompanyName}</h1>
-                            <h2><Link to={this.props.url}>{this.props.title}</Link></h2>
+                            <h2>{this.props.title}</h2>
                         </div>
 
                         <UserInfo user={user} date={this.props.postdate} />

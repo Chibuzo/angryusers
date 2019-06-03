@@ -10,7 +10,7 @@ import RecentPosts from "./Blog/RecentPosts";
 import Categories from "./Blog/BlogCategories";
 import Footer from "./Footer";
 import LoginModal from "./LoginModal";
-//import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import Notification, { notify } from 'react-notify-toast';
 
@@ -103,13 +103,13 @@ class ComplaintPage extends Component {
         return(
             <div className="container-fluid">
                 {/* <Banner /> */}
-                {/* <Helmet>
+                <Helmet>
                     <title>{this.state.complaint_data.Title && this.state.complaint_data.Title}</title>
                     <meta property="og:title" content={this.state.complaint_data.Title} />
                     <meta property="og:url" content={this.state.url} />
-                    <meta property="og:description" content={this.state.complaint_data.Title} />
+                    {/* <meta property="og:description" content={this.state.complaint_data.Title} /> */}
                     <meta property="og:type" content="website" />
-                </Helmet> */}
+                </Helmet>
 
                 <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} />
                 <Notification options={{ timeout: -1 }} />

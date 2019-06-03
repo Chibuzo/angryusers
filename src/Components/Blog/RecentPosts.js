@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SideBarWidget from "../SideBarWidget";
 
-const imageThumbnail = require('image-thumbnail');
+//const imageThumbnail = require('image-thumbnail');
 
 class RecentPosts extends Component {
     state = { posts: [] };
@@ -12,11 +12,11 @@ class RecentPosts extends Component {
             return res.json();
         }).then(res => {
             let posts = res.recentPosts || [];
-            console.log(posts)
-            let recent = posts.map(async p => {
+            //console.log(posts)
+            let recent = posts.map(p => {
                 try {
-                    const thumbnail = await imageThumbnail({ uri: p.Photo[0].PhotoSrc });
-                    console.log(thumbnail)
+                    // const thumbnail = await imageThumbnail({ uri: p.Photo[0].PhotoSrc });
+                    // console.log(thumbnail)
                 } catch (err) {
 
                 }

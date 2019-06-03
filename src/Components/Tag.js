@@ -29,9 +29,9 @@ class Tag extends Component {
     }
 
     handleDelete = i => {
-        const tags = this.state.tags.slice(0)
-        tags.splice(i, 1)
-        this.setState({ tags })
+        const tags = this.state.tags.slice(0);
+        tags.splice(i, 1);
+        this.setState({ tags });
     }
 
     handleAddition = tag => this.setState({ tags: [...this.state.tags, tag] });
