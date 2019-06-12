@@ -128,7 +128,6 @@ class Home extends Component {
 
     loadImages = (imgs) => {
         images = imgs;
-        console.log(imgs.length)
         this.setState({ post_files: { postImage: imgs.length, isOpen: true, photoIndex: 0 }});
     }
 
