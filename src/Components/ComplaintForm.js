@@ -71,7 +71,7 @@ class ComplaintForm extends Component {
                 this.state.uploadFiles.length > 0 && this.uploadFiles(data.Id);
 
                 // share on social networks
-                const link = process.env.REACT_APP_BASEURL + `complaint/${complaint.Id}/${complaint.Title.split(' ').join('-')}`;
+                const link = process.env.REACT_APP_BASEURL + `complaint/${complaint.Id}/${complaint.CompanyName.replace(/["'.,/]+/g, "").split(' ').join('-')}_${complaint.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`;
                 complaint.FacebookShare && post_utilities.postOnFb(post_utilities.postIntro(complaint.Issue), link);
 
                 // send review
