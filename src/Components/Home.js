@@ -38,7 +38,7 @@ const fetchComplaints = async ($this, path) => {
                     comments={rant.Comments.length}
                     key={rant.IssueDate}
                     views={rant.ViewCount}
-                    url={`/complaint/${rant.Id}/${rant.Company.CompanyName.replace(/[./]+/g, "").split(' ').join('-')}-${rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
+                    url={`/complaint/${rant.Id}/${rant.Company.CompanyName.replace(/["'.,/]+/g, "").split(' ').join('-')}_${rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
                     anonymous={rant.Anonymous}
                     user={rant.User}
                     sendImages={$this.loadImages}
