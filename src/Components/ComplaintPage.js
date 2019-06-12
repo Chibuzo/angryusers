@@ -41,9 +41,9 @@ class ComplaintPage extends Component {
         fetch(process.env.REACT_APP_API_URL + 'complaints/' + this.props.match.params.id).then(function(response) {
             return response.json();
         }).then(rant => {
-            document.title = rant.Title + ' . AngryUsers';
+            //document.title = rant.Title + ' . AngryUsers';
             
-            const url = process.env.REACT_APP_BASEURL + 'complaint/' + rant.Id + '/' + rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-');
+            const url = process.env.REACT_APP_BASEURL + `/complaint/${rant.Id}/${rant.Company.CompanyName.replace(/["'.,/]+/g, "").split(' ').join('-')}_${rant.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`;
             const complaint = <Complaint 
                                 id={rant.Id} 
                                 company={rant.Company} 
