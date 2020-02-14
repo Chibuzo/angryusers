@@ -6,7 +6,7 @@ import ComplaintForm from "./ComplaintForm";
 import ComplaintIntro from "./ComplaintIntro";
 // import StatWidget from "./StatWidget";
 import TagWidget from "./TagWidget";
-import RecentPosts from "./Blog/RecentPosts";
+// import RecentPosts from "./Blog/RecentPosts";
 import BlogCategories from "./Blog/BlogCategories";
 import Footer from "./Footer";
 
@@ -23,7 +23,7 @@ const fetchComplaints = async ($this, path) => {
     try {
         const res = await fetch(process.env.REACT_APP_API_URL + path);
         const data = await res.json();
-    
+
         let complaints = data.map(rant => {
             //const doc_title = rant.Company.CompanyName + ' - ' + rant.Title;
             return (
@@ -59,10 +59,10 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: null, update_login_view: false, 
-            post_files: { postImage: 0, photoIndex: 0, isOpen: false, }, 
+            show_complain_form: false, complaints: [], newComplaint: {}, new_complaint: false, modal_toggle: null, update_login_view: false,
+            post_files: { postImage: 0, photoIndex: 0, isOpen: false, },
             mFilter: { caret: 'fa-caret-right', tagwidget: false },
-            flag: { postTitle: '', postId: 0, postType: '', userId: 0, visible: false } 
+            flag: { postTitle: '', postId: 0, postType: '', userId: 0, visible: false }
         };
     }
 
@@ -114,7 +114,7 @@ class Home extends Component {
 
     // Update complaint list with new complaint
     repostNewPost(new_complaint) {
-        this.setState({ 
+        this.setState({
             newComplaint: {
                 Id: new_complaint.Id,
                 Company: { CompanyName: new_complaint.CompanyName },
@@ -128,7 +128,7 @@ class Home extends Component {
 
     loadImages = (imgs) => {
         images = imgs;
-        this.setState({ post_files: { postImage: imgs.length, isOpen: true, photoIndex: 0 }});
+        this.setState({ post_files: { postImage: imgs.length, isOpen: true, photoIndex: 0 } });
     }
 
     showLoginModal = (val) => {
@@ -158,7 +158,7 @@ class Home extends Component {
         const mFilter = this.state.mFilter;
         const flag = this.state.flag;
 
-        return(
+        return (
             <div className="container-fluid">
                 <Banner />
                 <SearchBar showComplaintForm={this.toggleComplaintForm} triggerLogin={this.showLoginModal} updateUserView={this.state.update_login_view} searchCompanyComplaints={this.findCompanyComplaints} />
@@ -169,14 +169,14 @@ class Home extends Component {
                         <div className="row">
                             <div className="col-lg-8 col-md-8 col-xs-12">
                                 <div className="row">
-                                    <div className="col-md-12 d-block d-sm-none"><span onClick={this.showTags} style={{ padding: '4px', position: 'relative', top: '-15px' }}><i className="fa fa-filter"></i> &nbsp;Filter Complaints &nbsp;<i className={'fa ' + mFilter.caret }></i></span> <br /></div>
+                                    <div className="col-md-12 d-block d-sm-none"><span onClick={this.showTags} style={{ padding: '4px', position: 'relative', top: '-15px' }}><i className="fa fa-filter"></i> &nbsp;Filter Complaints &nbsp;<i className={'fa ' + mFilter.caret}></i></span> <br /></div>
                                     <div className="clearfix"></div>
-                                    { mFilter.tagwidget && <TagWidget filterComplaint={this.filterComplaint} /> }
+                                    {mFilter.tagwidget && <TagWidget filterComplaint={this.filterComplaint} />}
                                 </div>
 
                                 <div className="row">
-                                    {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} showLoginOpts={this.showLoginModal} /> }
-                                </div>       
+                                    {this.state.show_complain_form && <ComplaintForm toggleForm={this.toggleComplaintForm} sendNewComplaint={this.repostNewPost.bind(this)} showLoginOpts={this.showLoginModal} />}
+                                </div>
 
                                 <div className="row">
                                     {this.state.new_complaint && <ComplaintIntro
@@ -186,37 +186,37 @@ class Home extends Component {
                                         intro={post_utilities.postIntro(this.state.newComplaint.Issue, 350)}
                                         complaint={this.state.newComplaint.Issue}
                                         postdate={post_utilities.formatDate(this.state.newComplaint.CreatedAt)}
-                                        comments='0'            
+                                        comments='0'
                                         views='0'
                                         url={`/complaint/${this.state.newComplaint.Id}/${this.state.newComplaint.Title.replace(/["'.,/]+/g, "").split(' ').join('-')}`}
                                         key={this.state.newComplaint.CreatedAt}
                                         user={User.getUserData()}
                                         sendImages={this.loadImages}
-                                        // onTapEnd={this.openComplaint(this.state)}
-                                    /> }
-                                </div>    
+                                    // onTapEnd={this.openComplaint(this.state)}
+                                    />}
+                                </div>
 
-                                <div className="row">{ this.state.complaints }</div>
+                                <div className="row">{this.state.complaints}</div>
                             </div>
 
                             <div className="col-lg-4 col-md-4 col-xs-12">
                                 {/* <StatWidget /> */}
                                 <TagWidget filterComplaint={this.filterComplaint} title={true} />
-                                <RecentPosts />
+                                {/* <RecentPosts /> */}
                                 <BlogCategories />
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <FlagPost postId={flag.postId} postTitle={flag.postTitle} postType={flag.postType} userId={flag.userId} visible={flag.visible} hideVisibilty={() => this.setState({ flag: { visible: false }})} />
+                <FlagPost postId={flag.postId} postTitle={flag.postTitle} postType={flag.postType} userId={flag.userId} visible={flag.visible} hideVisibilty={() => this.setState({ flag: { visible: false } })} />
 
-                { isOpen && (
+                {isOpen && (
                     <LightBox
                         mainSrc={images[photoIndex]}
                         nextSrc={images[(photoIndex + 1) % images.length]}
                         prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-                        onCloseRequest={() => this.setState({ post_files: { isOpen: false }})}
+                        onCloseRequest={() => this.setState({ post_files: { isOpen: false } })}
                         onMovePrevRequest={() =>
                             this.setState({
                                 photoIndex: (photoIndex + images.length - 1) % images.length,

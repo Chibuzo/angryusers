@@ -1,32 +1,32 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 
 import User from "../Helpers/User";
 
 class CommentForm extends Component {
-    state = { comment_btn: { text: 'Post Comment', icon: 'fa-upload', disabled: '' }};
+    state = { comment_btn: { text: 'Post Comment', icon: 'fa-upload', disabled: '' } };
 
     postComment = (e) => {
         e.preventDefault();
 
         // fetch user details
-        let user;
-        if (Object.keys(User.getUserData()).length > 0) {
-            user = User.getUserData();
-        } else {
-            this.props.showLoginOpts(true);
-            return;
-        }
+        // let user;
+        // if (Object.keys(User.getUserData()).length > 0) {
+        //     user = User.getUserData();
+        // } else {
+        //     this.props.showLoginOpts(true);
+        //     return;
+        // }
 
-        // let usr = {
-        //     Id: 1,
-        //     Fullname: 'Chibuzo',
-        //     email: 'uzo.systems@gmail.com',
-        // };
-        // var u = new User(usr);
-        // u.saveUser(usr);
-        // let user = User.getUserData();
+        let usr = {
+            Id: 1,
+            Fullname: 'Chibuzo',
+            email: 'uzo.systems@gmail.com',
+        };
+        var u = new User(usr);
+        u.saveUser(usr);
+        let user = User.getUserData();
 
-        this.setState({ comment_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' }});
+        this.setState({ comment_btn: { text: 'Posting...', icon: 'fa-redo fa-spin', disabled: 'disabled' } });
 
         let comment = {
             ComplaintId: e.target.elements.complaint_id.value,
@@ -53,7 +53,7 @@ class CommentForm extends Component {
     }
 
     render() {
-        return(
+        return (
             <form className="form" method="post" onSubmit={this.postComment}>
                 <div className="row">
                     <div className="posttext col-md-12 col-sm-12 col-xs-12">
@@ -70,12 +70,12 @@ class CommentForm extends Component {
                         <div className="notechbox pull-left">
                             <input type="checkbox" name="notify" className="form-control" />
                         </div>
-                
+
                         <div className="">
                             <label> Email me when some one post a reply</label>
                         </div>
-                    </div>    
-            
+                    </div>
+
                     <div className="col-md-4 text-right">
                         <button type="submit" className="btn btn-primary" {...this.state.comment_btn.disabled}><i className={"fa " + this.state.comment_btn.icon}></i>&nbsp;&nbsp;{this.state.comment_btn.text}</button>
                     </div>

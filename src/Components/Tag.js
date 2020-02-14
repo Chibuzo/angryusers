@@ -6,10 +6,8 @@ class Tag extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
-            tags: [
-               
-            ],
+        this.state = {
+            tags: [],
             suggestions: []
         };
     }
@@ -18,10 +16,10 @@ class Tag extends Component {
         try {
             const req = await fetch(process.env.REACT_APP_API_URL + 'complaintTags/');
             const tags = await req.json();
-            this.setState({ 
-                suggestions: tags.map(tag => { 
+            this.setState({
+                suggestions: tags.map(tag => {
                     return { id: tag.Id, name: tag.TagTitle };
-                }) 
+                })
             });
         } catch (err) {
             console.log(err)
@@ -36,11 +34,11 @@ class Tag extends Component {
 
     handleAddition = tag => this.setState({ tags: [...this.state.tags, tag] });
 
-    render() { 
+    render() {
         const { tags, suggestions } = this.state;
         const tagStr = tags.map(tag => tag.name).join(', ');
 
-        return ( 
+        return (
             <React.Fragment>
                 <Tags
                     tags={tags}
@@ -53,9 +51,9 @@ class Tag extends Component {
                     placeholder="Add related tags to your complaint..." />
 
                 <input type="hidden" name="tags" value={tagStr} />
-            </React.Fragment>  
+            </React.Fragment>
         );
     }
 }
- 
+
 export default Tag;
